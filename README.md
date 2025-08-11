@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# B.Touré - Mode Africaine Premium
+
+A clean, responsive, and SEO-optimized React + Tailwind e-commerce website inspired by B.Touré's fashion brand. This project showcases premium African fashion with a focus on accessibility, performance, and modern design.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -38,6 +40,25 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Project Features
+
+- **Premium Design**: Elegant African fashion aesthetic with gold/bronze and deep black color scheme
+- **Responsive Layout**: Mobile-first design that looks great on all devices
+- **Performance Optimized**: Lazy-loaded images, code splitting, and optimized assets
+- **SEO Ready**: Proper meta tags and structured data with schema.org markup
+- **Accessible**: ARIA labels, proper contrast ratios, and keyboard navigation
+- **Animations**: Subtle animations with Framer Motion for enhanced user experience
+
+## Tech Stack
+
+- **React**: Frontend library for building user interfaces
+- **Tailwind CSS**: Utility-first CSS framework for rapid UI development
+- **React Router DOM**: Declarative routing for React applications
+- **Framer Motion**: Animation library for React
+- **React Helmet Async**: Document head manager for React
+- **React Icons**: Icon library for React applications
+- **React Lazy Load Image Component**: Component for lazy loading images
 
 ## Learn More
 

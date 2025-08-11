@@ -1,0 +1,133 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiX, FiSearch } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+
+const SearchModal = ({ isOpen, onClose }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const inputRef = useRef(null);
+
+  // Focus on input when modal opens
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
+
+  // Close modal on escape key
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [onClose]);
+
+  // Mock search function - replace with actual search logic
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+    
+    // Mock data for demonstration
+    const mockProducts = [
+      { id: 1, name: 'Chemise Wax Premium', price: '25,000 CFA', category: 'homme', image: '/images/products/chemise-1.jpg' },
+      { id: 2, name: 'Robe Sakinatou', price: '35,000 CFA', category: 'femme', image: '/images/products/robe-1.jpg' },
+      { id: 3, name: 'Costume Africain Moderne', price: '45,000 CFA', category: 'homme', image: '/images/products/costume-1.jpg' },
+    ];
+    
+    if (term.trim() === '') {
+      setSearchResults([]);
+      return;
+    }
+    
+    // Filter products that match the search term
+    const results = mockProducts.filter(product => 
+      product.name.toLowerCase().includes(term.toLowerCase())
+    );
+    
+    setSearchResults(results);
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Overlay */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 z-50"
+            onClick={onClose}
+          />
+          
+          {/* Search Modal */}
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            className="fixed top-0 left-0 right-0 bg-white z-50 shadow-lg p-4"
+          >
+            <div className="container max-w-4xl mx-auto">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-lg font-medium text-secondary">Search for products (0)</h2>
+                <button
+                  onClick={onClose}
+                  className="text-gray-500 hover:text-secondary"
+                  aria-label="Fermer"
+                >
+                  <FiX size={24} />
+                </button>
+              </div>
+              
+              {/* Search Input */}
+              <div className="relative mb-8">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  placeholder="Search for products..."
+                  value={searchTerm}
+                  onChange={(e) => handleSearch(e.target.value)}
+                  className="w-full py-3 pl-4 pr-12 border border-gray-300 focus:border-primary focus:outline-none"
+                />
+                <FiSearch className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              </div>
+              
+              {/* Search Results */}
+              {searchResults.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  {searchResults.map(product => (
+                    <Link 
+                      key={product.id}
+                      to={`/creations/${product.category}/${product.id}`}
+                      onClick={onClose}
+                      className="group"
+                    >
+                      <div className="aspect-square overflow-hidden bg-gray-100 mb-3">
+                        <img 
+                          src={product.image} 
+                          alt={product.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                        />
+                      </div>
+                      <h3 className="text-secondary group-hover:text-primary transition-colors">{product.name}</h3>
+                      <p className="text-primary font-medium">{product.price}</p>
+                    </Link>
+                  ))}
+                </div>
+              ) : searchTerm ? (
+                <p className="text-center text-gray-500 py-8">Aucun résultat trouvé pour "{searchTerm}"</p>
+              ) : null}
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export default SearchModal;

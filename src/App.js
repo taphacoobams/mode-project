@@ -1,24 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { lazy, Suspense } from 'react';
+import React from 'react';
+
+// Layout Components
+import Layout from './components/layout/Layout';
+import ScrollToTop from './components/ui/ScrollToTop';
+import Spinner from './components/ui/Spinner';
+
+// Lazy-loaded Pages
+const Home = lazy(() => import('./pages/Home'));
+const Brand = lazy(() => import('./pages/NotreBrand'));
+const Creations = lazy(() => import('./pages/Creations'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Mensurations = lazy(() => import('./pages/Mensurations'));
+const ProductDetail = lazy(() => import('./pages/ProductDetail'));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HelmetProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="flex flex-col min-h-screen bg-white">
+          <Suspense fallback={
+            <div className="flex justify-center items-center h-screen">
+              <Spinner size="lg" color="primary" />
+            </div>
+          }>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/notre-marque" element={<Brand />} />
+                <Route path="/nos-creations" element={<Creations />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/mensurations" element={<Mensurations />} />
+                <Route path="/creations/:category/:id" element={<ProductDetail />} />
+              </Routes>
+            </Layout>
+          </Suspense>
+        </div>
+      </Router>
+    </HelmetProvider>
   );
 }
 
