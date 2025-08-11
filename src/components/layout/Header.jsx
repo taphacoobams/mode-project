@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FiSearch, FiUser, FiMenu, FiX } from 'react-icons/fi';
+import { FiSearch, FiMenu, FiX } from 'react-icons/fi';
 import SearchModal from '../ui/SearchModal';
 
 const Header = () => {
@@ -71,12 +71,6 @@ const Header = () => {
             onClick={() => setSearchModalOpen(true)}
           >
             <FiSearch size={20} />
-          </button>
-          <button 
-            aria-label="Mon compte"
-            className="p-2 text-secondary hover:text-primary transition-colors"
-          >
-            <FiUser size={20} />
           </button>
           
           {/* Mobile Menu Button */}
