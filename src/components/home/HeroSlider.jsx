@@ -9,7 +9,7 @@ const HeroSlider = () => {
     {
       id: 1,
       image: 'https://images.unsplash.com/photo-1523297736436-f01b8a4a6cbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80',
-      title: 'La mode africaine à un autre niveau',
+      title: "C'est moi, c'est vous !",
       subtitle: 'Collection Homme 2025',
     },
     {
@@ -72,7 +72,7 @@ const HeroSlider = () => {
                 transition={{ delay: 0.3, duration: 0.5 }}
                 className="max-w-xl text-white"
               >
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-serif mb-4">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-4">
                   {slides[currentSlide].title}
                 </h2>
                 <p className="text-xl md:text-2xl mb-8 text-white/90">
@@ -80,7 +80,7 @@ const HeroSlider = () => {
                 </p>
                 <Link 
                   to="/notre-marque" 
-                  className="btn btn-primary"
+                  className="bg-kc-gold text-kc-black px-5 py-2 rounded-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-kc-gold/50 inline-block"
                 >
                   Qui sommes-nous ?
                 </Link>
@@ -93,7 +93,7 @@ const HeroSlider = () => {
       {/* Navigation Arrows */}
       <button 
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-primary transition-colors z-10"
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-kc-gold transition-colors z-10"
         aria-label="Slide précédent"
       >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
@@ -103,7 +103,7 @@ const HeroSlider = () => {
       
       <button 
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-primary transition-colors z-10"
+        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-kc-gold transition-colors z-10"
         aria-label="Slide suivant"
       >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
@@ -118,7 +118,7 @@ const HeroSlider = () => {
             key={index}
             onClick={() => goToSlide(index)}
             className={`w-3 h-3 rounded-full transition-colors ${
-              index === currentSlide ? 'bg-primary' : 'bg-white/50'
+              index === currentSlide ? 'bg-kc-gold' : 'bg-white/50'
             }`}
             aria-label={`Aller au slide ${index + 1}`}
           />

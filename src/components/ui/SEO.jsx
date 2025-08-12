@@ -8,10 +8,10 @@ const SEO = ({
   type = 'website', 
   schema = null 
 }) => {
-  const siteName = 'I. K. Mbengue - Mode Africaine Premium';
+  const siteName = 'Khalil Collection - Mode Africaine Premium';
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
-  const defaultDescription = 'Découvrez la collection I. K. Mbengue, une marque de mode africaine premium proposant des vêtements élégants et des accessoires de qualité pour I. K. Mbengue hommes et femmes.';
-  const siteUrl = 'https://www.ikmbengue-mode.com'; // Replace with actual URL in production
+  const defaultDescription = 'Découvrez la collection Khalil Collection, une marque de mode africaine premium proposant des vêtements élégants et des accessoires de qualité pour hommes et femmes.';
+  const siteUrl = 'https://www.khalilcollection.com'; // Replace with actual URL in production
   
   return (
     <Helmet>

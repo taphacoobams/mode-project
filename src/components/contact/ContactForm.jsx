@@ -99,7 +99,7 @@ const ContactForm = ({ onSubmit, formSubmitted }) => {
           onChange={handleChange}
           className={`w-full border ${
             errors.fullName ? 'border-red-500' : 'border-gray-300'
-          } rounded-sm px-4 py-2 focus:outline-none focus:border-primary`}
+          } rounded-sm px-4 py-2 focus:outline-none focus:border-kc-gold`}
           aria-invalid={errors.fullName ? 'true' : 'false'}
           aria-describedby={errors.fullName ? 'fullName-error' : undefined}
         />
@@ -122,7 +122,7 @@ const ContactForm = ({ onSubmit, formSubmitted }) => {
           onChange={handleChange}
           className={`w-full border ${
             errors.email ? 'border-red-500' : 'border-gray-300'
-          } rounded-sm px-4 py-2 focus:outline-none focus:border-primary`}
+          } rounded-sm px-4 py-2 focus:outline-none focus:border-kc-gold`}
           aria-invalid={errors.email ? 'true' : 'false'}
           aria-describedby={errors.email ? 'email-error' : undefined}
         />
@@ -145,7 +145,7 @@ const ContactForm = ({ onSubmit, formSubmitted }) => {
           onChange={handleChange}
           className={`w-full border ${
             errors.phone ? 'border-red-500' : 'border-gray-300'
-          } rounded-sm px-4 py-2 focus:outline-none focus:border-primary`}
+          } rounded-sm px-4 py-2 focus:outline-none focus:border-kc-gold`}
           aria-invalid={errors.phone ? 'true' : 'false'}
           aria-describedby={errors.phone ? 'phone-error' : undefined}
         />
@@ -168,7 +168,7 @@ const ContactForm = ({ onSubmit, formSubmitted }) => {
           rows="5"
           className={`w-full border ${
             errors.message ? 'border-red-500' : 'border-gray-300'
-          } rounded-sm px-4 py-2 focus:outline-none focus:border-primary`}
+          } rounded-sm px-4 py-2 focus:outline-none focus:border-kc-gold`}
           aria-invalid={errors.message ? 'true' : 'false'}
           aria-describedby={errors.message ? 'message-error' : undefined}
         ></textarea>
@@ -181,7 +181,7 @@ const ContactForm = ({ onSubmit, formSubmitted }) => {
       
       <button
         type="submit"
-        className="btn btn-primary w-full flex items-center justify-center"
+        className="bg-kc-gold hover:bg-kc-gold/90 text-white w-full flex items-center justify-center px-6 py-3 rounded-md transition-colors"
         disabled={formSubmitted}
       >
         <FiSend className="mr-2" />

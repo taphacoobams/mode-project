@@ -21,10 +21,10 @@ const Mensurations = () => {
   return (
     <>
       <Helmet>
-        <title>Vos mensurations | I. K. MBENGUE - La mode africaine à un autre niveau</title>
-        <meta name="description" content="Prenez vos mesures en ligne pour des vêtements I. K. MBENGUE parfaitement ajustés à votre morphologie. Service gratuit pour tous nos clients." />
-        <meta property="og:title" content="Vos mensurations | I. K. MBENGUE - La mode africaine à un autre niveau" />
-        <meta property="og:description" content="Prenez vos mesures en ligne pour des vêtements I. K. MBENGUE parfaitement ajustés à votre morphologie. Service gratuit pour tous nos clients." />
+        <title>Vos mensurations | Khalil Collection - La mode africaine à un autre niveau</title>
+        <meta name="description" content="Prenez vos mesures en ligne pour des vêtements Khalil Collection parfaitement ajustés à votre morphologie. Service gratuit pour tous nos clients." />
+        <meta property="og:title" content="Vos mensurations | Khalil Collection - La mode africaine à un autre niveau" />
+        <meta property="og:description" content="Prenez vos mesures en ligne pour des vêtements Khalil Collection parfaitement ajustés à votre morphologie. Service gratuit pour tous nos clients." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://btoure.com/mensurations" />
       </Helmet>
@@ -56,7 +56,7 @@ const Mensurations = () => {
               >
                 <h2 className="text-2xl font-serif font-bold mb-4">Comment prendre vos mesures</h2>
                 <p className="text-gray-600 mb-4">
-                  Pour garantir que vos vêtements I. K. MBENGUE vous vont parfaitement, veuillez suivre 
+                  Pour garantir que vos vêtements Khalil Collection vous vont parfaitement, veuillez suivre 
                   les instructions ci-dessous et remplir le formulaire avec précision. Utilisez un mètre ruban 
                   et demandez l'aide d'une autre personne si nécessaire.
                 </p>

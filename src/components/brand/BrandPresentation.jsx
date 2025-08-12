@@ -30,12 +30,12 @@ const BrandPresentation = () => {
           transition={{ duration: 0.7 }}
           className="text-center max-w-3xl mx-auto mb-12"
         >
-          <h2 className="text-3xl font-serif font-bold text-secondary mb-6">
+          <h2 className="text-3xl font-heading font-bold text-kc-black mb-6">
             Notre philosophie
           </h2>
-          <div className="w-16 h-1 bg-primary mx-auto mb-6"></div>
+          <div className="w-16 h-1 bg-kc-gold mx-auto mb-6"></div>
           <p className="text-gray-700">
-            Chez I. K. MBENGUE, nous croyons que la mode est bien plus qu'un simple vêtement. 
+            Chez Khalil Collection, nous croyons que la mode est bien plus qu'un simple vêtement. 
             C'est une expression de soi, un héritage culturel et une vision du monde. 
             Notre mission est de créer des pièces qui vous permettent d'exprimer votre 
             individualité tout en célébrant la richesse de la culture africaine.
@@ -52,7 +52,7 @@ const BrandPresentation = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-white p-8 shadow-md"
             >
-              <h3 className="text-xl font-medium text-primary mb-4">{value.title}</h3>
+              <h3 className="text-xl font-medium text-kc-gold mb-4">{value.title}</h3>
               <p className="text-gray-700">{value.description}</p>
             </motion.div>
           ))}
@@ -63,11 +63,11 @@ const BrandPresentation = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mt-16 bg-secondary text-white p-8 md:p-12"
+          className="mt-16 bg-kc-black text-white p-8 md:p-12"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
-              <h3 className="text-2xl font-serif font-bold mb-4">Notre engagement</h3>
+              <h3 className="text-2xl font-heading font-bold mb-4">Notre engagement</h3>
               <p className="text-white/80 mb-4">
                 Nous nous engageons à créer des vêtements qui non seulement vous font 
                 paraître élégant, mais qui racontent aussi une histoire - celle de notre 
@@ -81,19 +81,19 @@ const BrandPresentation = () => {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-white/10 p-4 text-center">
-                <span className="block text-3xl font-bold text-primary mb-2">100%</span>
+                <span className="block text-3xl font-bold text-kc-gold mb-2">100%</span>
                 <span className="text-sm text-white/80">Tissus de qualité</span>
               </div>
               <div className="bg-white/10 p-4 text-center">
-                <span className="block text-3xl font-bold text-primary mb-2">50+</span>
+                <span className="block text-3xl font-bold text-kc-gold mb-2">50+</span>
                 <span className="text-sm text-white/80">Artisans locaux</span>
               </div>
               <div className="bg-white/10 p-4 text-center">
-                <span className="block text-3xl font-bold text-primary mb-2">5+</span>
+                <span className="block text-3xl font-bold text-kc-gold mb-2">5+</span>
                 <span className="text-sm text-white/80">Années d'expérience</span>
               </div>
               <div className="bg-white/10 p-4 text-center">
-                <span className="block text-3xl font-bold text-primary mb-2">1000+</span>
+                <span className="block text-3xl font-bold text-kc-gold mb-2">1000+</span>
                 <span className="text-sm text-white/80">Clients satisfaits</span>
               </div>
             </div>

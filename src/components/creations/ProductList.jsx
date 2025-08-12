@@ -52,7 +52,7 @@ const ProductList = ({ category, subcategory, sortBy, currentPage, onPageChange 
     <div>
       {filteredProducts.length === 0 ? (
         <div className="text-center py-12">
-          <h3 className="text-xl font-medium text-secondary mb-4">Aucun produit trouvé</h3>
+          <h3 className="text-xl font-heading font-medium text-kc-black mb-4">Aucun produit trouvé</h3>
           <p className="text-gray-600">
             Essayez de modifier vos filtres ou consultez nos autres catégories.
           </p>
@@ -88,18 +88,18 @@ const ProductList = ({ category, subcategory, sortBy, currentPage, onPageChange 
                   {/* Informations du produit */}
                   <div className="flex-grow">
                     <Link to={`/creations/${product.category}/${product.id.toString()}`}>
-                      <h3 className="text-lg font-medium text-secondary mb-2 hover:text-primary transition-colors">{product.name}</h3>
+                      <h3 className="text-lg font-medium text-kc-black mb-2 hover:text-kc-gold transition-colors">{product.name}</h3>
                     </Link>
-                    <p className="text-primary font-semibold mb-2">{product.price}</p>
+                    <p className="text-kc-gold font-semibold mb-2">{product.price}</p>
                     <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                      {product.description || `${product.name} - Collection I. K. MBENGUE. Disponible en plusieurs tailles.`}
+                      {product.description || `${product.name} - Collection Khalil Collection. Disponible en plusieurs tailles.`}
                     </p>
                     
                     {/* Boutons d'action */}
                     <div className="flex items-center space-x-4">
                       <button
                         onClick={() => handleQuickView(product)}
-                        className="flex items-center justify-center w-8 h-8 rounded-full text-gray-600 hover:text-primary hover:bg-gray-100 transition-colors"
+                        className="flex items-center justify-center w-8 h-8 rounded-full text-gray-600 hover:text-kc-gold hover:bg-gray-100 transition-colors"
                         aria-label={`Aperçu rapide de ${product.name}`}
                       >
                         <FiEye size={16} />
@@ -107,7 +107,7 @@ const ProductList = ({ category, subcategory, sortBy, currentPage, onPageChange 
                       
                       <Link 
                         to={`/creations/${product.category}/${product.id.toString()}`}
-                        className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white hover:bg-primary/80 transition-colors"
+                        className="flex items-center justify-center w-8 h-8 rounded-full bg-kc-gold text-kc-black hover:bg-kc-gold/80 transition-colors"
                         aria-label={`Voir les détails de ${product.name}`}
                       >
                         <FiArrowRight size={16} />

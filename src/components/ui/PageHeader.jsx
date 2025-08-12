@@ -82,7 +82,7 @@ const PageHeader = ({
                     <Link 
                       to={crumb.url} 
                       className={`text-sm hover:underline ${
-                        backgroundImage ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-primary'
+                        backgroundImage ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-kc-gold'
                       }`}
                     >
                       {crumb.label}
@@ -102,8 +102,8 @@ const PageHeader = ({
         
         {/* Title */}
         <motion.h1 
-          className={`text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 ${
-            backgroundImage ? 'text-white' : 'text-secondary'
+          className={`text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 ${
+            backgroundImage ? 'text-white' : 'text-kc-black'
           }`}
           variants={itemVariants}
         >

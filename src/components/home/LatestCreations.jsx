@@ -25,7 +25,7 @@ const LatestCreations = () => {
       image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
       category: 'homme',
       subcategory: 'chemises',
-      description: 'Chemise en tissu wax premium, confectionnée à la main par nos artisans. Design exclusif I. K. MBENGUE.',
+      description: 'Chemise en tissu wax premium, confectionnée à la main par nos artisans. Design exclusif Khalil Collection.',
       sizes: ['S', 'M', 'L', 'XL'],
     },
     {
@@ -65,17 +65,17 @@ const LatestCreations = () => {
       image: 'https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
       category: 'homme',
       subcategory: 'polo',
-      description: 'Polo brodé avec le logo I. K. MBENGUE, confortable et élégant pour un style décontracté.',
+      description: 'Polo brodé avec le logo Khalil Collection, confortable et élégant pour un style décontracté.',
       sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     },
     {
       id: 6,
-      name: 'Lunettes I. K. Mbengue',
+      name: 'Lunettes Khalil Collection',
       price: '15,000 CFA',
       image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
       category: 'accessoires',
-      subcategory: 'ikmbengue-sunglasses',
-      description: 'Lunettes de soleil de la collection exclusive I. K. MBENGUE, design élégant et protection UV.',
+      subcategory: 'khalilcollection-sunglasses',
+      description: 'Lunettes de soleil de la collection exclusive Khalil Collection, design élégant et protection UV.',
     },
   ];
 
@@ -98,7 +98,7 @@ const LatestCreations = () => {
     <>
       <section className="py-16 bg-gray-50">
         <div className="container">
-          <h2 className="section-title text-center">Nos dernières créations</h2>
+          <h2 className="text-3xl md:text-4xl font-bold font-heading text-kc-black text-center mb-6">Nos dernières créations</h2>
           
           <motion.div 
             variants={container}
@@ -130,7 +130,7 @@ const LatestCreations = () => {
                   
                   <button
                     onClick={(e) => handleQuickView(product, e)}
-                    className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-primary text-white py-2 px-4 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center space-x-2"
+                    className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-kc-gold text-kc-black py-2 px-4 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center space-x-2"
                     aria-label={`Aperçu rapide de ${product.name}`}
                   >
                     <FiEye size={18} />
@@ -139,16 +139,16 @@ const LatestCreations = () => {
                 </div>
                 <div className="p-4">
                   <Link to={`/creations/${product.category}/${product.id.toString()}`}>
-                    <h3 className="text-lg font-medium text-secondary mb-2 hover:text-primary transition-colors">{product.name}</h3>
+                    <h3 className="text-lg font-medium text-kc-black mb-2 hover:text-kc-gold transition-colors">{product.name}</h3>
                   </Link>
-                  <p className="text-primary font-semibold">{product.price}</p>
+                  <p className="text-kc-gold font-semibold">{product.price}</p>
                 </div>
               </motion.div>
             ))}
           </motion.div>
           
           <div className="text-center mt-12">
-            <Link to="/nos-creations" className="btn btn-primary">
+            <Link to="/nos-creations" className="bg-kc-gold text-kc-black px-5 py-2 rounded-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-kc-gold/50 inline-block">
               Voir toutes nos créations
             </Link>
           </div>

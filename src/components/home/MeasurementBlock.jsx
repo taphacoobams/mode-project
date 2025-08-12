@@ -18,7 +18,7 @@ const MeasurementBlock = () => {
               Mensurations en ligne
             </h2>
             <p className="text-white/80 mb-6 max-w-lg">
-              Pour garantir que vos vêtements I. K. MBENGUE vous vont parfaitement, 
+              Pour garantir que vos vêtements Khalil Collection vous vont parfaitement, 
               nous vous proposons notre service de mensurations en ligne. 
               Suivez notre guide simple et obtenez des vêtements sur mesure.
             </p>

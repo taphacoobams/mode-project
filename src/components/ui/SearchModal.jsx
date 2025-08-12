@@ -74,10 +74,10 @@ const SearchModal = ({ isOpen, onClose }) => {
             <div className="container max-w-4xl mx-auto">
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-medium text-secondary">Search for products (0)</h2>
+                <h2 className="text-lg font-medium font-heading text-kc-black">Search for products (0)</h2>
                 <button
                   onClick={onClose}
-                  className="text-gray-500 hover:text-secondary"
+                  className="text-gray-500 hover:text-kc-black"
                   aria-label="Fermer"
                 >
                   <FiX size={24} />
@@ -92,7 +92,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                   placeholder="Search for products..."
                   value={searchTerm}
                   onChange={(e) => handleSearch(e.target.value)}
-                  className="w-full py-3 pl-4 pr-12 border border-gray-300 focus:border-primary focus:outline-none"
+                  className="w-full py-3 pl-4 pr-12 border border-gray-300 focus:border-kc-gold focus:outline-none"
                 />
                 <FiSearch className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
               </div>
@@ -114,8 +114,8 @@ const SearchModal = ({ isOpen, onClose }) => {
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                         />
                       </div>
-                      <h3 className="text-secondary group-hover:text-primary transition-colors">{product.name}</h3>
-                      <p className="text-primary font-medium">{product.price}</p>
+                      <h3 className="text-kc-black group-hover:text-kc-gold transition-colors">{product.name}</h3>
+                      <p className="text-kc-gold font-medium">{product.price}</p>
                     </Link>
                   ))}
                 </div>

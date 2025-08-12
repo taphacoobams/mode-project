@@ -34,7 +34,7 @@ const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
       name: 'Accessoires',
       subcategories: [
         { id: 'boxer', name: 'Boxer' },
-        { id: 'ikmbengue-sunglasses', name: 'I. K. Mbengue sunglasses' },
+        { id: 'khalil-sunglasses', name: 'Khalil Collection sunglasses' },
         { id: 'chaussures', name: 'Chaussures' },
       ],
     },
@@ -57,15 +57,15 @@ const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
 
   return (
     <div className="bg-white shadow-md p-6">
-      <h2 className="text-xl font-serif font-bold text-secondary mb-6">Catégories</h2>
+      <h2 className="text-xl font-heading font-bold text-kc-black mb-6">Catégories</h2>
       
       <ul className="space-y-4">
         {categories.map((category) => (
           <li key={category.id} className="border-b border-gray-100 pb-2">
             <div className="flex items-center justify-between">
               <button
-                className={`text-left py-2 font-medium hover:text-primary transition-colors w-full flex items-center justify-between ${
-                  activeCategory === category.id ? 'text-primary' : 'text-secondary'
+                className={`text-left py-2 font-medium hover:text-kc-gold transition-colors w-full flex items-center justify-between ${
+                  activeCategory === category.id ? 'text-kc-gold' : 'text-kc-black'
                 }`}
                 onClick={() => {
                   toggleCategory(category.id);
@@ -87,8 +87,8 @@ const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
                 {category.subcategories.map((subcategory) => (
                   <li key={subcategory.id}>
                     <button
-                      className={`text-left py-1 text-sm hover:text-primary transition-colors w-full ${
-                        activeSubcategory === subcategory.id ? 'text-primary font-medium' : 'text-gray-600'
+                      className={`text-left py-1 text-sm hover:text-kc-gold transition-colors w-full ${
+                        activeSubcategory === subcategory.id ? 'text-kc-gold font-medium' : 'text-gray-600'
                       }`}
                       onClick={() => handleSubcategoryClick(category.id, subcategory.id)}
                     >

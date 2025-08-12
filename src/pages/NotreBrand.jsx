@@ -8,10 +8,10 @@ const Brand = () => {
   return (
     <>
       <Helmet>
-        <title>Notre marque | B.Touré - La mode africaine à un autre niveau</title>
-        <meta name="description" content="Découvrez l'histoire de B.Touré, notre vision et notre engagement pour une mode africaine premium et contemporaine." />
-        <meta property="og:title" content="Notre marque | B.Touré - La mode africaine à un autre niveau" />
-        <meta property="og:description" content="Découvrez l'histoire de B.Touré, notre vision et notre engagement pour une mode africaine premium et contemporaine." />
+        <title>Notre marque | Khalil Collection - La mode africaine à un autre niveau</title>
+        <meta name="description" content="Découvrez l'histoire de Khalil Collection, notre vision et notre engagement pour une mode africaine premium et contemporaine." />
+        <meta property="og:title" content="Notre marque | Khalil Collection - La mode africaine à un autre niveau" />
+        <meta property="og:description" content="Découvrez l'histoire de Khalil Collection, notre vision et notre engagement pour une mode africaine premium et contemporaine." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://btoure.com/notre-marque" />
       </Helmet>

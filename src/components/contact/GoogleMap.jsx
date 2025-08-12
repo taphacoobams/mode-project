@@ -1,53 +1,19 @@
-import { useEffect, useRef } from 'react';
+import React from 'react';
 
 const GoogleMap = () => {
-  const mapRef = useRef(null);
-
-  useEffect(() => {
-    // This is a placeholder for Google Maps integration
-    // In a real application, you would use the Google Maps API
-    // and replace this with actual map initialization code
-    
-    const createPlaceholderMap = () => {
-      if (mapRef.current) {
-        const mapContainer = mapRef.current;
-        
-        // Create a placeholder map with CSS
-        mapContainer.innerHTML = `
-          <div style="position: relative; width: 100%; height: 100%;">
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #f0f0f0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;">
-              <div style="font-size: 24px; color: #1A1A1A; margin-bottom: 10px;">Google Maps</div>
-              <div style="font-size: 16px; color: #666;">
-                <p>I. K. MBENGUE Boutique</p>
-                <p>Abidjan, Côte d'Ivoire</p>
-              </div>
-              <div style="margin-top: 20px; font-size: 14px; color: #999;">
-                Pour intégrer Google Maps, vous devez obtenir une clé API Google Maps et l'implémenter dans votre application.
-              </div>
-            </div>
-          </div>
-        `;
-      }
-    };
-    
-    createPlaceholderMap();
-    
-    // Cleanup function
-    return () => {
-      // Store a reference to the current mapRef value to avoid issues with cleanup
-      const currentMapRef = mapRef.current;
-      if (currentMapRef) {
-        currentMapRef.innerHTML = '';
-      }
-    };
-  }, []);
-
   return (
-    <div 
-      ref={mapRef} 
-      className="w-full h-full bg-gray-100"
-      aria-label="Carte montrant l'emplacement de I. K. MBENGUE à Abidjan, Côte d'Ivoire"
-    ></div>
+    <div className="w-full h-full bg-gray-100 overflow-hidden rounded-lg">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3859.1499629533257!2d-17.46618492526739!3d14.688912476423918!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec173d9ad7399ed%3A0x211ce641c1a33a88!2sFann%20Hock%2C%20Dakar%2C%20Senegal!5e0!3m2!1sfr!2sus!4v1716657671037!5m2!1sfr!2sus"
+        width="100%"
+        height="100%"
+        style={{ border: 0 }}
+        allowFullScreen=""
+        loading="lazy"
+        title="Khalil Collection location"
+        aria-label="Carte montrant l'emplacement de Khalil Collection à Fann Hock Rue 55X70, Dakar, Sénégal"
+      ></iframe>
+    </div>
   );
 };
 
@@ -86,7 +52,7 @@ const GoogleMap = () => {
       new window.google.maps.Marker({
         position: storeLocation,
         map: googleMapRef.current,
-        title: 'I. K. MBENGUE Boutique',
+        title: 'Khalil Collection Boutique',
       });
     };
 
@@ -116,7 +82,7 @@ const GoogleMap = () => {
     <div 
       ref={mapRef} 
       className="w-full h-full"
-      aria-label="Carte montrant l'emplacement de I. K. MBENGUE à Abidjan, Côte d'Ivoire"
+      aria-label="Carte montrant l'emplacement de Khalil Collection à Dakar, Sénégal"
     ></div>
   );
 };

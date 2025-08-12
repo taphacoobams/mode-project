@@ -22,12 +22,12 @@ const Contact = () => {
   return (
     <>
       <Helmet>
-        <title>Contact | I. K. MBENGUE - La mode africaine à un autre niveau</title>
-        <meta name="description" content="Contactez I. K. MBENGUE pour toute question concernant nos créations, commandes ou collaborations. Notre équipe est à votre disposition." />
-        <meta property="og:title" content="Contact | I. K. MBENGUE - La mode africaine à un autre niveau" />
-        <meta property="og:description" content="Contactez I. K. MBENGUE pour toute question concernant nos créations, commandes ou collaborations. Notre équipe est à votre disposition." />
+        <title>Contact | Khalil Collection - Mode & Broderie - C'est moi, c'est vous !</title>
+        <meta name="description" content="Contactez Khalil Collection pour toute question concernant nos créations, commandes ou collaborations. Notre équipe est à votre disposition." />
+        <meta property="og:title" content="Contact | Khalil Collection - Mode & Broderie - C'est moi, c'est vous !" />
+        <meta property="og:description" content="Contactez Khalil Collection pour toute question concernant nos créations, commandes ou collaborations. Notre équipe est à votre disposition." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://btoure.com/contact" />
+        <meta property="og:url" content="https://khalilcollection.com/contact" />
       </Helmet>
 
       <PageHeader 
@@ -44,45 +44,51 @@ const Contact = () => {
           {/* Contact Info Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             <div className="bg-white p-8 shadow-md flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                <FiPhone size={24} className="text-primary" />
+              <div className="w-16 h-16 rounded-full bg-kc-gold/10 flex items-center justify-center mb-4">
+                <FiPhone size={24} className="text-kc-gold" />
               </div>
-              <h3 className="text-xl font-medium mb-2">Téléphone</h3>
-              <a href="tel:+22500000000" className="text-gray-600 hover:text-primary transition-colors">
-                +225 00 00 00 00
+              <h3 className="text-xl font-heading font-medium mb-2 text-kc-black">Téléphone</h3>
+              <a href="tel:+221784631010" className="text-gray-600 hover:text-kc-gold transition-colors">
+                +221 78 463 10 10
               </a>
             </div>
             
             <div className="bg-white p-8 shadow-md flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                <FiMapPin size={24} className="text-primary" />
+              <div className="w-16 h-16 rounded-full bg-kc-gold/10 flex items-center justify-center mb-4">
+                <FiMapPin size={24} className="text-kc-gold" />
               </div>
-              <h3 className="text-xl font-medium mb-2">Adresse</h3>
+              <h3 className="text-xl font-heading font-medium mb-2 text-kc-black">Adresse</h3>
               <address className="text-gray-600 not-italic">
-                Abidjan, Côte d'Ivoire
+                Fann Hock Rue 55X70<br />
+                Dakar, Sénégal
               </address>
             </div>
             
             <div className="bg-white p-8 shadow-md flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                <FiMail size={24} className="text-primary" />
+              <div className="w-16 h-16 rounded-full bg-kc-gold/10 flex items-center justify-center mb-4">
+                <FiMail size={24} className="text-kc-gold" />
               </div>
-              <h3 className="text-xl font-medium mb-2">Email</h3>
-              <a href="mailto:contact@ikmbengue.com" className="text-gray-600 hover:text-primary transition-colors">
-                contact@ikmbengue.com
+              <h3 className="text-xl font-heading font-medium mb-2 text-kc-black">Email</h3>
+              <a href="mailto:khalilcollections@gmail.com" className="text-gray-600 hover:text-kc-gold transition-colors">
+                khalilcollections@gmail.com
               </a>
             </div>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Google Map */}
-            <div className="h-[400px] bg-gray-100">
+          {/* Carte Google Maps */}
+          <div className="mt-16">
+            <h2 className="text-2xl font-heading font-bold text-kc-black mb-6 max-w-4xl mx-auto">
+              Nous trouver
+            </h2>
+            <div className="max-w-4xl mx-auto h-96 bg-gray-200 rounded-lg overflow-hidden">
               <GoogleMap />
             </div>
-            
-            {/* Contact Form */}
-            <div className="bg-white p-8 shadow-md">
-              <h2 className="text-2xl font-serif font-bold mb-6">Envoyez-nous un message</h2>
+          </div>
+          
+          {/* Contact Form */}
+          <div className="mt-16">
+            <h2 className="text-2xl font-heading font-bold text-kc-black mb-6 max-w-4xl mx-auto">Envoyez-nous un message</h2>
+            <div className="max-w-4xl mx-auto bg-white p-8 shadow-md rounded-lg">
               <ContactForm onSubmit={handleFormSubmit} formSubmitted={formSubmitted} />
             </div>
           </div>

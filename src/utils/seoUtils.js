@@ -34,14 +34,14 @@ export const generateProductSchema = (product) => {
     image,
     brand: {
       '@type': 'Brand',
-      name: 'I. K. Mbengue',
+      name: 'Khalil Collection',
     },
     offers: {
       '@type': 'Offer',
       price: price.replace(/[^\d]/g, ''),
       priceCurrency: currency,
       availability: `https://schema.org/${availability}`,
-      url: `https://www.ikmbengue-mode.com/nos-creations/${id}`,
+      url: `https://www.khalilcollection.com/nos-creations/${id}`,
     },
   };
 };
@@ -54,9 +54,9 @@ export const generateLocalBusinessSchema = () => {
   return {
     '@context': 'https://schema.org',
     '@type': 'ClothingStore',
-    name: 'I. K. Mbengue',
+    name: 'Khalil Collection',
     description: 'Mode africaine premium pour hommes et femmes',
-    url: 'https://www.ikmbengue-mode.com',
+    url: 'https://www.khalilcollection.com',
     telephone: '+225 07 07 07 07 07',
     address: {
       '@type': 'PostalAddress',
@@ -87,8 +87,8 @@ export const generateLocalBusinessSchema = () => {
       },
     ],
     sameAs: [
-      'https://www.facebook.com/ikmbengue',
-      'https://www.instagram.com/ikmbengue',
+      'https://www.facebook.com/khalilcollection',
+      'https://www.instagram.com/khalilcollection',
     ],
   };
 };
@@ -117,6 +117,6 @@ export const generateBreadcrumbSchema = (breadcrumbs) => {
  * @returns {String} Canonical URL
  */
 export const generateCanonicalUrl = (path) => {
-  const baseUrl = 'https://www.ikmbengue-mode.com';
+  const baseUrl = 'https://www.khalilcollection.com';
   return `${baseUrl}${path}`;
 };

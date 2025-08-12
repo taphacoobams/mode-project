@@ -32,15 +32,18 @@ const Header = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
+        isScrolled ? 'bg-kc-black shadow-md py-2 text-kc-textLight' : 'bg-transparent py-4 text-kc-textDark'
       }`}
     >
       <div className="container flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="relative z-10">
-          <h1 className="text-2xl font-bold font-serif text-secondary">
-            I. K. MBENGUE
-          </h1>
+          <img 
+            src="/logo.png" 
+            alt="Khalil Collection" 
+            className="h-12 w-auto" 
+            loading="eager"
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -51,8 +54,8 @@ const Header = () => {
                 <NavLink
                   to={item.path}
                   className={({ isActive }) =>
-                    `text-sm font-medium uppercase tracking-wider transition-colors hover:text-primary ${
-                      isActive ? 'text-primary' : 'text-secondary'
+                    `text-sm font-medium uppercase tracking-wider transition-colors hover:text-kc-gold ${
+                      isActive ? 'text-kc-gold' : isScrolled ? 'text-kc-textLight' : 'text-kc-textDark'
                     }`
                   }
                 >
@@ -67,7 +70,7 @@ const Header = () => {
         <div className="flex items-center space-x-4">
           <button 
             aria-label="Rechercher"
-            className="p-2 text-secondary hover:text-primary transition-colors"
+            className={`p-2 ${isScrolled ? 'text-kc-textLight' : 'text-kc-textDark'} hover:text-kc-gold transition-colors`}
             onClick={() => setSearchModalOpen(true)}
           >
             <FiSearch size={20} />
@@ -75,7 +78,7 @@ const Header = () => {
           
           {/* Mobile Menu Button */}
           <button
-            className="p-2 text-secondary md:hidden"
+            className={`p-2 ${isScrolled ? 'text-kc-textLight' : 'text-kc-textDark'} hover:text-kc-gold transition-colors md:hidden`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
           >
@@ -90,7 +93,7 @@ const Header = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="absolute top-full left-0 w-full bg-white shadow-lg md:hidden"
+          className="absolute top-full left-0 w-full bg-kc-black text-kc-textLight shadow-lg md:hidden"
         >
           <nav className="container py-4">
             <ul className="flex flex-col space-y-4">
@@ -99,8 +102,8 @@ const Header = () => {
                   <NavLink
                     to={item.path}
                     className={({ isActive }) =>
-                      `block py-2 text-sm font-medium uppercase tracking-wider transition-colors hover:text-primary ${
-                        isActive ? 'text-primary' : 'text-secondary'
+                      `block py-2 text-sm font-medium uppercase tracking-wider transition-colors hover:text-kc-gold ${
+                        isActive ? 'text-kc-gold' : 'text-kc-textLight'
                       }`
                     }
                     onClick={() => setMobileMenuOpen(false)}

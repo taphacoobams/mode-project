@@ -45,7 +45,7 @@ const ProductGrid = ({ category, subcategory, sortBy }) => {
     <div>
       {filteredProducts.length === 0 ? (
         <div className="text-center py-12">
-          <h3 className="text-xl font-medium text-secondary mb-4">Aucun produit trouvé</h3>
+          <h3 className="text-xl font-heading font-medium text-kc-black mb-4">Aucun produit trouvé</h3>
           <p className="text-gray-600">
             Essayez de modifier vos filtres ou consultez nos autres catégories.
           </p>
@@ -81,7 +81,7 @@ const ProductGrid = ({ category, subcategory, sortBy }) => {
                   <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <button
                       onClick={() => handleQuickView(product)}
-                      className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
+                      className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-kc-gold hover:text-kc-black transition-colors"
                       aria-label={`Aperçu rapide de ${product.name}`}
                     >
                       <FiEye size={18} />
@@ -90,7 +90,7 @@ const ProductGrid = ({ category, subcategory, sortBy }) => {
                   
                   <Link 
                     to={`/creations/${product.category}/${product.id.toString()}`}
-                    className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-primary/80"
+                    className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-kc-gold text-kc-black w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-kc-gold/80"
                     aria-label={`Voir ${product.name}`}
                   >
                     <FiArrowRight size={16} />
@@ -98,9 +98,9 @@ const ProductGrid = ({ category, subcategory, sortBy }) => {
                 </div>
                 <div className="p-4">
                   <Link to={`/creations/${product.category}/${product.id.toString()}`}>
-                    <h3 className="text-lg font-medium text-secondary mb-2 hover:text-primary transition-colors">{product.name}</h3>
+                    <h3 className="text-lg font-medium text-kc-black mb-2 hover:text-kc-gold transition-colors">{product.name}</h3>
                   </Link>
-                  <p className="text-primary font-semibold">{product.price}</p>
+                  <p className="text-kc-gold font-semibold">{product.price}</p>
                 </div>
               </motion.div>
             ))}

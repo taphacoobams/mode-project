@@ -42,10 +42,10 @@ const CategoryBlocks = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
               
               <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                <h3 className="text-3xl font-serif font-bold mb-4">{category.title}</h3>
+                <h3 className="text-3xl font-heading font-bold mb-4">{category.title}</h3>
                 <Link 
                   to={category.link}
-                  className="btn btn-outline border-white text-white hover:bg-white hover:text-secondary"
+                  className="border border-white text-white hover:bg-kc-gold hover:border-kc-gold hover:text-kc-black transition-colors px-4 py-2 inline-block"
                 >
                   Découvrir
                 </Link>

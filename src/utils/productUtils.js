@@ -38,7 +38,7 @@ const baseProducts = [
     image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
     category: 'homme',
     subcategory: 'chemises',
-    description: 'Chemise en tissu wax premium, confectionnée à la main par nos artisans. Design exclusif I. K. MBENGUE avec finitions soignées et boutons en nacre.',
+    description: 'Chemise en tissu wax premium, confectionnée à la main par nos artisans. Design exclusif Khalil Collection avec finitions soignées et boutons en nacre.',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
   },
   {
@@ -77,11 +77,11 @@ const baseProducts = [
   },
   {
     id: 6,
-    name: 'Lunettes B.Touré',
+    name: 'Lunettes Khalil Collection',
     price: '15,000 CFA',
     image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
     category: 'accessoires',
-    subcategory: 'ikmbengue-sunglasses',
+    subcategory: 'khalilcollection-sunglasses',
   },
   {
     id: 7,
@@ -207,7 +207,7 @@ const generateMoreProducts = (multiplier = 6) => {
       let productDescription = product.description;
       if (!productDescription) {
         const descriptionTemplates = [
-          `${newName} de la collection I. K. MBENGUE. Confectionné avec des matériaux de qualité supérieure pour un confort optimal.`,
+          `${newName} de la collection Khalil Collection. Confectionné avec des matériaux de qualité supérieure pour un confort optimal.`,
           `Pièce exclusive ${newName} fabriquée à la main par nos artisans. Design unique et élégant.`,
           `${newName} inspiré des traditions africaines avec une touche moderne. Parfait pour toutes les occasions.`
         ];

@@ -34,12 +34,12 @@ const Creations = () => {
   return (
     <>
       <Helmet>
-        <title>Nos créations | I. K. MBENGUE - La mode africaine à un autre niveau</title>
-        <meta name="description" content="Découvrez nos collections de vêtements africains premium pour hommes et femmes. Chemises, costumes, robes et accessoires de qualité." />
-        <meta property="og:title" content="Nos créations | I. K. MBENGUE - La mode africaine à un autre niveau" />
-        <meta property="og:description" content="Découvrez nos collections de vêtements africains premium pour hommes et femmes. Chemises, costumes, robes et accessoires de qualité." />
+        <title>Nos créations | Khalil Collection - Mode & Broderie - C'est moi, c'est vous !</title>
+        <meta name="description" content="Découvrez les créations exclusives de Khalil Collection : vêtements africains premium pour hommes et femmes, broderies artisanales et accessoires de qualité." />
+        <meta property="og:title" content="Nos créations | Khalil Collection - Mode & Broderie - C'est moi, c'est vous !" />
+        <meta property="og:description" content="Découvrez les créations exclusives de Khalil Collection : vêtements africains premium pour hommes et femmes, broderies artisanales et accessoires de qualité." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://btoure.com/nos-creations" />
+        <meta property="og:url" content="https://khalilcollection.com/nos-creations" />
       </Helmet>
 
       <PageHeader 

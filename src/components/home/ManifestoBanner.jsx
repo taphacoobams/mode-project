@@ -19,13 +19,13 @@ const ManifestoBanner = () => {
           transition={{ duration: 0.7 }}
           className="max-w-3xl mx-auto text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold font-serif text-secondary mb-6">
-            I. K. MBENGUE
+          <h2 className="text-4xl md:text-5xl font-bold font-heading text-kc-black mb-6">
+            KHALIL COLLECTION
           </h2>
-          <p className="text-2xl md:text-3xl font-serif text-primary mb-8">
-            Recréons l'habillement
+          <p className="text-2xl md:text-3xl font-heading text-kc-gold mb-8">
+            C'est moi, c'est vous !
           </p>
-          <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
+          <div className="w-24 h-1 bg-kc-gold mx-auto mb-8"></div>
           <p className="text-lg text-gray-700 mb-8">
             Nous croyons en une mode africaine contemporaine, élégante et durable. 
             Chaque pièce est conçue avec passion et fabriquée avec le plus grand soin, 
@@ -38,7 +38,7 @@ const ManifestoBanner = () => {
             >
               <button 
                 type="button"
-                className="btn btn-primary"
+                className="bg-kc-gold text-kc-black px-5 py-2 rounded-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-kc-gold/50 inline-block"
                 onClick={() => {
                   document.getElementById('measurement-block')?.scrollIntoView({ behavior: 'smooth' });
                 }}

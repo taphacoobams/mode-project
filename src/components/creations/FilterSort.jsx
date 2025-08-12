@@ -16,7 +16,7 @@ const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange }) => {
     <div className="bg-white shadow-md p-4 mb-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
         <button
-          className="flex items-center text-secondary hover:text-primary transition-colors mb-4 sm:mb-0"
+          className="flex items-center text-kc-black hover:text-kc-gold transition-colors mb-4 sm:mb-0"
           onClick={() => setShowFilters(!showFilters)}
           aria-expanded={showFilters}
         >
@@ -30,7 +30,7 @@ const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange }) => {
           <div className="flex items-center border border-gray-200 rounded-sm overflow-hidden">
             <button
               onClick={() => onViewModeChange('grid')}
-              className={`p-2 ${viewMode === 'grid' ? 'bg-primary text-white' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}
+              className={`p-2 ${viewMode === 'grid' ? 'bg-kc-gold text-kc-black' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}
               aria-label="Affichage en grille"
               aria-pressed={viewMode === 'grid'}
             >
@@ -38,7 +38,7 @@ const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange }) => {
             </button>
             <button
               onClick={() => onViewModeChange('list')}
-              className={`p-2 ${viewMode === 'list' ? 'bg-primary text-white' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}
+              className={`p-2 ${viewMode === 'list' ? 'bg-kc-gold text-kc-black' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}
               aria-label="Affichage en liste"
               aria-pressed={viewMode === 'list'}
             >
@@ -56,7 +56,7 @@ const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange }) => {
                 id="sort-select"
                 value={sortBy}
                 onChange={(e) => onSortChange(e.target.value)}
-                className="appearance-none bg-gray-50 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded-sm leading-tight focus:outline-none focus:bg-white focus:border-primary"
+                className="appearance-none bg-gray-50 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded-sm leading-tight focus:outline-none focus:bg-white focus:border-kc-gold"
                 aria-label="Options de tri"
               >
                 {sortOptions.map((option) => (
@@ -77,19 +77,19 @@ const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange }) => {
         <div className="mt-4 pt-4 border-t border-gray-200 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {/* Price Range Filter */}
           <div>
-            <h3 className="text-sm font-medium text-secondary mb-2">Prix</h3>
+            <h3 className="text-sm font-medium text-kc-black mb-2">Prix</h3>
             <div className="flex items-center space-x-2">
               <input
                 type="number"
                 placeholder="Min"
-                className="w-full border border-gray-200 rounded-sm px-3 py-2 focus:outline-none focus:border-primary"
+                className="w-full border border-gray-200 rounded-sm px-3 py-2 focus:outline-none focus:border-kc-gold"
                 aria-label="Prix minimum"
               />
               <span className="text-gray-400">-</span>
               <input
                 type="number"
                 placeholder="Max"
-                className="w-full border border-gray-200 rounded-sm px-3 py-2 focus:outline-none focus:border-primary"
+                className="w-full border border-gray-200 rounded-sm px-3 py-2 focus:outline-none focus:border-kc-gold"
                 aria-label="Prix maximum"
               />
             </div>
@@ -97,12 +97,12 @@ const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange }) => {
           
           {/* Color Filter */}
           <div>
-            <h3 className="text-sm font-medium text-secondary mb-2">Couleur</h3>
+            <h3 className="text-sm font-medium text-kc-black mb-2">Couleur</h3>
             <div className="flex flex-wrap gap-2">
               {['#000000', '#FFFFFF', '#C8A165', '#0000FF', '#FF0000', '#008000'].map((color) => (
                 <button
                   key={color}
-                  className="w-6 h-6 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-6 h-6 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-kc-gold"
                   style={{ backgroundColor: color }}
                   aria-label={`Filtrer par couleur ${color}`}
                 />
@@ -112,12 +112,12 @@ const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange }) => {
           
           {/* Size Filter */}
           <div>
-            <h3 className="text-sm font-medium text-secondary mb-2">Taille</h3>
+            <h3 className="text-sm font-medium text-kc-black mb-2">Taille</h3>
             <div className="flex flex-wrap gap-2">
               {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map((size) => (
                 <button
                   key={size}
-                  className="min-w-[36px] h-8 px-2 border border-gray-200 rounded-sm hover:border-primary hover:text-primary focus:outline-none focus:border-primary focus:text-primary transition-colors"
+                  className="min-w-[36px] h-8 px-2 border border-gray-200 rounded-sm hover:border-kc-gold hover:text-kc-gold focus:outline-none focus:border-kc-gold focus:text-kc-gold transition-colors"
                   aria-label={`Filtrer par taille ${size}`}
                 >
                   {size}

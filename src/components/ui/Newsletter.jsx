@@ -83,7 +83,7 @@ const Newsletter = ({ className = '' }) => {
       )}
       
       <p className="text-xs mt-3 text-gray-500">
-        En vous inscrivant, vous acceptez notre politique de confidentialité et de recevoir des emails de I. K. Mbengue.
+        En vous inscrivant, vous acceptez notre politique de confidentialité et de recevoir des emails de Khalil Collection.
       </p>
     </div>
   );
