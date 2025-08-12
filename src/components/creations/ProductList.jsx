@@ -74,7 +74,7 @@ const ProductList = ({ category, subcategory, sortBy, currentPage, onPageChange 
                 <div className="flex items-center space-x-6">
                   {/* Image du produit */}
                   <div className="relative w-32 h-32 flex-shrink-0">
-                    <Link to={`/creations/${product.category}/${product.id.toString()}`}>
+                    <Link to={`/nos-creations/homme/${product.id.toString()}`}>
                       <LazyLoadImage
                         src={product.image}
                         alt={product.name}
@@ -87,7 +87,7 @@ const ProductList = ({ category, subcategory, sortBy, currentPage, onPageChange 
                   
                   {/* Informations du produit */}
                   <div className="flex-grow">
-                    <Link to={`/creations/${product.category}/${product.id.toString()}`}>
+                    <Link to={`/nos-creations/homme/${product.id.toString()}`}>
                       <h3 className="text-lg font-medium text-kc-black mb-2 hover:text-kc-gold transition-colors">{product.name}</h3>
                     </Link>
                     <p className="text-kc-gold font-semibold mb-2">{product.price}</p>
@@ -106,7 +106,7 @@ const ProductList = ({ category, subcategory, sortBy, currentPage, onPageChange 
                       </button>
                       
                       <Link 
-                        to={`/creations/${product.category}/${product.id.toString()}`}
+                        to={`/nos-creations/homme/${product.id.toString()}`}
                         className="flex items-center justify-center w-8 h-8 rounded-full bg-kc-gold text-kc-black hover:bg-kc-gold/80 transition-colors"
                         aria-label={`Voir les détails de ${product.name}`}
                       >

@@ -66,7 +66,7 @@ const ProductGrid = ({ category, subcategory, sortBy }) => {
                 whileHover={{ y: -5, transition: { duration: 0.3 } }}
               >
                 <div className="relative overflow-hidden aspect-square">
-                  <Link to={`/creations/${product.category}/${product.id.toString()}`}>
+                  <Link to={`/nos-creations/homme/${product.id.toString()}`}>
                     <LazyLoadImage
                       src={product.image}
                       alt={product.name}
@@ -89,7 +89,7 @@ const ProductGrid = ({ category, subcategory, sortBy }) => {
                   </div>
                   
                   <Link 
-                    to={`/creations/${product.category}/${product.id.toString()}`}
+                    to={`/nos-creations/homme/${product.id.toString()}`}
                     className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-kc-gold text-kc-black w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-kc-gold/80"
                     aria-label={`Voir ${product.name}`}
                   >
@@ -97,7 +97,7 @@ const ProductGrid = ({ category, subcategory, sortBy }) => {
                   </Link>
                 </div>
                 <div className="p-4">
-                  <Link to={`/creations/${product.category}/${product.id.toString()}`}>
+                  <Link to={`/nos-creations/homme/${product.id.toString()}`}>
                     <h3 className="text-lg font-medium text-kc-black mb-2 hover:text-kc-gold transition-colors">{product.name}</h3>
                   </Link>
                   <p className="text-kc-gold font-semibold">{product.price}</p>

@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import HeroSlider from '../components/home/HeroSlider';
 import CategoryBlocks from '../components/home/CategoryBlocks';
 import LatestCreations from '../components/home/LatestCreations';
+import MeasurementBlock from '../components/home/MeasurementBlock';
 import ManifestoBanner from '../components/home/ManifestoBanner';
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
         <HeroSlider />
         <CategoryBlocks />
         <LatestCreations />
+        <MeasurementBlock />
         <ManifestoBanner />
       </div>
     </>

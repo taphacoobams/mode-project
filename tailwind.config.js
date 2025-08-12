@@ -18,6 +18,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Open Sans', 'sans-serif'],
+        script: ['Dancing Script', 'cursive'],
         serif: ['Montserrat', 'sans-serif'],
         heading: ['Montserrat', 'sans-serif'],
       },

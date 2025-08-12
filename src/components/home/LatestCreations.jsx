@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { Link } from 'react-router-dom';
 import { FiEye } from 'react-icons/fi';
 import QuickView from '../ui/QuickView';
+import { getFilteredProducts } from '../../utils/productUtils';
 
 const LatestCreations = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [quickViewOpen, setQuickViewOpen] = useState(false);
+  const [latestProducts, setLatestProducts] = useState([]);
 
   const handleQuickView = (product, e) => {
     e.preventDefault();
@@ -16,68 +18,14 @@ const LatestCreations = () => {
     setQuickViewOpen(true);
   };
 
-  // Mock data for latest products
-  const latestProducts = [
-    {
-      id: 1,
-      name: 'Chemise Wax Premium',
-      price: '25,000 CFA',
-      image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
-      category: 'homme',
-      subcategory: 'chemises',
-      description: 'Chemise en tissu wax premium, confectionnée à la main par nos artisans. Design exclusif Khalil Collection.',
-      sizes: ['S', 'M', 'L', 'XL'],
-    },
-    {
-      id: 2,
-      name: 'Costume Africain Moderne',
-      price: '45,000 CFA',
-      image: 'https://images.unsplash.com/photo-1507680434567-5739c80be1ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
-      category: 'homme',
-      subcategory: 'costumes-africains',
-      description: 'Costume africain moderne alliant tradition et élégance contemporaine. Parfait pour les occasions spéciales.',
-      sizes: ['M', 'L', 'XL'],
-    },
-    {
-      id: 3,
-      name: 'Robe Sakinatou',
-      price: '35,000 CFA',
-      image: 'https://images.unsplash.com/photo-1594226801341-41427b4e5c22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
-      category: 'femme',
-      subcategory: 'collection-sakinatou',
-      description: 'Robe élégante de la collection Sakinatou, avec des motifs traditionnels revisités.',
-      sizes: ['S', 'M', 'L'],
-    },
-    {
-      id: 4,
-      name: 'Ensemble Chic Femme',
-      price: '40,000 CFA',
-      image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
-      category: 'femme',
-      subcategory: 'collection-femme-chic',
-      description: 'Ensemble chic pour femme, parfait pour les événements professionnels et cérémonies.',
-      sizes: ['S', 'M', 'L'],
-    },
-    {
-      id: 5,
-      name: 'Polo Brodé',
-      price: '18,000 CFA',
-      image: 'https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
-      category: 'homme',
-      subcategory: 'polo',
-      description: 'Polo brodé avec le logo Khalil Collection, confortable et élégant pour un style décontracté.',
-      sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    },
-    {
-      id: 6,
-      name: 'Lunettes Khalil Collection',
-      price: '15,000 CFA',
-      image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
-      category: 'accessoires',
-      subcategory: 'khalilcollection-sunglasses',
-      description: 'Lunettes de soleil de la collection exclusive Khalil Collection, design élégant et protection UV.',
-    },
-  ];
+  // Charger les 6 premiers produits de la page Créations avec le tri "newest"
+  useEffect(() => {
+    // Utiliser la fonction getFilteredProducts pour obtenir les produits triés par "newest"
+    const allProducts = getFilteredProducts('', '', 'newest');
+    // Prendre les 6 premiers produits
+    const latest = allProducts.slice(0, 6);
+    setLatestProducts(latest);
+  }, []);
 
   const container = {
     hidden: { opacity: 0 },
@@ -96,26 +44,30 @@ const LatestCreations = () => {
 
   return (
     <>
-      <section className="py-16 bg-gray-50">
+      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold font-heading text-kc-black text-center mb-6">Nos dernières créations</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold font-heading text-kc-black mb-4">Nos dernières créations</h2>
+            <div className="w-24 h-1 bg-kc-gold mx-auto"></div>
+            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">Découvrez notre sélection de pièces uniques confectionnées avec passion par nos artisans talentueux.</p>
+          </div>
           
           <motion.div 
             variants={container}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12"
           >
             {latestProducts.map((product) => (
               <motion.div 
                 key={product.id} 
                 variants={item}
-                className="bg-white shadow-md overflow-hidden group"
+                className="bg-white rounded-lg overflow-hidden group shadow-sm hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="relative overflow-hidden aspect-square">
                   <Link 
-                    to={`/creations/${product.category}/${product.id.toString()}`}
+                    to={`/nos-creations/${product.category}/${product.id.toString()}`}
                     className="block"
                   >
                     <LazyLoadImage
@@ -125,31 +77,38 @@ const LatestCreations = () => {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       wrapperClassName="w-full h-full"
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </Link>
                   
                   <button
                     onClick={(e) => handleQuickView(product, e)}
-                    className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-kc-gold text-kc-black py-2 px-4 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center space-x-2"
+                    className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-kc-gold text-kc-black py-2 px-4 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center space-x-2 transform translate-y-4 group-hover:translate-y-0 shadow-md"
                     aria-label={`Aperçu rapide de ${product.name}`}
                   >
                     <FiEye size={18} />
                     <span>Aperçu rapide</span>
                   </button>
                 </div>
-                <div className="p-4">
-                  <Link to={`/creations/${product.category}/${product.id.toString()}`}>
-                    <h3 className="text-lg font-medium text-kc-black mb-2 hover:text-kc-gold transition-colors">{product.name}</h3>
+                <div className="p-5 border-t border-gray-100">
+                  <p className="text-sm text-gray-500 mb-1">{product.category.replace(/-/g, ' ').replace(/(^\w|\s\w)/g, m => m.toUpperCase())}</p>
+                  <Link to={`/nos-creations/${product.category}/${product.id.toString()}`}>
+                    <h3 className="text-lg font-semibold text-kc-black mb-2 hover:text-kc-gold transition-colors">{product.name}</h3>
                   </Link>
-                  <p className="text-kc-gold font-semibold">{product.price}</p>
+                  <p className="text-kc-gold font-bold text-xl">{product.price}</p>
                 </div>
               </motion.div>
             ))}
           </motion.div>
           
-          <div className="text-center mt-12">
-            <Link to="/nos-creations" className="bg-kc-gold text-kc-black px-5 py-2 rounded-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-kc-gold/50 inline-block">
-              Voir toutes nos créations
+          <div className="text-center mt-16">
+            <Link 
+              to="/nos-creations" 
+              className="bg-kc-gold text-kc-black px-8 py-3 rounded-md hover:bg-kc-black hover:text-kc-gold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-kc-gold/50 inline-flex items-center font-medium text-lg shadow-md"
+            >
+              <span>Voir toutes nos créations</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
             </Link>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaSnapchatGhost, FaTiktok, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -50,7 +50,7 @@ const Footer = () => {
             <h3 className="text-xl font-heading font-semibold mb-4">Suivez-nous</h3>
             <div className="flex space-x-4 mb-6">
               <a 
-                href="https://facebook.com" 
+                href="https://m.facebook.com/108168142221694/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -59,13 +59,40 @@ const Footer = () => {
                 <FaFacebookF className="text-white" />
               </a>
               <a 
-                href="https://instagram.com" 
+                href="https://instagram.com/khalilcollections" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-kc-gold transition-colors"
               >
                 <FaInstagram className="text-white" />
+              </a>
+              <a 
+                href="https://snapchat.com/add/khalilcollections" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Snapchat"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-kc-gold transition-colors"
+              >
+                <FaSnapchatGhost className="text-white" />
+              </a>
+              <a 
+                href="https://tiktok.com/@khalilcollections" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-kc-gold transition-colors"
+              >
+                <FaTiktok className="text-white" />
+              </a>
+              <a 
+                href="https://youtube.com/khalilcollections" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-kc-gold transition-colors"
+              >
+                <FaYoutube className="text-white" />
               </a>
             </div>
             {/* Bouton WhatsApp supprimé */}

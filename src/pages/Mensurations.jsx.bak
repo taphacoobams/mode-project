@@ -1,0 +1,446 @@
+import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { motion } from 'framer-motion';
+import PageHeader from '../components/ui/PageHeader';
+import ManifestoBanner from '../components/home/ManifestoBanner';
+
+const Mensurations = () => {
+  const [activeTab, setActiveTab] = useState('hommes');
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Ici, vous pourriez envoyer les données à votre backend
+    setFormSubmitted(true);
+    setTimeout(() => {
+      setFormSubmitted(false);
+      e.target.reset();
+    }, 3000);
+  };
+
+  return (
+    <>
+      <Helmet>
+        <title>Vos mensurations | Khalil Collection - La mode africaine à un autre niveau</title>
+        <meta name="description" content="Prenez vos mesures en ligne pour des vêtements Khalil Collection parfaitement ajustés à votre morphologie. Service gratuit pour tous nos clients." />
+        <meta property="og:title" content="Vos mensurations | Khalil Collection - La mode africaine à un autre niveau" />
+        <meta property="og:description" content="Prenez vos mesures en ligne pour des vêtements Khalil Collection parfaitement ajustés à votre morphologie. Service gratuit pour tous nos clients." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://btoure.com/mensurations" />
+      </Helmet>
+
+      <PageHeader 
+        title="Vos mensurations" 
+        breadcrumbs={[
+          { label: 'Accueil', url: '/' },
+          { label: 'Vos mensurations' }
+        ]}
+      />
+      
+      <section className="py-12 bg-white">
+        <div className="container">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-heading font-bold text-kc-black mb-4">Vos mensurations</h2>
+            </div>
+            
+            {/* Image de mesure */}
+            <div className="mb-10">
+              <img 
+                src="/images/mensurations.jpg" 
+                alt="Prise de mesures" 
+                className="w-full h-auto rounded-lg shadow-md"
+              />
+            </div>
+            
+            {/* Onglets Hommes/Femmes */}
+            <div className="flex justify-center mb-8 border-b border-gray-200">
+              <button
+                type="button"
+                className={`px-8 py-3 text-base font-medium border-b-2 ${activeTab === 'hommes' ? 'border-kc-gold text-kc-gold' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+                onClick={() => setActiveTab('hommes')}
+              >
+                MESURES HOMMES
+              </button>
+              <button
+                type="button"
+                className={`px-8 py-3 text-base font-medium border-b-2 ${activeTab === 'femmes' ? 'border-kc-gold text-kc-gold' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+                onClick={() => setActiveTab('femmes')}
+              >
+                MESURES FEMMES
+              </button>
+            </div>
+            
+            {/* Formulaire */}
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {formSubmitted ? (
+                <div className="text-center py-12">
+                  <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-4">Merci pour vos informations!</h3>
+                  <p className="text-lg text-gray-600 mb-6">
+                    Nous avons bien reçu vos mensurations et nous les utiliserons pour créer des vêtements parfaitement ajustés à votre morphologie.
+                  </p>
+                  <button
+                    onClick={() => setFormSubmitted(false)}
+                    className="px-6 py-2 bg-kc-gold text-white rounded-md hover:bg-kc-gold-dark transition duration-300"
+                  >
+                    Retour au formulaire
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit}>
+                  {activeTab === 'hommes' ? (
+                    <div className="grid grid-cols-1 gap-y-4">
+                      <div>
+                        <label htmlFor="nom" className="sr-only">Nom complet *</label>
+                        <input
+                          type="text"
+                          id="nom"
+                          name="nom"
+                          required
+                          className="w-full px-4 py-2 border-b border-gray-300 focus:border-kc-gold focus:outline-none"
+                          placeholder="Nom complet *"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="telephone" className="sr-only">Téléphone *</label>
+                        <input
+                          type="tel"
+                          id="telephone"
+                          name="telephone"
+                          required
+                          className="w-full px-4 py-2 border-b border-gray-300 focus:border-kc-gold focus:outline-none"
+                          placeholder="Téléphone *"
+                        />
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label htmlFor="cou" className="sr-only">Cou *</label>
+                          <input
+                            type="text"
+                            id="cou"
+                            name="cou"
+                            required
+                            className="w-full px-4 py-2 border-b border-gray-300 focus:border-kc-gold focus:outline-none"
+                            placeholder="Cou *"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="epaule" className="sr-only">Épaule *</label>
+                          <input
+                            type="text"
+                            id="epaule"
+                            name="epaule"
+                            required
+                            className="w-full px-4 py-2 border-b border-gray-300 focus:border-kc-gold focus:outline-none"
+                            placeholder="Épaule *"
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label htmlFor="manche_courte" className="sr-only">Manche courte *</label>
+                          <input
+                            type="text"
+                            id="manche_courte"
+                            name="manche_courte"
+                            required
+                            className="w-full px-4 py-2 border-b border-gray-300 focus:border-kc-gold focus:outline-none"
+                            placeholder="Manche courte *"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="manche_longue" className="sr-only">Manche longue *</label>
+                          <input
+                            type="text"
+                            id="manche_longue"
+                            name="manche_longue"
+                            required
+                            className="w-full px-4 py-2 border-b border-gray-300 focus:border-kc-gold focus:outline-none"
+                            placeholder="Manche longue *"
+                          />
+                        </div>
+                      </div>
+                            rows="3"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                            placeholder="Votre adresse complète"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Colonne 2 */}
+                    <div>
+                      <h3 className="text-xl font-semibold mb-6 text-kc-black border-b border-gray-200 pb-2">
+                        {activeTab === 'hommes' ? 'Mensurations homme (cm)' : 'Mensurations femme (cm)'}
+                      </h3>
+                      
+                      <div className="space-y-5">
+                        {activeTab === 'hommes' ? (
+                          <>
+                            <div className="grid grid-cols-2 gap-4">
+                              <div>
+                                <label htmlFor="tour_cou" className="block text-sm font-medium text-gray-700 mb-1">Tour de cou</label>
+                                <input
+                                  type="number"
+                                  id="tour_cou"
+                                  name="tour_cou"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                              
+                              <div>
+                                <label htmlFor="tour_poitrine" className="block text-sm font-medium text-gray-700 mb-1">Tour de poitrine</label>
+                                <input
+                                  type="number"
+                                  id="tour_poitrine"
+                                  name="tour_poitrine"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                            </div>
+                            
+                            <div className="grid grid-cols-2 gap-4">
+                              <div>
+                                <label htmlFor="tour_taille" className="block text-sm font-medium text-gray-700 mb-1">Tour de taille</label>
+                                <input
+                                  type="number"
+                                  id="tour_taille"
+                                  name="tour_taille"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                              
+                              <div>
+                                <label htmlFor="tour_hanches" className="block text-sm font-medium text-gray-700 mb-1">Tour de hanches</label>
+                                <input
+                                  type="number"
+                                  id="tour_hanches"
+                                  name="tour_hanches"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                            </div>
+                            
+                            <div className="grid grid-cols-2 gap-4">
+                              <div>
+                                <label htmlFor="longueur_epaule" className="block text-sm font-medium text-gray-700 mb-1">Largeur d'épaules</label>
+                                <input
+                                  type="number"
+                                  id="longueur_epaule"
+                                  name="longueur_epaule"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                              
+                              <div>
+                                <label htmlFor="longueur_bras" className="block text-sm font-medium text-gray-700 mb-1">Longueur des bras</label>
+                                <input
+                                  type="number"
+                                  id="longueur_bras"
+                                  name="longueur_bras"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                            </div>
+                            
+                            <div className="grid grid-cols-2 gap-4">
+                              <div>
+                                <label htmlFor="hauteur_totale" className="block text-sm font-medium text-gray-700 mb-1">Hauteur totale</label>
+                                <input
+                                  type="number"
+                                  id="hauteur_totale"
+                                  name="hauteur_totale"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                              
+                              <div>
+                                <label htmlFor="longueur_jambe" className="block text-sm font-medium text-gray-700 mb-1">Longueur jambe</label>
+                                <input
+                                  type="number"
+                                  id="longueur_jambe"
+                                  name="longueur_jambe"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="grid grid-cols-2 gap-4">
+                              <div>
+                                <label htmlFor="tour_poitrine" className="block text-sm font-medium text-gray-700 mb-1">Tour de poitrine</label>
+                                <input
+                                  type="number"
+                                  id="tour_poitrine"
+                                  name="tour_poitrine"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                              
+                              <div>
+                                <label htmlFor="tour_sous_poitrine" className="block text-sm font-medium text-gray-700 mb-1">Tour sous poitrine</label>
+                                <input
+                                  type="number"
+                                  id="tour_sous_poitrine"
+                                  name="tour_sous_poitrine"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                            </div>
+                            
+                            <div className="grid grid-cols-2 gap-4">
+                              <div>
+                                <label htmlFor="tour_taille" className="block text-sm font-medium text-gray-700 mb-1">Tour de taille</label>
+                                <input
+                                  type="number"
+                                  id="tour_taille"
+                                  name="tour_taille"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                              
+                              <div>
+                                <label htmlFor="tour_hanches" className="block text-sm font-medium text-gray-700 mb-1">Tour de hanches</label>
+                                <input
+                                  type="number"
+                                  id="tour_hanches"
+                                  name="tour_hanches"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                            </div>
+                            
+                            <div className="grid grid-cols-2 gap-4">
+                              <div>
+                                <label htmlFor="longueur_epaule" className="block text-sm font-medium text-gray-700 mb-1">Largeur d'épaules</label>
+                                <input
+                                  type="number"
+                                  id="longueur_epaule"
+                                  name="longueur_epaule"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                              
+                              <div>
+                                <label htmlFor="longueur_bras" className="block text-sm font-medium text-gray-700 mb-1">Longueur des bras</label>
+                                <input
+                                  type="number"
+                                  id="longueur_bras"
+                                  name="longueur_bras"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                            </div>
+                            
+                            <div className="grid grid-cols-2 gap-4">
+                              <div>
+                                <label htmlFor="hauteur_totale" className="block text-sm font-medium text-gray-700 mb-1">Hauteur totale</label>
+                                <input
+                                  type="number"
+                                  id="hauteur_totale"
+                                  name="hauteur_totale"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                              
+                              <div>
+                                <label htmlFor="longueur_jupe" className="block text-sm font-medium text-gray-700 mb-1">Longueur jupe/robe</label>
+                                <input
+                                  type="number"
+                                  id="longueur_jupe"
+                                  name="longueur_jupe"
+                                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                                />
+                              </div>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="pt-4">
+                    <label htmlFor="commentaires" className="block text-sm font-medium text-gray-700 mb-2">Commentaires additionnels</label>
+                    <textarea
+                      id="commentaires"
+                      name="commentaires"
+                      rows="4"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-kc-gold focus:border-kc-gold shadow-sm"
+                      placeholder="Précisions sur vos préférences ou particularités morphologiques..."
+                    ></textarea>
+                  </div>
+                  
+                  <div className="text-center pt-4">
+                    <button
+                      type="submit"
+                      className="inline-flex items-center px-8 py-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-kc-gold hover:bg-kc-gold-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kc-gold transition-colors duration-300"
+                    >
+                      <FiSend className="mr-3" />
+                      Envoyer mes mensurations
+                    </button>
+                  </div>
+                </form>
+              )}
+            </motion.div>
+            
+            <div className="mt-10 p-6 bg-gray-50 rounded-lg border border-gray-200">
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">Comment prendre vos mesures correctement</h3>
+              <p className="text-gray-600 mb-6">Pour des résultats optimaux, utilisez un mètre ruban souple et demandez l'aide d'une autre personne. Tenez-vous debout naturellement pendant la prise de mesures.</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-medium text-kc-black mb-3">Mesures communes</h4>
+                  <ul className="list-disc pl-5 space-y-2 text-gray-600">
+                    <li><strong>Tour de poitrine</strong> : Mesurez la partie la plus large de votre poitrine, en passant par les omoplates.</li>
+                    <li><strong>Tour de taille</strong> : Mesurez la partie la plus fine de votre taille, généralement au niveau du nombril.</li>
+                    <li><strong>Tour de hanches</strong> : Mesurez la partie la plus large de vos hanches.</li>
+                    <li><strong>Largeur d'épaules</strong> : Mesurez d'une extrémité de l'épaule à l'autre.</li>
+                    <li><strong>Hauteur totale</strong> : Mesurez de la tête aux pieds (votre taille).</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 className="font-medium text-kc-black mb-3">{activeTab === 'hommes' ? 'Mesures spécifiques hommes' : 'Mesures spécifiques femmes'}</h4>
+                  <ul className="list-disc pl-5 space-y-2 text-gray-600">
+                    {activeTab === 'hommes' ? (
+                      <>
+                        <li><strong>Tour de cou</strong> : Mesurez le contour de votre cou à la base.</li>
+                        <li><strong>Longueur des bras</strong> : Mesurez de l'épaule jusqu'au poignet, bras légèrement plié.</li>
+                        <li><strong>Longueur jambe</strong> : Mesurez de la taille jusqu'à la cheville.</li>
+                      </>
+                    ) : (
+                      <>
+                        <li><strong>Tour sous poitrine</strong> : Mesurez juste sous la poitrine, là où se place l'élastique d'un soutien-gorge.</li>
+                        <li><strong>Longueur des bras</strong> : Mesurez de l'épaule jusqu'au poignet, bras légèrement plié.</li>
+                        <li><strong>Longueur jupe/robe</strong> : Mesurez de la taille jusqu'à la longueur souhaitée.</li>
+                      </>
+                    )}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <ManifestoBanner />
+    </>
+  );
+};
+
+export default Mensurations;

@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import DesignerProfile from '../components/brand/DesignerProfile';
 import BrandPresentation from '../components/brand/BrandPresentation';
+import DesignerMessage from '../components/brand/DesignerMessage';
 import GiftCheckSection from '../components/brand/GiftCheckSection';
 import PageHeader from '../components/ui/PageHeader';
 
@@ -29,6 +30,7 @@ const Brand = () => {
           
           <DesignerProfile />
           <BrandPresentation />
+          <DesignerMessage />
           <GiftCheckSection />
         </div>
       </div>

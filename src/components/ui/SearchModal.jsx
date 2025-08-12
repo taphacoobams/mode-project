@@ -27,26 +27,20 @@ const SearchModal = ({ isOpen, onClose }) => {
     return () => window.removeEventListener('keydown', handleEsc);
   }, [onClose]);
 
-  // Mock search function - replace with actual search logic
+  // Search function - returns empty results as products are not available
   const handleSearch = (term) => {
     setSearchTerm(term);
     
-    // Mock data for demonstration
-    const mockProducts = [
-      { id: 1, name: 'Chemise Wax Premium', price: '25,000 CFA', category: 'homme', image: '/images/products/chemise-1.jpg' },
-      { id: 2, name: 'Robe Sakinatou', price: '35,000 CFA', category: 'femme', image: '/images/products/robe-1.jpg' },
-      { id: 3, name: 'Costume Africain Moderne', price: '45,000 CFA', category: 'homme', image: '/images/products/costume-1.jpg' },
-    ];
+    // No products available
+    const mockProducts = [];
     
     if (term.trim() === '') {
       setSearchResults([]);
       return;
     }
     
-    // Filter products that match the search term
-    const results = mockProducts.filter(product => 
-      product.name.toLowerCase().includes(term.toLowerCase())
-    );
+    // Always return empty results
+    const results = [];
     
     setSearchResults(results);
   };
@@ -74,7 +68,7 @@ const SearchModal = ({ isOpen, onClose }) => {
             <div className="container max-w-4xl mx-auto">
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-medium font-heading text-kc-black">Search for products (0)</h2>
+                <h2 className="text-lg font-medium font-heading text-kc-black">Recherche</h2>
                 <button
                   onClick={onClose}
                   className="text-gray-500 hover:text-kc-black"
@@ -89,7 +83,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                 <input
                   ref={inputRef}
                   type="text"
-                  placeholder="Search for products..."
+                  placeholder="Rechercher..."
                   value={searchTerm}
                   onChange={(e) => handleSearch(e.target.value)}
                   className="w-full py-3 pl-4 pr-12 border border-gray-300 focus:border-kc-gold focus:outline-none"
@@ -103,7 +97,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                   {searchResults.map(product => (
                     <Link 
                       key={product.id}
-                      to={`/creations/${product.category}/${product.id}`}
+                      to={`/nos-creations/${product.category}/${product.id}`}
                       onClick={onClose}
                       className="group"
                     >

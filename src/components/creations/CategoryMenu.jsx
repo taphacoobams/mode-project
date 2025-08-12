@@ -16,26 +16,32 @@ const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
       name: 'Homme',
       subcategories: [
         { id: 'chemises', name: 'Chemises' },
-        { id: 'costumes-africains', name: 'Costumes africains' },
-        { id: 'polo', name: 'Polo' },
         { id: 'pantalons', name: 'Pantalons' },
+        { id: 'costumes-africains', name: 'Costumes africains' },
+        { id: 'costumes-europeens', name: 'Costumes européens' },
+        { id: 'boubous-traditionnelles', name: 'Boubous Traditionnelles' },
+        { id: 'grand-boubou', name: 'Grand boubou' },
+        { id: 'tenues-personnalisees', name: 'Tenues personnalisées' },
       ],
     },
     {
       id: 'femme',
       name: 'Femme',
       subcategories: [
-        { id: 'collection-femme-chic', name: 'Collection femme chic' },
-        { id: 'collection-sakinatou', name: 'Collection Sakinatou' },
+        { id: 'chemises', name: 'Chemises' },
+        { id: 'pantalons', name: 'Pantalons' },
+        { id: 'costumes-africains', name: 'Costumes africains' },
+        { id: 'grand-boubou', name: 'Grand boubou' },
       ],
     },
     {
       id: 'accessoires',
       name: 'Accessoires',
       subcategories: [
-        { id: 'boxer', name: 'Boxer' },
-        { id: 'khalil-sunglasses', name: 'Khalil Collection sunglasses' },
         { id: 'chaussures', name: 'Chaussures' },
+        { id: 'bonnet', name: 'Bonnet' },
+        { id: 'boutons-manchettes', name: 'Boutons manchettes' },
+        { id: 'autres-accessoires', name: 'Autres accessoires' },
       ],
     },
   ];
@@ -48,11 +54,11 @@ const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
   };
 
   const handleCategoryClick = (categoryId) => {
-    navigate(`/nos-creations?category=${categoryId}`);
+    navigate(`/nos-creations/productcategory/${categoryId}`);
   };
 
   const handleSubcategoryClick = (categoryId, subcategoryId) => {
-    navigate(`/nos-creations?category=${categoryId}&subcategory=${subcategoryId}`);
+    navigate(`/nos-creations/productcategory/${categoryId}/${subcategoryId}`);
   };
 
   return (

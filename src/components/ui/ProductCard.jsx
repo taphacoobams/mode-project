@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
       transition={{ duration: 0.5 }}
     >
       <div className="relative overflow-hidden aspect-square">
-        <Link to={`/creations/${category}/${id}`} aria-label={`Voir ${name}`}>
+        <Link to={`/nos-creations/${category}/${id}`} aria-label={`Voir ${name}`}>
           <LazyLoadImage
             src={image}
             alt={name}
@@ -44,7 +44,7 @@ const ProductCard = ({ product }) => {
         
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
           <Link 
-            to={`/creations/${category}/${id}`}
+            to={`/nos-creations/${category}/${id}`}
             className="inline-block bg-primary text-white py-2 px-4 rounded-sm text-sm"
             aria-label={`Voir détails de ${name}`}
           >
@@ -54,7 +54,7 @@ const ProductCard = ({ product }) => {
       </div>
       
       <div className="p-4">
-        <Link to={`/creations/${category}/${id}`} className="block">
+        <Link to={`/nos-creations/${category}/${id}`} className="block">
           <h3 className="text-lg font-medium text-secondary mb-2 hover:text-primary transition-colors">{name}</h3>
         </Link>
         <p className="text-primary font-semibold">{price}</p>

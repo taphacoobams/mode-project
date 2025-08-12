@@ -15,6 +15,8 @@ const Creations = lazy(() => import('./pages/Creations'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Mensurations = lazy(() => import('./pages/Mensurations'));
 const ProductDetail = lazy(() => import('./pages/ProductDetail'));
+const Designer = lazy(() => import('./pages/Designer'));
+const ChequeCadeau = lazy(() => import('./pages/ChequeCadeau'));
 
 function App() {
   return (
@@ -32,9 +34,17 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/notre-marque" element={<Brand />} />
                 <Route path="/nos-creations" element={<Creations />} />
+                <Route path="/noscreations" element={<Creations />} />
+                <Route path="/nos-creations/productcategory/:category" element={<Creations />} />
+                <Route path="/noscreations/productcategory/:category" element={<Creations />} />
+                <Route path="/nos-creations/productcategory/:category/:subcategory" element={<Creations />} />
+                <Route path="/noscreations/productcategory/:category/:subcategory" element={<Creations />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/mensurations" element={<Mensurations />} />
+                <Route path="/designer" element={<Designer />} />
+                <Route path="/cheque-cadeau" element={<ChequeCadeau />} />
                 <Route path="/creations/:category/:id" element={<ProductDetail />} />
+                <Route path="/nos-creations/:category/:id" element={<ProductDetail />} />
               </Routes>
             </Layout>
           </Suspense>

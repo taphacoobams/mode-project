@@ -50,7 +50,7 @@ const QuickView = ({ product, isOpen, onClose }) => {
           <p className="text-2xl font-semibold text-kc-gold mb-6">{product.price}</p>
           
           <Link 
-            to={`/creations/${product.category}/${product.id.toString()}`}
+            to={`/nos-creations/${product.category}/${product.id.toString()}`}
             className="inline-block bg-kc-gold hover:bg-kc-gold/90 text-kc-black py-3 px-6 text-sm uppercase tracking-wider font-medium w-full text-center"
           >
             Voir les détails
