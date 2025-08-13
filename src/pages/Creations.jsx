@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useSearchParams } from 'react-router-dom';
+// import { useSearchParams } from 'react-router-dom'; // Non utilisé
 import CategoryMenu from '../components/creations/CategoryMenu';
 import ProductGrid from '../components/creations/ProductGrid';
 import ProductList from '../components/creations/ProductList';
@@ -9,7 +9,7 @@ import PageHeader from '../components/ui/PageHeader';
 import ManifestoBanner from '../components/home/ManifestoBanner';
 
 const Creations = () => {
-  const [searchParams] = useSearchParams();
+  // const [searchParams] = useSearchParams(); // Non utilisé
   const [category, setCategory] = useState('');
   const [subcategory, setSubcategory] = useState('');
   const [sortBy, setSortBy] = useState('newest');
@@ -35,7 +35,8 @@ const Creations = () => {
         setCurrentPage(1); // Réinitialiser la page lors du changement de sous-catégorie
       }
     }
-  }, [window.location.pathname]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSortChange = (sort) => {
     setSortBy(sort);
@@ -71,9 +72,7 @@ const Creations = () => {
         title="Nos créations"
         breadcrumbs={[
           { label: 'Accueil', url: '/' },
-          { label: 'Nos créations', url: '/nos-creations' },
-          ...(category ? [{ label: category.charAt(0).toUpperCase() + category.slice(1), url: `/nos-creations/productcategory/${category}` }] : []),
-          ...(subcategory ? [{ label: subcategory.charAt(0).toUpperCase() + subcategory.slice(1).replace(/-/g, ' ') }] : [])
+          { label: 'Nos créations', url: '/nos-creations' }
         ]}
       />
       

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useLocation, Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
@@ -10,8 +10,7 @@ import { convertEuroToCFA } from '../utils/priceUtils';
 
 const ProductDetail = () => {
   const { category, id } = useParams();
-  const location = useLocation();
-  const currentUrl = window.location.href;
+  // Les variables location et currentUrl ont été supprimées car non utilisées
   
   // Les sélecteurs de taille et quantité ont été supprimés selon la demande du client
   
@@ -69,9 +68,7 @@ const ProductDetail = () => {
         textAlignment="left"
         breadcrumbs={[
           { label: 'Accueil', url: '/' },
-          { label: 'Nos créations', url: '/nos-creations' },
-          { label: category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '), url: `/nos-creations?category=${category}` },
-          { label: product.name, url: null }
+          { label: 'Nos créations', url: '/nos-creations' }
         ]}
       />
 

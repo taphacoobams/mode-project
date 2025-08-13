@@ -122,7 +122,7 @@ const ProductList = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
                       </Link>
 
                       <a
-                        href={`https://wa.me/221784631010?text=Je%20suis%20intéressé(e)%20par%20ce%20produit:%20${encodeURIComponent(product.name)}%20sur%20https://khalil-collection.vercel.app/`}
+                        href={`https://wa.me/221784631010?text=${encodeURIComponent(`Je suis intéressé(e) par ce produit: ${product.name} sur https://khalil-collection.vercel.app/nos-creations/${product.category}/${product.id.toString()}`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center justify-center w-8 h-8 rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors"
@@ -173,8 +173,8 @@ const ProductList = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
                       </button>
                     );
                   } else if (
-                    pageNumber === 4 && currentPage > 5 ||
-                    pageNumber === totalPages - 3 && currentPage < totalPages - 4
+                    (pageNumber === 4 && currentPage > 5) ||
+                    (pageNumber === totalPages - 3 && currentPage < totalPages - 4)
                   ) {
                     // Afficher des points de suspension pour indiquer des pages omises
                     return <span key={pageNumber} className="px-2">...</span>;

@@ -22,7 +22,7 @@ const MeasurementBlock = () => {
               nous vous proposons notre service de mensurations en ligne. 
               Suivez notre guide simple et obtenez des vêtements sur mesure.
             </p>
-            <Link to="/mensurations" className="btn bg-primary hover:bg-primary/90 text-white flex items-center space-x-2">
+            <Link to="/mensurations" className="btn bg-kc-gold hover:bg-kc-gold/90 text-kc-black flex items-center space-x-2">
               <FiTool size={20} />
               <span>Je prends mes mesures</span>
             </Link>

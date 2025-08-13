@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Modal from './Modal';
 import { convertEuroToCFA } from '../../utils/priceUtils';
+// import WhatsAppButton from './WhatsAppButton'; // Non utilisé
 
 const QuickView = ({ product, isOpen, onClose }) => {
   if (!product) return null;
@@ -30,6 +31,12 @@ const QuickView = ({ product, isOpen, onClose }) => {
           </div>
           
           <p className="text-2xl font-semibold text-kc-gold mb-6">{convertEuroToCFA(product.price)}</p>
+          
+          {product.description && (
+            <p className="text-gray-700 leading-relaxed mb-6 text-sm">
+              {product.description}
+            </p>
+          )}
           
           <Link 
             to={`/nos-creations/${product.category}/${product.id.toString()}`}
