@@ -8,21 +8,19 @@ const HeroSlider = () => {
   const slides = [
     {
       id: 1,
-      image: 'https://images.unsplash.com/photo-1523297736436-f01b8a4a6cbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80',
+      backgroundColor: '#1a1a1a',
       title: "C'est moi, c'est vous !",
       subtitle: 'Collection Homme 2025',
+      buttonText: 'Qui sommes-nous ?',
+      buttonLink: '/notre-marque'
     },
     {
       id: 2,
-      image: 'https://images.unsplash.com/photo-1534196511436-921a4e99f297?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80',
+      backgroundColor: '#2a2a2a',
       title: 'Élégance et tradition',
       subtitle: 'Collection Femme 2025',
-    },
-    {
-      id: 3,
-      image: 'https://images.unsplash.com/photo-1566454825481-9c31211a1f88?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80',
-      title: 'Accessoires exclusifs',
-      subtitle: 'Nouvelle collection',
+      buttonText: 'Nous contacter',
+      buttonLink: '/contact'
     }
   ];
 
@@ -58,10 +56,9 @@ const HeroSlider = () => {
           className="absolute inset-0"
         >
           <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${slides[currentSlide].image})` }}
+            className="absolute inset-0"
+            style={{ backgroundColor: slides[currentSlide].backgroundColor }}
           >
-            <div className="absolute inset-0 bg-black/40" />
           </div>
           
           <div className="relative h-full flex items-center">
@@ -79,10 +76,10 @@ const HeroSlider = () => {
                   {slides[currentSlide].subtitle}
                 </p>
                 <Link 
-                  to="/notre-marque" 
+                  to={slides[currentSlide].buttonLink} 
                   className="bg-kc-gold text-kc-black px-5 py-2 rounded-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-kc-gold/50 inline-block"
                 >
-                  Qui sommes-nous ?
+                  {slides[currentSlide].buttonText}
                 </Link>
               </motion.div>
             </div>

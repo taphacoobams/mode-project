@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaFacebookF, FaInstagram, FaSnapchatGhost, FaTiktok, FaYoutube } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaSnapchatGhost, FaTiktok, FaYoutube, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -23,21 +23,21 @@ const Footer = () => {
           {/* Contact Section */}
           <div>
             <h3 className="text-xl font-heading font-semibold mb-4">Nos contacts</h3>
-            <ul className="space-y-2 text-gray-300">
-              <li>
-                <span className="block">Téléphone:</span>
+            <ul className="space-y-4 text-gray-300">
+              <li className="flex items-center">
+                <FaPhoneAlt className="text-kc-gold mr-3 text-lg" />
                 <a href="tel:+221784631010" className="hover:text-kc-gold transition-colors">
                   +221 78 463 10 10
                 </a>
               </li>
-              <li>
-                <span className="block">Email:</span>
+              <li className="flex items-center">
+                <FaEnvelope className="text-kc-gold mr-3 text-lg" />
                 <a href="mailto:khalilcollections@gmail.com" className="hover:text-kc-gold transition-colors">
                   khalilcollections@gmail.com
                 </a>
               </li>
-              <li>
-                <span className="block">Adresse:</span>
+              <li className="flex items-start">
+                <FaMapMarkerAlt className="text-kc-gold mr-3 text-lg mt-1" />
                 <address className="not-italic">
                   Fann Hock Rue 55X70, Dakar, Sénégal
                 </address>

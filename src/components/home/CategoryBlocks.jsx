@@ -8,21 +8,21 @@ const CategoryBlocks = () => {
     {
       id: 1,
       title: 'Hommes',
-      image: 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-      link: '/nos-creations?category=homme',
+      image: 'https://i.pinimg.com/originals/d4/4f/d2/d44fd2c3f8e3a967506bd8f8b5ba4a93.jpg',
+      link: '/nos-creations/productcategory/homme',
     },
     {
       id: 2,
       title: 'Femmes',
-      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-      link: '/nos-creations?category=femme',
+      image: 'https://i.pinimg.com/originals/7e/62/f0/7e62f0b4f6821fa37b1e4b5a2e4e7a72.jpg',
+      link: '/nos-creations/productcategory/femme',
     },
   ];
 
   return (
-    <section className="py-16">
+    <section className="py-24 px-4">
       <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {categories.map((category) => (
             <motion.div
               key={category.id}
@@ -30,24 +30,24 @@ const CategoryBlocks = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="relative overflow-hidden group h-[400px]"
+              className="relative overflow-hidden group h-[700px]"
             >
               <LazyLoadImage
                 src={category.image}
                 alt={category.title}
                 effect="blur"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
                 wrapperClassName="absolute inset-0"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
               
-              <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                <h3 className="text-3xl font-heading font-bold mb-4">{category.title}</h3>
+              <div className="absolute bottom-0 left-0 right-0 p-10 text-white">
+                <h3 className="text-4xl font-heading font-bold mb-6 tracking-wider">{category.title}</h3>
                 <Link 
                   to={category.link}
-                  className="border border-white text-white hover:bg-kc-gold hover:border-kc-gold hover:text-kc-black transition-colors px-4 py-2 inline-block"
+                  className="border-2 border-white text-white hover:bg-kc-gold hover:border-kc-gold hover:text-kc-black transition-colors px-6 py-3 inline-block text-lg font-medium tracking-wide"
                 >
-                  Découvrir
+                  Découvrir la collection
                 </Link>
               </div>
             </motion.div>

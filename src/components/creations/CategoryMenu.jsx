@@ -19,8 +19,10 @@ const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
         { id: 'pantalons', name: 'Pantalons' },
         { id: 'costumes-africains', name: 'Costumes africains' },
         { id: 'costumes-europeens', name: 'Costumes européens' },
-        { id: 'boubous-traditionnelles', name: 'Boubous Traditionnelles' },
+        { id: 'boubous-traditionnelles', name: 'Boubous Traditionnels' },
         { id: 'grand-boubou', name: 'Grand boubou' },
+        { id: 'broderies', name: 'Broderies' },
+        { id: 'fillage', name: 'Fillage' },
         { id: 'tenues-personnalisees', name: 'Tenues personnalisées' },
       ],
     },
@@ -94,7 +96,7 @@ const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
                   <li key={subcategory.id}>
                     <button
                       className={`text-left py-1 text-sm hover:text-kc-gold transition-colors w-full ${
-                        activeSubcategory === subcategory.id ? 'text-kc-gold font-medium' : 'text-gray-600'
+                        activeCategory === category.id && activeSubcategory === subcategory.id ? 'text-kc-gold font-medium' : 'text-gray-600'
                       }`}
                       onClick={() => handleSubcategoryClick(category.id, subcategory.id)}
                     >

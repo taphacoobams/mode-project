@@ -14,6 +14,7 @@ const Creations = () => {
   const [subcategory, setSubcategory] = useState('');
   const [sortBy, setSortBy] = useState('newest');
   const [viewMode, setViewMode] = useState('grid'); // 'grid' ou 'list'
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     // Extraire les paramètres de l'URL basé sur le nouveau format de chemin
@@ -25,18 +26,34 @@ const Creations = () => {
       const categoryParam = pathParts[3];
       const subcategoryParam = pathParts.length >= 5 ? pathParts[4] : '';
       
-      if (categoryParam) setCategory(categoryParam);
-      if (subcategoryParam) setSubcategory(subcategoryParam);
+      if (categoryParam) {
+        setCategory(categoryParam);
+        setCurrentPage(1); // Réinitialiser la page lors du changement de catégorie
+      }
+      if (subcategoryParam) {
+        setSubcategory(subcategoryParam);
+        setCurrentPage(1); // Réinitialiser la page lors du changement de sous-catégorie
+      }
     }
   }, [window.location.pathname]);
 
   const handleSortChange = (sort) => {
     setSortBy(sort);
+    setCurrentPage(1); // Réinitialiser la page lors du changement de tri
   };
   
   const handleViewModeChange = (mode) => {
     setViewMode(mode);
-    // Plus besoin de réinitialiser la page car la pagination a été supprimée
+    setCurrentPage(1); // Réinitialiser la page lors du changement de mode d'affichage
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // Scroll vers le haut de la page pour une meilleure expérience utilisateur
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
@@ -86,12 +103,16 @@ const Creations = () => {
                   category={category}
                   subcategory={subcategory}
                   sortBy={sortBy}
+                  currentPage={currentPage}
+                  onPageChange={handlePageChange}
                 />
               ) : (
                 <ProductList 
                   category={category}
                   subcategory={subcategory}
                   sortBy={sortBy}
+                  currentPage={currentPage}
+                  onPageChange={handlePageChange}
                 />
               )}
             </div>

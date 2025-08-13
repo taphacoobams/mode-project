@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
         <MeasurementBlock />
       </main>
       <Footer />
-      <WhatsAppButton accountId="YOUR_JOINCHAT_ACCOUNT_ID" />
+      <WhatsAppButton />
     </>
   );
 };

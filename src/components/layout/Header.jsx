@@ -219,8 +219,10 @@ const Header = () => {
             { name: 'Pantalons', path: '/nos-creations/productcategory/homme/pantalons' },
             { name: 'Costumes africains', path: '/nos-creations/productcategory/homme/costumes-africains' },
             { name: 'Costumes européens', path: '/nos-creations/productcategory/homme/costumes-europeens' },
-            { name: 'Boubous Traditionnelles', path: '/nos-creations/productcategory/homme/boubous-traditionnelles' },
+            { name: 'Boubous Traditionnels', path: '/nos-creations/productcategory/homme/boubous-traditionnelles' },
             { name: 'Grand boubou', path: '/nos-creations/productcategory/homme/grand-boubou' },
+            { name: 'Broderies', path: '/nos-creations/productcategory/homme/broderies' },
+            { name: 'Fillage', path: '/nos-creations/productcategory/homme/fillage' },
             { name: 'Tenues personnalisées', path: '/nos-creations/productcategory/homme/tenues-personnalisees' },
           ]
         },

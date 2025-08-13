@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Modal from './Modal';
+import { convertEuroToCFA } from '../../utils/priceUtils';
 
 const QuickView = ({ product, isOpen, onClose }) => {
   if (!product) return null;
@@ -8,25 +9,6 @@ const QuickView = ({ product, isOpen, onClose }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} className="p-0 overflow-hidden">
       <div className="flex flex-col md:flex-row w-full">
-        {/* Thumbnails column - visible uniquement sur desktop */}
-        <div className="hidden md:flex flex-col gap-2 p-2 bg-gray-100 w-16">
-          <div className="border border-kc-gold p-1 cursor-pointer">
-            <img 
-              src={product.image} 
-              alt={`Miniature de ${product.name}`} 
-              className="w-full aspect-square object-cover"
-            />
-          </div>
-          {product.additionalImages?.slice(0, 3).map((img, index) => (
-            <div key={index} className="border border-gray-200 p-1 cursor-pointer hover:border-kc-gold transition-colors">
-              <img 
-                src={img} 
-                alt={`Vue alternative de ${product.name}`} 
-                className="w-full aspect-square object-cover"
-              />
-            </div>
-          ))}
-        </div>
         
         {/* Main image */}
         <div className="md:flex-1">
@@ -47,7 +29,7 @@ const QuickView = ({ product, isOpen, onClose }) => {
             <p className="text-sm text-gray-500">Stock: <span className="text-green-600">En stock</span></p>
           </div>
           
-          <p className="text-2xl font-semibold text-kc-gold mb-6">{product.price}</p>
+          <p className="text-2xl font-semibold text-kc-gold mb-6">{convertEuroToCFA(product.price)}</p>
           
           <Link 
             to={`/nos-creations/${product.category}/${product.id.toString()}`}

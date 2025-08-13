@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { FiEye } from 'react-icons/fi';
 import QuickView from '../ui/QuickView';
 import { getFilteredProducts } from '../../utils/productUtils';
+import { convertEuroToCFA } from '../../utils/priceUtils';
 
 const LatestCreations = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -94,7 +95,7 @@ const LatestCreations = () => {
                   <Link to={`/nos-creations/${product.category}/${product.id.toString()}`}>
                     <h3 className="text-lg font-semibold text-kc-black mb-2 hover:text-kc-gold transition-colors">{product.name}</h3>
                   </Link>
-                  <p className="text-kc-gold font-bold text-xl">{product.price}</p>
+                  <p className="text-kc-gold font-bold text-xl">{convertEuroToCFA(product.price)}</p>
                 </div>
               </motion.div>
             ))}

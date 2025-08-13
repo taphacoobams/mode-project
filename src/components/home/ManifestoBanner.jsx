@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaFacebookF, FaInstagram, FaSnapchatGhost, FaTiktok, FaYoutube, FaPhone, FaEnvelope, FaGlobe, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaSnapchatGhost, FaTiktok, FaYoutube, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 
 const ManifestoBanner = () => {
   return (
@@ -54,7 +54,7 @@ const ManifestoBanner = () => {
               
               <div className="flex flex-col space-y-2 items-center">
                 <div className="flex items-center">
-                  <FaPhone className="text-kc-black mr-2" />
+                  <FaPhoneAlt className="text-kc-black mr-2" />
                   <span className="text-kc-black">+221 78 463 10 10</span>
                 </div>
                 <div className="flex items-center">

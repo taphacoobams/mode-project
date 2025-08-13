@@ -3,9 +3,10 @@ import { useParams, useLocation, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import { FaWhatsapp } from 'react-icons/fa';
 import PageHeader from '../components/ui/PageHeader';
+import WhatsAppButton from '../components/ui/WhatsAppButton';
 import { allProducts } from '../utils/productUtils';
+import { convertEuroToCFA } from '../utils/priceUtils';
 
 const ProductDetail = () => {
   const { category, id } = useParams();
@@ -52,7 +53,7 @@ const ProductDetail = () => {
             },
             offers: {
               '@type': 'Offer',
-              price: product.price.replace(/[^\d]/g, ''),
+              price: convertEuroToCFA(product.price).replace(/[^\d]/g, ''),
               priceCurrency: 'XOF',
               availability: product.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'
             }
@@ -104,9 +105,9 @@ const ProductDetail = () => {
             <div>
               <h1 className="text-3xl font-serif font-medium text-kc-black mb-2">{product.name}</h1>
               <div className="flex items-center space-x-3">
-                <span className="text-2xl font-medium text-kc-gold">{product.price}</span>
+                <span className="text-2xl font-medium text-kc-gold">{convertEuroToCFA(product.price)}</span>
                 {product.originalPrice && (
-                  <span className="text-gray-500 line-through">{product.originalPrice}</span>
+                  <span className="text-gray-500 line-through">{convertEuroToCFA(product.originalPrice)}</span>
                 )}
                 {product.discount && (
                   <span className="text-red-600 font-medium">{product.discount}</span>
@@ -172,16 +173,8 @@ const ProductDetail = () => {
         </section>
       )}
       
-      {/* Bouton WhatsApp flottant */}
-      <a 
-        href={`https://wa.me/221784631010?text=Je%20suis%20intéressé(e)%20par%20ce%20produit:%20${encodeURIComponent(product.name)}%20${encodeURIComponent(currentUrl)}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-colors z-50 flex items-center justify-center"
-        aria-label="Commander via WhatsApp"
-      >
-        <FaWhatsapp size={28} />
-      </a>
+      {/* Bouton WhatsApp flottant avec le nom du produit */}
+      <WhatsAppButton productName={product.name} />
     </>
   );
 };
