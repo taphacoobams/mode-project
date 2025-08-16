@@ -5,9 +5,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-kc-black text-kc-white pt-12 pb-6">
-      <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="bg-kc-black text-kc-white pt-8 sm:pt-12 pb-6">
+      <div className="container px-4 sm:px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           {/* About Section */}
           <div>
             <h3 className="text-xl font-heading font-semibold mb-4">À propos</h3>
@@ -48,7 +48,7 @@ const Footer = () => {
           {/* Social Media Section */}
           <div>
             <h3 className="text-xl font-heading font-semibold mb-4">Suivez-nous</h3>
-            <div className="flex space-x-4 mb-6">
+            <div className="flex flex-wrap gap-3 mb-6">
               <a 
                 href="https://m.facebook.com/108168142221694/" 
                 target="_blank" 

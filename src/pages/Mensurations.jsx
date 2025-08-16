@@ -22,9 +22,9 @@ const Mensurations = () => {
     <>
       <Helmet>
         <title>Vos mensurations | Khalil Collection - La mode africaine à un autre niveau</title>
-        <meta name="description" content="Prenez vos mesures en ligne pour des vêtements Khalil Collection parfaitement ajustés à votre morphologie. Service gratuit pour tous nos clients." />
+        <meta name="description" content="Prenez vos mensurations en ligne pour des vêtements Khalil Collection parfaitement ajustés à votre morphologie. Service gratuit pour tous nos clients." />
         <meta property="og:title" content="Vos mensurations | Khalil Collection - La mode africaine à un autre niveau" />
-        <meta property="og:description" content="Prenez vos mesures en ligne pour des vêtements Khalil Collection parfaitement ajustés à votre morphologie. Service gratuit pour tous nos clients." />
+        <meta property="og:description" content="Prenez vos mensurations en ligne pour des vêtements Khalil Collection parfaitement ajustés à votre morphologie. Service gratuit pour tous nos clients." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://btoure.com/mensurations" />
       </Helmet>
@@ -35,10 +35,10 @@ const Mensurations = () => {
         <div className="container">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-heading font-bold text-kc-black mb-6">Formulaire de mensurations</h2>
+              <h2 className="text-3xl font-heading font-bold text-kc-black mb-6">Mensurations</h2>
               <div className="w-16 h-1 bg-kc-gold mx-auto mb-6"></div>
               <p className="text-lg text-gray-700">
-                Pour des vêtements parfaitement ajustés à votre morphologie, veuillez remplir ce formulaire de mensurations.
+                Pour des vêtements parfaitement ajustés à votre morphologie, veuillez remplir ce formulaire.
                 Nos tailleurs utiliseront ces informations pour créer des pièces sur mesure qui vous mettront en valeur.
               </p>
             </div>
@@ -268,9 +268,9 @@ const Mensurations = () => {
             </form>
 
             <div className="mt-12 bg-gray-50 p-6 rounded-md">
-              <h3 className="text-xl font-medium mb-4 text-kc-black">Comment prendre vos mesures</h3>
+              <h3 className="text-xl font-medium mb-4 text-kc-black">Comment prendre vos mensurations</h3>
               <p className="text-gray-700 mb-4">
-                Pour des mesures précises, nous vous recommandons de :
+                Pour des mensurations précises, nous vous recommandons de :
               </p>
               <ul className="list-disc pl-5 space-y-2 text-gray-700">
                 <li>Utiliser un mètre ruban souple</li>

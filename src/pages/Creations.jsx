@@ -15,7 +15,7 @@ const Creations = () => {
   const [sortBy, setSortBy] = useState('newest');
   const [viewMode, setViewMode] = useState('grid'); // 'grid' ou 'list'
   const [currentPage, setCurrentPage] = useState(1);
-  const [priceFilter, setPriceFilter] = useState({ min: '', max: '' });
+  const [priceFilter, setPriceFilter] = useState({ min: '', max: '', onDemand: false });
 
   // Extraire les paramètres de l'URL à chaque changement de location
   useEffect(() => {
@@ -72,8 +72,8 @@ const Creations = () => {
     });
   };
   
-  const handlePriceFilterChange = (min, max) => {
-    setPriceFilter({ min, max });
+  const handlePriceFilterChange = (min, max, onDemand) => {
+    setPriceFilter({ min, max, onDemand });
     setCurrentPage(1); // Réinitialiser la page lors du changement de filtre de prix
   };
 

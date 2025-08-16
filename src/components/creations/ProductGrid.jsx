@@ -15,7 +15,24 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
   const [totalPages, setTotalPages] = useState(1);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const productsPerPage = 12; // 12 articles par page
+  
+  // Détecter la taille de l'écran
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 640);
+    };
+    
+    // Vérifier la taille initiale
+    checkScreenSize();
+    
+    // Ajouter un écouteur d'événement pour les changements de taille
+    window.addEventListener('resize', checkScreenSize);
+    
+    // Nettoyer l'écouteur d'événement
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
   
   const handleQuickView = (product) => {
     setQuickViewProduct(product);
@@ -37,18 +54,33 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
     let filtered = getFilteredProducts(category, subcategory, sortBy);
     
     // Appliquer le filtre de prix si défini
-    if (priceFilter && (priceFilter.min || priceFilter.max)) {
-      filtered = filtered.filter(product => {
-        // Extraire le prix numérique du format "XX XXX FCFA"
-        const priceString = product.price.replace(/[^0-9]/g, '');
-        const price = parseInt(priceString, 10);
-        
-        const minPrice = priceFilter.min ? parseInt(priceFilter.min, 10) : 0;
-        const maxPrice = priceFilter.max ? parseInt(priceFilter.max, 10) : Infinity;
-        
-        return price >= minPrice && price <= maxPrice;
-      });
-      console.log('ProductGrid - Après filtre de prix:', filtered.length);
+    if (priceFilter) {
+      // Filtre pour "Prix sur demande"
+      if (priceFilter.onDemand) {
+        filtered = filtered.filter(product => {
+          return product.price === "Prix sur demande";
+        });
+        console.log('ProductGrid - Après filtre Prix sur demande:', filtered.length);
+      }
+      // Filtre par plage de prix
+      else if (priceFilter.min || priceFilter.max) {
+        filtered = filtered.filter(product => {
+          // Ignorer les produits "Prix sur demande"
+          if (product.price === "Prix sur demande") {
+            return false;
+          }
+          
+          // Extraire le prix numérique du format "XX XXX FCFA"
+          const priceString = product.price.replace(/[^0-9]/g, '');
+          const price = parseInt(priceString, 10);
+          
+          const minPrice = priceFilter.min ? parseInt(priceFilter.min, 10) : 0;
+          const maxPrice = priceFilter.max ? parseInt(priceFilter.max, 10) : Infinity;
+          
+          return price >= minPrice && price <= maxPrice;
+        });
+        console.log('ProductGrid - Après filtre de prix:', filtered.length);
+      }
     }
     
     console.log('ProductGrid - Produits filtrés:', filtered.length);
@@ -92,7 +124,7 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
             variants={container}
             initial="hidden"
             animate="show"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6"
           >
             {paginatedProducts.map((product) => (
               <motion.div 
@@ -141,11 +173,11 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
                     <FiArrowRight size={16} />
                   </Link>
                 </div>
-                <div className="p-4">
+                <div className="p-2 sm:p-4">
                   <Link to={`/product/${product.reference.toLowerCase()}`}>
-                    <h3 className="text-lg font-medium text-kc-black mb-2 hover:text-kc-gold transition-colors">{product.name}</h3>
+                    <h3 className="text-xs sm:text-sm md:text-lg font-medium text-kc-black mb-1 sm:mb-2 hover:text-kc-gold transition-colors line-clamp-2">{product.name}</h3>
                   </Link>
-                  <p className="text-kc-gold font-semibold">{product.price}</p>
+                  <p className="text-kc-gold font-semibold text-xs sm:text-sm md:text-base">{product.price}</p>
                 </div>
               </motion.div>
             ))}
@@ -153,30 +185,31 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
           
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex justify-center mt-8">
-              <nav className="flex items-center space-x-2" aria-label="Pagination">
+            <div className="flex justify-center mt-6 sm:mt-8">
+              <nav className="flex flex-wrap items-center justify-center gap-1 sm:gap-2" aria-label="Pagination">
                 <button
                   onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
                   disabled={currentPage === 1}
-                  className={`p-2 rounded-md ${currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'text-gray-700 hover:bg-gray-100'}`}
+                  className={`p-1 sm:p-2 rounded-md ${currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'text-gray-700 hover:bg-gray-100'}`}
                   aria-label="Page précédente"
                 >
-                  <FiChevronLeft size={18} />
+                  <FiChevronLeft size={16} />
                 </button>
                 
                 {[...Array(totalPages)].map((_, index) => {
                   const pageNumber = index + 1;
-                  // Afficher les 3 premiers, les 3 derniers, et 2 autour de la page courante
+                  // Sur mobile, afficher seulement la page courante et les adjacentes
+                  // Sur desktop, afficher plus de pages
+                  
                   if (
-                    pageNumber <= 3 ||
-                    pageNumber > totalPages - 3 ||
+                    (!isSmallScreen && (pageNumber <= 2 || pageNumber > totalPages - 2)) ||
                     (pageNumber >= currentPage - 1 && pageNumber <= currentPage + 1)
                   ) {
                     return (
                       <button
                         key={pageNumber}
                         onClick={() => handlePageChange(pageNumber)}
-                        className={`px-3 py-1 rounded-md ${pageNumber === currentPage
+                        className={`w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-md text-xs sm:text-sm ${pageNumber === currentPage
                           ? 'bg-kc-gold text-white'
                           : 'text-gray-700 hover:bg-gray-100'
                         }`}
@@ -187,11 +220,13 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
                       </button>
                     );
                   } else if (
-                    (pageNumber === 4 && currentPage > 5) ||
-                    (pageNumber === totalPages - 3 && currentPage < totalPages - 4)
+                    (!isSmallScreen) && (
+                      (pageNumber === 3 && currentPage > 4) ||
+                      (pageNumber === totalPages - 2 && currentPage < totalPages - 3)
+                    )
                   ) {
                     // Afficher des points de suspension pour indiquer des pages omises
-                    return <span key={pageNumber} className="px-2">...</span>;
+                    return <span key={pageNumber} className="px-1 sm:px-2 text-xs sm:text-sm">...</span>;
                   }
                   return null;
                 })}
@@ -199,10 +234,10 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
                 <button
                   onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
                   disabled={currentPage === totalPages}
-                  className={`p-2 rounded-md ${currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'text-gray-700 hover:bg-gray-100'}`}
+                  className={`p-1 sm:p-2 rounded-md ${currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'text-gray-700 hover:bg-gray-100'}`}
                   aria-label="Page suivante"
                 >
-                  <FiChevronRight size={18} />
+                  <FiChevronRight size={16} />
                 </button>
               </nav>
             </div>

@@ -5,6 +5,7 @@ const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange, onPriceF
   const [showFilters, setShowFilters] = useState(false);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const [onDemand, setOnDemand] = useState(false);
   
   const sortOptions = [
     { id: 'newest', name: 'Nouveautés' },
@@ -86,9 +87,10 @@ const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange, onPriceF
                 placeholder="Min"
                 value={minPrice}
                 onChange={(e) => setMinPrice(e.target.value)}
-                onBlur={() => onPriceFilterChange(minPrice, maxPrice)}
+                onBlur={() => onPriceFilterChange(minPrice, maxPrice, onDemand)}
                 className="w-full border border-gray-200 rounded-sm px-3 py-2 focus:outline-none focus:border-kc-gold"
                 aria-label="Prix minimum"
+                disabled={onDemand}
               />
               <span className="text-gray-400">-</span>
               <input
@@ -96,15 +98,38 @@ const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange, onPriceF
                 placeholder="Max"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
-                onBlur={() => onPriceFilterChange(minPrice, maxPrice)}
+                onBlur={() => onPriceFilterChange(minPrice, maxPrice, onDemand)}
                 className="w-full border border-gray-200 rounded-sm px-3 py-2 focus:outline-none focus:border-kc-gold"
                 aria-label="Prix maximum"
+                disabled={onDemand}
               />
             </div>
+            
+            {/* Prix sur demande checkbox */}
+            <div className="mt-3 flex items-center">
+              <input
+                type="checkbox"
+                id="price-on-demand"
+                checked={onDemand}
+                onChange={(e) => {
+                  setOnDemand(e.target.checked);
+                  if (e.target.checked) {
+                    setMinPrice('');
+                    setMaxPrice('');
+                  }
+                  onPriceFilterChange('', '', e.target.checked);
+                }}
+                className="h-4 w-4 text-kc-gold focus:ring-kc-gold border-gray-300 rounded"
+              />
+              <label htmlFor="price-on-demand" className="ml-2 block text-sm text-gray-700">
+                Prix sur demande uniquement
+              </label>
+            </div>
+            
             <div className="mt-3">
               <button 
                 onClick={() => {
-                  onPriceFilterChange(minPrice, maxPrice);
+                  onPriceFilterChange(minPrice, maxPrice, onDemand);
                 }}
                 className="bg-kc-gold text-kc-black px-4 py-2 rounded-sm hover:bg-opacity-90 transition-colors"
               >
@@ -114,7 +139,8 @@ const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange, onPriceF
                 onClick={() => {
                   setMinPrice('');
                   setMaxPrice('');
-                  onPriceFilterChange('', '');
+                  setOnDemand(false);
+                  onPriceFilterChange('', '', false);
                 }}
                 className="ml-2 text-gray-600 hover:text-kc-gold transition-colors"
               >

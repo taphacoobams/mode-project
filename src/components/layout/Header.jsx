@@ -127,12 +127,12 @@ const MobileNavItem = ({ item, setMobileMenuOpen }) => {
                   </div>
                   
                   {subItem.submenu && (
-                    <div className="pl-4 mt-1 border-l border-kc-gold/20">
+                    <div className="pl-3 sm:pl-4 mt-1 border-l border-kc-gold/20">
                       {subItem.submenu.map((subSubItem) => (
                         <Link
                           key={subSubItem.name}
                           to={subSubItem.path}
-                          className="block py-1 text-sm text-kc-white/80 hover:text-kc-gold"
+                          className="block py-1 text-xs sm:text-sm text-kc-white/80 hover:text-kc-gold"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {subSubItem.name}
@@ -243,7 +243,7 @@ const Header = () => {
         isScrolled ? 'bg-kc-black shadow-md py-2 text-kc-white' : 'bg-transparent py-4 text-kc-black'
       }`}
     >
-      <div className="container flex items-center justify-between">
+      <div className="container px-4 sm:px-6 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="relative z-10">
           <img 
@@ -290,10 +290,10 @@ const Header = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="absolute top-full left-0 w-full bg-kc-black text-kc-white shadow-lg md:hidden"
+          className="absolute top-full left-0 w-full bg-kc-black text-kc-white shadow-lg md:hidden max-h-[80vh] overflow-y-auto"
         >
-          <nav className="container py-4">
-            <ul className="flex flex-col space-y-4">
+          <nav className="container px-4 sm:px-6 py-4">
+            <ul className="flex flex-col space-y-3">
               {navItems.map((item) => (
                 <MobileNavItem key={item.name} item={item} setMobileMenuOpen={setMobileMenuOpen} />
               ))}

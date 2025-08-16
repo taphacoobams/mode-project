@@ -15,7 +15,7 @@ const ManifestoBanner = () => {
                 className="w-32 h-32"
               />
             </div>
-            <p className="text-kc-gold font-medium mb-2">khalilcollections</p>
+            <p className="text-kc-gold font-medium mb-2">Khalil Collection</p>
             <div className="flex space-x-2 mb-3">
               <a href="https://m.facebook.com/108168142221694/" className="bg-kc-gold w-8 h-8 rounded-md flex items-center justify-center hover:opacity-90">
                 <FaFacebookF className="text-kc-black" />
@@ -68,7 +68,7 @@ const ManifestoBanner = () => {
           {/* Partie droite - Logo */}
           <div className="w-full md:w-1/4 flex justify-center">
             <img 
-              src="/logo3.png" 
+              src="/logo.png" 
               alt="Khalil Collection Logo" 
               className="w-40 h-40 md:w-48 md:h-48"
             />

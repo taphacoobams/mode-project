@@ -24,14 +24,14 @@ const MeasurementBlock = () => {
             </p>
             <Link to="/mensurations" className="btn bg-kc-gold hover:bg-kc-gold/90 text-kc-black flex items-center space-x-2">
               <FiTool size={20} />
-              <span>Je prends mes mesures</span>
+              <span>Je prends mes mensurations</span>
             </Link>
           </div>
           
           <div className="md:w-5/12">
             <div className="bg-white/10 p-6 rounded-sm">
               <h3 className="text-xl font-medium mb-4 text-kc-gold">
-                Pourquoi prendre vos mesures ?
+                Pourquoi prendre vos mensurations ?
               </h3>
               <ul className="space-y-3 text-white/80">
                 <li className="flex items-start">
