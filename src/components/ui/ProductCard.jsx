@@ -16,12 +16,12 @@ const ProductCard = ({ product }) => {
       transition={{ duration: 0.5 }}
     >
       <div className="relative overflow-hidden aspect-square">
-        <Link to={`/nos-creations/${category}/${id}`} aria-label={`Voir ${name}`}>
+        <Link to={`/product/${product.reference.toLowerCase()}`} aria-label={`Voir ${name}`}>
           <LazyLoadImage
             src={image}
             alt={name}
             effect="blur"
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
             wrapperClassName="w-full h-full"
           />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
@@ -29,13 +29,13 @@ const ProductCard = ({ product }) => {
         
         <div className="absolute top-4 right-4 flex flex-col space-y-2">
           <button 
-            className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-primary hover:text-white transition-colors duration-300"
+            className="w-10 h-10 bg-kc-white rounded-full flex items-center justify-center shadow-md hover:bg-kc-gold hover:text-kc-black transition-colors duration-300"
             aria-label="Ajouter aux favoris"
           >
             <FiHeart size={18} />
           </button>
           <button 
-            className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-primary hover:text-white transition-colors duration-300"
+            className="w-10 h-10 bg-kc-white rounded-full flex items-center justify-center shadow-md hover:bg-kc-gold hover:text-kc-black transition-colors duration-300"
             aria-label="Ajouter au panier"
           >
             <FiShoppingBag size={18} />
@@ -44,8 +44,8 @@ const ProductCard = ({ product }) => {
         
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
           <Link 
-            to={`/nos-creations/${category}/${id}`}
-            className="inline-block bg-primary text-white py-2 px-4 rounded-sm text-sm"
+            to={`/product/${product.reference.toLowerCase()}`}
+            className="inline-block bg-kc-gold text-kc-black py-2 px-4 rounded-sm text-sm"
             aria-label={`Voir détails de ${name}`}
           >
             Voir détails
@@ -54,10 +54,10 @@ const ProductCard = ({ product }) => {
       </div>
       
       <div className="p-4">
-        <Link to={`/nos-creations/${category}/${id}`} className="block">
-          <h3 className="text-lg font-medium text-secondary mb-2 hover:text-primary transition-colors">{name}</h3>
+        <Link to={`/product/${product.reference.toLowerCase()}`} className="block">
+          <h3 className="text-lg font-medium text-kc-black mb-2 hover:text-kc-gold transition-colors">{name}</h3>
         </Link>
-        <p className="text-primary font-semibold">{price}</p>
+        <p className="text-kc-gold font-semibold">{price}</p>
       </div>
       
       {/* Schema.org Product structured data for SEO - Moved to Helmet component */}

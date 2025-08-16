@@ -8,8 +8,8 @@ import WhatsAppButton from '../ui/WhatsAppButton';
 const Layout = ({ children }) => {
   const location = useLocation();
   
-  // Vérifier si nous sommes sur une page produit (URL contient /nos-creations/ et un ID de produit)
-  const isProductPage = /\/nos-creations\/[^\/]+\/\d+/.test(location.pathname);
+  // Vérifier si nous sommes sur une page produit (URL contient /creations/ ou /product/)
+  const isProductPage = /\/creations\/[^\/]+\/[^\/]+/.test(location.pathname) || /\/product\/[^\/]+/.test(location.pathname);
   
   return (
     <>

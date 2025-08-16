@@ -20,16 +20,15 @@ const Designer = () => {
         <meta property="og:url" content="https://khalilcollection.com/designer" />
       </Helmet>
 
-      <PageHeader 
-        title="Le Designer"
-        breadcrumbs={[
-          { label: 'Accueil', url: '/' },
-          { label: 'Le Designer' }
-        ]}
-      />
+      {/* PageHeader supprimé */}
       
-      <div className="py-16">
-        <div className="container">
+      <div className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-heading font-bold text-kc-black mb-6">Notre Designer</h2>
+            <div className="w-16 h-1 bg-kc-gold mx-auto mb-6"></div>
+            <p className="text-lg text-gray-700">Découvrez l'histoire et la vision du créateur de Khalil Collection</p>
+          </div>
           <DesignerProfile />
           <DesignerMessage />
           <PartnershipsSection />

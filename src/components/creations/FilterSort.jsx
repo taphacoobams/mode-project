@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FiFilter, FiChevronDown, FiGrid, FiList } from 'react-icons/fi';
 
-const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange }) => {
+const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange, onPriceFilterChange }) => {
   const [showFilters, setShowFilters] = useState(false);
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
   
   const sortOptions = [
     { id: 'newest', name: 'Nouveautés' },
@@ -74,14 +76,17 @@ const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange }) => {
       </div>
       
       {showFilters && (
-        <div className="mt-4 pt-4 border-t border-gray-200 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="mt-4 pt-4 border-t border-gray-200">
           {/* Price Range Filter */}
-          <div>
+          <div className="max-w-md">
             <h3 className="text-sm font-medium text-kc-black mb-2">Prix</h3>
             <div className="flex items-center space-x-2">
               <input
                 type="number"
                 placeholder="Min"
+                value={minPrice}
+                onChange={(e) => setMinPrice(e.target.value)}
+                onBlur={() => onPriceFilterChange(minPrice, maxPrice)}
                 className="w-full border border-gray-200 rounded-sm px-3 py-2 focus:outline-none focus:border-kc-gold"
                 aria-label="Prix minimum"
               />
@@ -89,40 +94,32 @@ const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange }) => {
               <input
                 type="number"
                 placeholder="Max"
+                value={maxPrice}
+                onChange={(e) => setMaxPrice(e.target.value)}
+                onBlur={() => onPriceFilterChange(minPrice, maxPrice)}
                 className="w-full border border-gray-200 rounded-sm px-3 py-2 focus:outline-none focus:border-kc-gold"
                 aria-label="Prix maximum"
               />
             </div>
-          </div>
-          
-          {/* Color Filter */}
-          <div>
-            <h3 className="text-sm font-medium text-kc-black mb-2">Couleur</h3>
-            <div className="flex flex-wrap gap-2">
-              {['#000000', '#FFFFFF', '#C8A165', '#0000FF', '#FF0000', '#008000'].map((color) => (
-                <button
-                  key={color}
-                  className="w-6 h-6 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-kc-gold"
-                  style={{ backgroundColor: color }}
-                  aria-label={`Filtrer par couleur ${color}`}
-                />
-              ))}
-            </div>
-          </div>
-          
-          {/* Size Filter */}
-          <div>
-            <h3 className="text-sm font-medium text-kc-black mb-2">Taille</h3>
-            <div className="flex flex-wrap gap-2">
-              {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map((size) => (
-                <button
-                  key={size}
-                  className="min-w-[36px] h-8 px-2 border border-gray-200 rounded-sm hover:border-kc-gold hover:text-kc-gold focus:outline-none focus:border-kc-gold focus:text-kc-gold transition-colors"
-                  aria-label={`Filtrer par taille ${size}`}
-                >
-                  {size}
-                </button>
-              ))}
+            <div className="mt-3">
+              <button 
+                onClick={() => {
+                  onPriceFilterChange(minPrice, maxPrice);
+                }}
+                className="bg-kc-gold text-kc-black px-4 py-2 rounded-sm hover:bg-opacity-90 transition-colors"
+              >
+                Appliquer
+              </button>
+              <button 
+                onClick={() => {
+                  setMinPrice('');
+                  setMaxPrice('');
+                  onPriceFilterChange('', '');
+                }}
+                className="ml-2 text-gray-600 hover:text-kc-gold transition-colors"
+              >
+                Réinitialiser
+              </button>
             </div>
           </div>
         </div>

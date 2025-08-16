@@ -61,7 +61,7 @@ const Newsletter = ({ className = '' }) => {
               placeholder="Votre adresse email"
               className={`w-full py-3 pl-10 pr-4 bg-white border ${
                 error ? 'border-red-500' : 'border-gray-300'
-              } rounded-sm focus:outline-none focus:border-primary`}
+              } rounded-sm focus:outline-none focus:border-kc-gold`}
               aria-label="Adresse email pour la newsletter"
               disabled={isSubmitting}
             />
@@ -74,7 +74,7 @@ const Newsletter = ({ className = '' }) => {
           
           <button
             type="submit"
-            className="mt-3 w-full bg-primary text-white py-3 px-4 rounded-sm hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="mt-3 w-full bg-kc-gold text-kc-black py-3 px-4 rounded-sm hover:bg-kc-gold/90 transition-colors focus:outline-none focus:ring-2 focus:ring-kc-gold/50"
             disabled={isSubmitting}
           >
             {isSubmitting ? 'Inscription en cours...' : 'S\'inscrire'}

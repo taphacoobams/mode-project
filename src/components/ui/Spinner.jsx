@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-const Spinner = ({ size = 'md', color = 'primary' }) => {
+const Spinner = ({ size = 'md', color = 'gold' }) => {
   // Size variants
   const sizeVariants = {
     sm: 'w-5 h-5 border-2',
@@ -10,9 +10,9 @@ const Spinner = ({ size = 'md', color = 'primary' }) => {
   
   // Color variants
   const colorVariants = {
-    primary: 'border-primary/30 border-t-primary',
-    white: 'border-white/30 border-t-white',
-    secondary: 'border-secondary/30 border-t-secondary',
+    gold: 'border-kc-gold/30 border-t-kc-gold',
+    white: 'border-kc-white/30 border-t-kc-white',
+    black: 'border-kc-black/30 border-t-kc-black',
   };
   
   const spinTransition = {

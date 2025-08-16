@@ -97,7 +97,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                   {searchResults.map(product => (
                     <Link 
                       key={product.id}
-                      to={`/nos-creations/${product.category}/${product.id}`}
+                      to={`/product/${product.id}`}
                       onClick={onClose}
                       className="group"
                     >

@@ -17,13 +17,7 @@ const Brand = () => {
         <meta property="og:url" content="https://btoure.com/notre-marque" />
       </Helmet>
 
-      <PageHeader 
-        title="Notre marque"
-        breadcrumbs={[
-          { label: 'Accueil', url: '/' },
-          { label: 'Notre marque' }
-        ]}
-      />
+      {/* PageHeader supprimé */}
       
       <div className="py-16">
         <div className="container">

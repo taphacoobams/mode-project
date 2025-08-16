@@ -41,7 +41,7 @@ export const generateProductSchema = (product) => {
       price: price.replace(/[^\d]/g, ''),
       priceCurrency: currency,
       availability: `https://schema.org/${availability}`,
-      url: `https://www.khalilcollection.com/nos-creations/${id}`,
+      url: `https://www.khalilcollection.com/creations/${id}`,
     },
   };
 };

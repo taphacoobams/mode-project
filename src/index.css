@@ -27,14 +27,14 @@ body {
   }
   
   .btn-primary {
-    @apply text-white bg-primary hover:bg-primary/90;
+    @apply text-kc-black bg-kc-gold hover:bg-kc-gold/90;
   }
   
   .btn-outline {
-    @apply text-primary border border-primary hover:bg-primary hover:text-white;
+    @apply text-kc-gold border border-kc-gold hover:bg-kc-gold hover:text-kc-black;
   }
   
   .section-title {
-    @apply mb-8 text-3xl font-bold font-serif text-secondary md:text-4xl;
+    @apply mb-8 text-3xl font-bold font-serif text-kc-black md:text-4xl;
   }
 }

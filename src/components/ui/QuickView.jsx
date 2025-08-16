@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Modal from './Modal';
-import { convertEuroToCFA } from '../../utils/priceUtils';
 // import WhatsAppButton from './WhatsAppButton'; // Non utilisé
 
 const QuickView = ({ product, isOpen, onClose }) => {
@@ -17,7 +16,7 @@ const QuickView = ({ product, isOpen, onClose }) => {
             <img 
               src={product.image} 
               alt={product.name} 
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
         </div>
@@ -30,7 +29,7 @@ const QuickView = ({ product, isOpen, onClose }) => {
             <p className="text-sm text-gray-500">Stock: <span className="text-green-600">En stock</span></p>
           </div>
           
-          <p className="text-2xl font-semibold text-kc-gold mb-6">{convertEuroToCFA(product.price)}</p>
+          <p className="text-2xl font-semibold text-kc-gold mb-6">{product.price}</p>
           
           {product.description && (
             <p className="text-gray-700 leading-relaxed mb-6 text-sm">
@@ -39,7 +38,7 @@ const QuickView = ({ product, isOpen, onClose }) => {
           )}
           
           <Link 
-            to={`/nos-creations/${product.category}/${product.id.toString()}`}
+            to={`/product/${product.reference.toLowerCase()}`}
             className="inline-block bg-kc-gold hover:bg-kc-gold/90 text-kc-black py-3 px-6 text-sm uppercase tracking-wider font-medium w-full text-center"
           >
             Voir les détails

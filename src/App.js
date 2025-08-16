@@ -26,25 +26,22 @@ function App() {
         <div className="flex flex-col min-h-screen bg-white">
           <Suspense fallback={
             <div className="flex justify-center items-center h-screen">
-              <Spinner size="lg" color="primary" />
+              <Spinner size="lg" color="gold" />
             </div>
           }>
             <Layout>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/notre-marque" element={<Brand />} />
-                <Route path="/nos-creations" element={<Creations />} />
-                <Route path="/noscreations" element={<Creations />} />
-                <Route path="/nos-creations/productcategory/:category" element={<Creations />} />
-                <Route path="/noscreations/productcategory/:category" element={<Creations />} />
-                <Route path="/nos-creations/productcategory/:category/:subcategory" element={<Creations />} />
-                <Route path="/noscreations/productcategory/:category/:subcategory" element={<Creations />} />
+                <Route path="/creations" element={<Creations />} />
+                <Route path="/creations/productcategory/:category" element={<Creations />} />
+                <Route path="/creations/productcategory/:category/:subcategory" element={<Creations />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/mensurations" element={<Mensurations />} />
                 <Route path="/designer" element={<Designer />} />
                 <Route path="/cheque-cadeau" element={<ChequeCadeau />} />
-                <Route path="/creations/:category/:id" element={<ProductDetail />} />
-                <Route path="/nos-creations/:category/:id" element={<ProductDetail />} />
+                <Route path="/product/:reference" element={<ProductDetail />} />
+                <Route path="/creations/:category/:reference" element={<ProductDetail />} />
               </Routes>
             </Layout>
           </Suspense>

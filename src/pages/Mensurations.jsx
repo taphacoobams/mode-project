@@ -29,13 +29,7 @@ const Mensurations = () => {
         <meta property="og:url" content="https://btoure.com/mensurations" />
       </Helmet>
 
-      <PageHeader 
-        title="Vos mensurations" 
-        breadcrumbs={[
-          { label: 'Accueil', url: '/' },
-          { label: 'Vos mensurations' }
-        ]}
-      />
+      {/* PageHeader supprimé */}
       
       <div className="py-16">
         <div className="container">

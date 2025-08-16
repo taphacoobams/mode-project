@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import { FiEye } from 'react-icons/fi';
 import QuickView from '../ui/QuickView';
 import { getFilteredProducts } from '../../utils/productUtils';
-import { convertEuroToCFA } from '../../utils/priceUtils';
 
 const LatestCreations = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -68,14 +67,14 @@ const LatestCreations = () => {
               >
                 <div className="relative overflow-hidden aspect-square">
                   <Link 
-                    to={`/nos-creations/${product.category}/${product.id.toString()}`}
+                    to={`/product/${product.reference.toLowerCase()}`}
                     className="block"
                   >
                     <LazyLoadImage
                       src={product.image}
                       alt={product.name}
                       effect="blur"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                       wrapperClassName="w-full h-full"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -83,19 +82,18 @@ const LatestCreations = () => {
                   
                   <button
                     onClick={(e) => handleQuickView(product, e)}
-                    className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-kc-gold text-kc-black py-2 px-4 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center space-x-2 transform translate-y-4 group-hover:translate-y-0 shadow-md"
+                    className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-kc-gold text-kc-black p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center transform translate-y-4 group-hover:translate-y-0 shadow-md"
                     aria-label={`Aperçu rapide de ${product.name}`}
                   >
-                    <FiEye size={18} />
-                    <span>Aperçu rapide</span>
+                    <FiEye size={20} />
                   </button>
                 </div>
                 <div className="p-5 border-t border-gray-100">
                   <p className="text-sm text-gray-500 mb-1">{product.category.replace(/-/g, ' ').replace(/(^\w|\s\w)/g, m => m.toUpperCase())}</p>
-                  <Link to={`/nos-creations/${product.category}/${product.id.toString()}`}>
+                  <Link to={`/product/${product.reference.toLowerCase()}`}>
                     <h3 className="text-lg font-semibold text-kc-black mb-2 hover:text-kc-gold transition-colors">{product.name}</h3>
                   </Link>
-                  <p className="text-kc-gold font-bold text-xl">{convertEuroToCFA(product.price)}</p>
+                  <p className="text-kc-gold font-bold text-xl">{product.price}</p>
                 </div>
               </motion.div>
             ))}
@@ -103,7 +101,7 @@ const LatestCreations = () => {
           
           <div className="text-center mt-16">
             <Link 
-              to="/nos-creations" 
+              to="/creations" 
               className="bg-kc-gold text-kc-black px-8 py-3 rounded-md hover:bg-kc-black hover:text-kc-gold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-kc-gold/50 inline-flex items-center font-medium text-lg shadow-md"
             >
               <span>Voir toutes nos créations</span>

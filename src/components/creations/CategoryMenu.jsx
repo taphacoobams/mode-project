@@ -19,8 +19,8 @@ const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
         { id: 'pantalons', name: 'Pantalons' },
         { id: 'costumes-africains', name: 'Costumes africains' },
         { id: 'costumes-europeens', name: 'Costumes européens' },
-        { id: 'boubous-traditionnelles', name: 'Boubous Traditionnels' },
-        { id: 'grand-boubou', name: 'Grand boubou' },
+        { id: 'boubous-traditionnels', name: 'Boubous Traditionnels' },
+        { id: 'grands-boubous', name: 'Grands boubous' },
         { id: 'broderies', name: 'Broderies' },
         { id: 'fillage', name: 'Fillage' },
         { id: 'tenues-personnalisees', name: 'Tenues personnalisées' },
@@ -33,7 +33,7 @@ const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
         { id: 'chemises', name: 'Chemises' },
         { id: 'pantalons', name: 'Pantalons' },
         { id: 'costumes-africains', name: 'Costumes africains' },
-        { id: 'grand-boubou', name: 'Grand boubou' },
+        { id: 'grands-boubous', name: 'Grands boubous' },
       ],
     },
     {
@@ -56,11 +56,19 @@ const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
   };
 
   const handleCategoryClick = (categoryId) => {
-    navigate(`/nos-creations/productcategory/${categoryId}`);
+    // Naviguer vers la catégorie et réinitialiser la sous-catégorie
+    console.log('Navigation vers la catégorie:', categoryId);
+    navigate(`/creations/productcategory/${categoryId}`);
   };
 
   const handleSubcategoryClick = (categoryId, subcategoryId) => {
-    navigate(`/nos-creations/productcategory/${categoryId}/${subcategoryId}`);
+    // S'assurer que la catégorie parente est également développée
+    setExpandedCategories({
+      ...expandedCategories,
+      [categoryId]: true
+    });
+    console.log('Navigation vers la sous-catégorie:', subcategoryId, 'de la catégorie:', categoryId);
+    navigate(`/creations/productcategory/${categoryId}/${subcategoryId}`);
   };
 
   return (
@@ -112,8 +120,8 @@ const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
       
       <div className="mt-8 pt-4 border-t border-gray-200">
         <Link 
-          to="/nos-creations"
-          className="text-primary hover:underline font-medium"
+          to="/creations"
+          className="text-kc-gold hover:underline font-medium"
         >
           Voir toutes les créations
         </Link>

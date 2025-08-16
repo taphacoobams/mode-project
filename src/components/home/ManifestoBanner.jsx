@@ -68,7 +68,7 @@ const ManifestoBanner = () => {
           {/* Partie droite - Logo */}
           <div className="w-full md:w-1/4 flex justify-center">
             <img 
-              src="/logo1.png" 
+              src="/logo3.png" 
               alt="Khalil Collection Logo" 
               className="w-40 h-40 md:w-48 md:h-48"
             />

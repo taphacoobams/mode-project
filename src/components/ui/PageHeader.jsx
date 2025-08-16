@@ -8,7 +8,9 @@ const PageHeader = ({
   overlay = true,
   height = 'md',
   textAlignment = 'center',
-  breadcrumbs = []
+  breadcrumbs = [],
+  hideTitle = false,
+  customClass = ''
 }) => {
   // Height variants
   const heightClasses = {
@@ -45,12 +47,12 @@ const PageHeader = ({
 
   return (
     <motion.div 
-      className={`relative ${heightClasses[height]} w-full flex flex-col justify-center ${alignmentClasses[textAlignment]} px-6`}
+      className={`relative ${heightClasses[height]} w-full flex flex-col justify-center ${alignmentClasses[textAlignment]} px-6 ${customClass}`}
       style={{
         backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'none',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundColor: backgroundImage ? 'transparent' : '#f8f8f8'
+        backgroundColor: backgroundImage ? 'transparent' : ''
       }}
       initial="hidden"
       animate="visible"
@@ -70,26 +72,26 @@ const PageHeader = ({
             variants={itemVariants}
             aria-label="Breadcrumb"
           >
-            <ol className="flex flex-wrap items-center space-x-2 text-xs">
+            <ol className="flex flex-wrap items-center space-x-2">
               {breadcrumbs.map((crumb, index) => (
                 <li key={index} className="flex items-center">
                   {index > 0 && (
-                    <span className={`mx-2 ${backgroundImage ? 'text-white/70' : 'text-gray-400'}`}>
+                    <span className="mx-3 text-kc-gold text-lg font-medium">
                       /
                     </span>
                   )}
                   {crumb.url ? (
                     <Link 
                       to={crumb.url} 
-                      className={`text-sm hover:underline ${
-                        backgroundImage ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-kc-gold'
+                      className={`text-base md:text-lg font-medium hover:underline ${
+                        customClass ? '' : backgroundImage ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-kc-gold'
                       }`}
                     >
                       {crumb.label}
                     </Link>
                   ) : (
-                    <span className={`text-sm ${
-                      backgroundImage ? 'text-white' : 'text-gray-800'
+                    <span className={`text-base md:text-lg font-bold ${
+                      customClass ? 'text-kc-gold' : backgroundImage ? 'text-white' : 'text-gray-800'
                     }`}>
                       {crumb.label}
                     </span>
@@ -101,14 +103,16 @@ const PageHeader = ({
         )}
         
         {/* Title */}
-        <motion.h1 
-          className={`text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 ${
-            backgroundImage ? 'text-white' : 'text-kc-black'
-          }`}
-          variants={itemVariants}
-        >
-          {title}
-        </motion.h1>
+        {!hideTitle && title && (
+          <motion.h1 
+            className={`text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 ${
+              backgroundImage ? 'text-white' : 'text-kc-black'
+            }`}
+            variants={itemVariants}
+          >
+            {title}
+          </motion.h1>
+        )}
         
         {/* Subtitle */}
         {subtitle && (

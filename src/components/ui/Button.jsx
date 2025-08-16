@@ -28,11 +28,11 @@ const Button = ({
   
   // Variant classes
   const variantClasses = {
-    primary: 'bg-primary text-white hover:bg-primary/90 focus:ring-primary/50',
-    secondary: 'bg-secondary text-white hover:bg-secondary/90 focus:ring-secondary/50',
-    outline: 'bg-transparent border border-primary text-primary hover:bg-primary/10 focus:ring-primary/30',
-    ghost: 'bg-transparent text-primary hover:bg-primary/10 focus:ring-primary/30',
-    white: 'bg-white text-secondary border border-gray-200 hover:border-primary hover:text-primary focus:ring-primary/30',
+    primary: 'bg-kc-gold text-kc-black hover:bg-kc-gold/90 focus:ring-kc-gold/50',
+    secondary: 'bg-kc-black text-kc-white hover:bg-kc-black/90 focus:ring-kc-black/50',
+    outline: 'bg-transparent border border-kc-gold text-kc-gold hover:bg-kc-gold/10 focus:ring-kc-gold/30',
+    ghost: 'bg-transparent text-kc-gold hover:bg-kc-gold/10 focus:ring-kc-gold/30',
+    white: 'bg-kc-white text-kc-black border border-gray-200 hover:border-kc-gold hover:text-kc-gold focus:ring-kc-gold/30',
   };
   
   // Disabled state

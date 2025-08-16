@@ -5,7 +5,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-kc-black text-kc-textLight pt-12 pb-6">
+    <footer className="bg-kc-black text-kc-white pt-12 pb-6">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About Section */}
@@ -15,7 +15,7 @@ const Footer = () => {
               Khalil Collection est une marque de mode africaine premium qui réinvente l'habillement traditionnel 
               avec une touche contemporaine. Nos créations sont fabriquées avec passion et savoir-faire.
             </p>
-            <Link to="/notre-marque" className="text-kc-gold hover:text-kc-gold/80 transition-colors">
+            <Link to="/designer" className="text-kc-gold hover:text-kc-gold/80 transition-colors">
               En savoir plus
             </Link>
           </div>

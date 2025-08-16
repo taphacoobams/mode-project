@@ -98,13 +98,16 @@ const allAvailableImages = [
 //   'Imprimé', 'Fil d\'or', 'Satin', 'Velours', 'Premium'
 // ];
 
+// Fonction supprimée car intégrée directement dans la création des produits
+
 // Produits pour la catégorie homme et sous-catégorie chemises
-let allProducts = [
+const productsData = [
   // Chemises homme
   {
     id: 1,
-    name: "Chemise Africaine Brodée Premium",
-    price: "89,99 €",
+    reference: "KC-H-CH-001",
+    name: "KC-H-CH-001",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise élégante avec broderie traditionnelle africaine, parfaite pour les occasions spéciales.",
@@ -540,7 +543,7 @@ let allProducts = [
     price: "189,99 €",
     category: "homme",
     subcategory: "boubous-traditionnelles",
-    description: "Le boubou signature de la maison Khalil, symbole d'excellence et d'élégance intemporelle pour les hommes raffinés.",
+    description: "Le boubou signature de la maison Khalil, symbole d'excellence et d'élégance intemporelle pour l'homme raffiné.",
     image: "/images/boubou-traditionnel/photo_8_2025-08-12_19-31-00.jpg",
     additionalImages: [],
     colors: ["Blanc", "Or", "Noir"],
@@ -910,7 +913,7 @@ let allProducts = [
     price: "269,99 €",
     category: "homme",
     subcategory: "grand-boubou",
-    description: "Le grand boubou signature de la maison Khalil, symbole d'excellence et d'élégance intemporelle pour les hommes raffinés.",
+    description: "Le grand boubou signature de la maison Khalil, symbole d'excellence et d'élégance intemporelle pour l'homme raffiné.",
     image: "/images/grand-boubou/photo_8_2025-08-12_19-32-52.jpg",
     additionalImages: [],
     colors: ["Blanc", "Or", "Noir"],
@@ -1261,7 +1264,50 @@ let allProducts = [
 
 // Vérifier le nombre de produits générés
 console.log(`Nombre total d'images disponibles: ${allAvailableImages.length}`);
-console.log(`Nombre de produits générés: ${allProducts.length}`);
+console.log(`Nombre de produits générés: ${productsData.length}`);
+
+// Mettre à jour tous les produits avec des références et des prix en FCFA
+const allProducts = (() => {
+  // Regrouper les produits par catégorie pour la numérotation
+  const categoriesMap = {};
+  
+  return productsData.map(product => {
+    const { category, subcategory } = product;
+    
+    // Initialiser le compteur pour cette catégorie si nécessaire
+    if (!categoriesMap[category]) {
+      categoriesMap[category] = 1;
+    }
+    
+    // Utiliser le compteur de la catégorie pour la référence
+    const categoryCounter = categoriesMap[category]++;
+    
+    // Générer la référence avec le préfixe KC, la première lettre de la catégorie,
+    // les premières lettres de la sous-catégorie et le compteur de la catégorie
+    const prefix = "KC";
+    const catPrefix = category.charAt(0).toUpperCase();
+    const subcatPrefix = subcategory.split('-').map(part => part.charAt(0).toUpperCase()).join('');
+    const reference = `${prefix}-${catPrefix}-${subcatPrefix}-${categoryCounter.toString().padStart(3, '0')}`;
+    
+    // Déterminer le prix en fonction du dossier d'images
+    let price;
+    if (product.image && product.image.includes('/images/haut/')) {
+      price = "15000 FCFA";
+    } else {
+      price = "Prix sur demande";
+    }
+    
+    // Retourner le produit mis à jour
+    return {
+      ...product,
+      reference,
+      name: reference, // Remplacer le nom par la référence
+      price
+    };
+  });
+})();
+
+export { allProducts };
 
 // Filter and sort products
 const getFilteredProducts = (category, subcategory, sortBy) => {
@@ -1270,12 +1316,19 @@ const getFilteredProducts = (category, subcategory, sortBy) => {
   // Filtrer les produits sans images
   filtered = filtered.filter(product => product.image && product.image.trim() !== '');
   
+  console.log('Filtrage par catégorie:', category);
+  console.log('Filtrage par sous-catégorie:', subcategory);
+  console.log('Produits avant filtrage:', filtered.length);
+  
   if (category) {
     filtered = filtered.filter(product => product.category === category);
+    console.log('Produits après filtrage par catégorie:', filtered.length);
   }
   
   if (subcategory) {
     filtered = filtered.filter(product => product.subcategory === subcategory);
+    console.log('Produits après filtrage par sous-catégorie:', filtered.length);
+    console.log('Sous-catégories disponibles:', [...new Set(allProducts.map(p => p.subcategory))]);
   }
   
   // Sort products based on sortBy
@@ -1308,7 +1361,6 @@ const getPaginatedProducts = (products, currentPage, productsPerPage) => {
 };
 
 export {
-  allProducts,
   getFilteredProducts,
   getPaginatedProducts
 };

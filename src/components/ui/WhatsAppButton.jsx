@@ -2,17 +2,22 @@ import React from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
 
-const WhatsAppButton = ({ productName = '' }) => {
+const WhatsAppButton = () => {
   // Utiliser useLocation pour accéder à l'URL actuelle
   const location = useLocation();
   
-  // Message de base pour contacter le propriétaire
-  const baseMessage = "Bonjour, je vous contacte depuis votre site Khalil Collection";
+  // Vérifier si nous sommes sur une page de détail produit
+  const isProductPage = (location.pathname.includes('/creations/') && location.pathname.split('/').length > 3) || 
+                      (location.pathname.includes('/product/') && location.pathname.split('/').length > 2);
   
-  // Si un nom de produit est fourni, ajouter des informations sur le produit et l'URL complète
-  const message = productName
-    ? `Je suis intéressé(e) par ce produit: ${productName} sur https://khalil-collection.vercel.app${location.pathname}` 
-    : baseMessage;
+  // Construire le message
+  let message = "Bonjour, je vous contacte depuis votre site Khalil Collection";
+  
+  // Ajouter les informations du produit si nous sommes sur une page produit
+  if (isProductPage) {
+    const productRef = location.pathname.split('/').pop().toUpperCase();
+    message += `\n\nJe suis intéressé(e) par ce produit: ${productRef} sur https://khalil-collection.vercel.app${location.pathname}`;
+  }
   
   // Numéro de téléphone WhatsApp
   const phoneNumber = "221784631010";

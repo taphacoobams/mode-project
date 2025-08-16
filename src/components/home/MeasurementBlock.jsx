@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const MeasurementBlock = () => {
   return (
-    <section id="measurement-block" className="py-16 bg-secondary text-white">
+    <section id="measurement-block" className="py-16 bg-kc-black text-kc-white">
       <div className="container">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
@@ -30,24 +30,24 @@ const MeasurementBlock = () => {
           
           <div className="md:w-5/12">
             <div className="bg-white/10 p-6 rounded-sm">
-              <h3 className="text-xl font-medium mb-4 text-primary">
+              <h3 className="text-xl font-medium mb-4 text-kc-gold">
                 Pourquoi prendre vos mesures ?
               </h3>
               <ul className="space-y-3 text-white/80">
                 <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
+                  <span className="text-kc-gold mr-2">✓</span>
                   <span>Vêtements parfaitement ajustés à votre morphologie</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
+                  <span className="text-kc-gold mr-2">✓</span>
                   <span>Confort optimal pour toutes vos tenues</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
+                  <span className="text-kc-gold mr-2">✓</span>
                   <span>Évitez les retours et les ajustements</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
+                  <span className="text-kc-gold mr-2">✓</span>
                   <span>Service gratuit pour tous nos clients</span>
                 </li>
               </ul>

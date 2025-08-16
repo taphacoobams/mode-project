@@ -16,13 +16,7 @@ const Brand = () => {
         <meta property="og:url" content="https://khalilcollection.com/notre-marque" />
       </Helmet>
 
-      <PageHeader 
-        title="La marque"
-        breadcrumbs={[
-          { label: 'Accueil', url: '/' },
-          { label: 'La marque' }
-        ]}
-      />
+      {/* PageHeader supprimé */}
       
       <div className="py-16">
         <div className="container">

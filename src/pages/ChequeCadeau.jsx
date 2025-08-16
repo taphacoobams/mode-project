@@ -17,13 +17,7 @@ const ChequeCadeau = () => {
         <meta property="og:url" content="https://khalilcollection.com/cheque-cadeau" />
       </Helmet>
 
-      <PageHeader 
-        title="Chèque Cadeau"
-        breadcrumbs={[
-          { label: 'Accueil', url: '/' },
-          { label: 'Chèque Cadeau' }
-        ]}
-      />
+      {/* PageHeader supprimé */}
       
       <div className="py-16">
         <div className="container max-w-4xl mx-auto">
@@ -69,13 +63,13 @@ const ChequeCadeau = () => {
               
               <div className="flex flex-col items-center justify-center bg-gray-50 p-6 rounded-lg">
                 <img 
-                  src="/CHEQUE CADEAU KHALIL 2025_page-0001.jpg" 
+                  src="/cheque.jpg" 
                   alt="Aperçu du chèque cadeau" 
                   className="w-full max-w-xs mb-6 shadow-md rounded-md" 
                 />
                 
                 <a 
-                  href="/CHEQUE CADEAU KHALIL 2025.pdf" 
+                  href="/cheque.pdf" 
                   download
                   className="flex items-center justify-center bg-kc-gold hover:bg-kc-gold/90 text-white font-medium py-3 px-6 rounded-md transition-colors w-full max-w-xs"
                 >

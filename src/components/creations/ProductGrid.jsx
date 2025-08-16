@@ -7,9 +7,8 @@ import { FiEye, FiArrowRight, FiChevronLeft, FiChevronRight } from 'react-icons/
 import { FaWhatsapp } from 'react-icons/fa';
 import QuickView from '../ui/QuickView';
 import { getFilteredProducts, getPaginatedProducts } from '../../utils/productUtils';
-import { convertEuroToCFA } from '../../utils/priceUtils';
 
-const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageChange }) => {
+const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageChange, priceFilter }) => {
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [paginatedProducts, setPaginatedProducts] = useState([]);
@@ -30,8 +29,29 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
   };
 
   useEffect(() => {
+    console.log('ProductGrid - Catégorie:', category);
+    console.log('ProductGrid - Sous-catégorie:', subcategory);
+    console.log('ProductGrid - Filtre de prix:', priceFilter);
+    
     // Utiliser les fonctions utilitaires pour filtrer les produits
-    const filtered = getFilteredProducts(category, subcategory, sortBy);
+    let filtered = getFilteredProducts(category, subcategory, sortBy);
+    
+    // Appliquer le filtre de prix si défini
+    if (priceFilter && (priceFilter.min || priceFilter.max)) {
+      filtered = filtered.filter(product => {
+        // Extraire le prix numérique du format "XX XXX FCFA"
+        const priceString = product.price.replace(/[^0-9]/g, '');
+        const price = parseInt(priceString, 10);
+        
+        const minPrice = priceFilter.min ? parseInt(priceFilter.min, 10) : 0;
+        const maxPrice = priceFilter.max ? parseInt(priceFilter.max, 10) : Infinity;
+        
+        return price >= minPrice && price <= maxPrice;
+      });
+      console.log('ProductGrid - Après filtre de prix:', filtered.length);
+    }
+    
+    console.log('ProductGrid - Produits filtrés:', filtered.length);
     setFilteredProducts(filtered);
     
     // Calculer le nombre total de pages
@@ -40,7 +60,7 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
     // Obtenir les produits pour la page actuelle
     const paginated = getPaginatedProducts(filtered, currentPage, productsPerPage);
     setPaginatedProducts(paginated);
-  }, [category, subcategory, sortBy, currentPage, productsPerPage]);
+  }, [category, subcategory, sortBy, currentPage, productsPerPage, priceFilter]);
 
   const container = {
     hidden: { opacity: 0 },
@@ -82,12 +102,12 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
                 whileHover={{ y: -5, transition: { duration: 0.3 } }}
               >
                 <div className="relative overflow-hidden aspect-square">
-                  <Link to={`/nos-creations/homme/${product.id.toString()}`}>
+                  <Link to={`/product/${product.reference.toLowerCase()}`}>
                     <LazyLoadImage
                       src={product.image}
                       alt={product.name}
                       effect="blur"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                       wrapperClassName="w-full h-full"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
@@ -103,7 +123,7 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
                       <FiEye size={18} />
                     </button>
                     <a
-                      href={`https://wa.me/221784631010?text=${encodeURIComponent(`Je suis intéressé(e) par ce produit: ${product.name} sur https://khalil-collection.vercel.app/nos-creations/${product.category}/${product.id.toString()}`)}`}
+                      href={`https://wa.me/221784631010?text=${encodeURIComponent(`Bonjour, je vous contacte depuis votre site Khalil Collection\n\nJe suis intéressé(e) par ce produit: ${product.reference.toUpperCase()} sur https://khalil-collection.vercel.app/product/${product.reference.toLowerCase()}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-10 h-10 rounded-full bg-green-500 shadow-md flex items-center justify-center hover:bg-green-600 text-white transition-colors"
@@ -114,7 +134,7 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
                   </div>
                   
                   <Link 
-                    to={`/nos-creations/homme/${product.id.toString()}`}
+                    to={`/product/${product.reference.toLowerCase()}`}
                     className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-kc-gold text-kc-black w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-kc-gold/80"
                     aria-label={`Voir ${product.name}`}
                   >
@@ -122,10 +142,10 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
                   </Link>
                 </div>
                 <div className="p-4">
-                  <Link to={`/nos-creations/homme/${product.id.toString()}`}>
+                  <Link to={`/product/${product.reference.toLowerCase()}`}>
                     <h3 className="text-lg font-medium text-kc-black mb-2 hover:text-kc-gold transition-colors">{product.name}</h3>
                   </Link>
-                  <p className="text-kc-gold font-semibold">{convertEuroToCFA(product.price)}</p>
+                  <p className="text-kc-gold font-semibold">{product.price}</p>
                 </div>
               </motion.div>
             ))}

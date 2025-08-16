@@ -9,16 +9,18 @@ const HeroSlider = () => {
     {
       id: 1,
       backgroundColor: '#1a1a1a',
-      title: "C'est moi, c'est vous !",
-      subtitle: 'Collection Homme 2025',
-      buttonText: 'Qui sommes-nous ?',
-      buttonLink: '/notre-marque'
+      backgroundImage: '/images/carrousel1.png',
+      title: "Bienvenue chez Khalil Collection",
+      subtitle: 'L’élégance dans chaque couture',
+      buttonText: 'Qui sommes-nous',
+      buttonLink: '/designer'
     },
     {
       id: 2,
       backgroundColor: '#2a2a2a',
-      title: 'Élégance et tradition',
-      subtitle: 'Collection Femme 2025',
+      backgroundImage: '/images/carrousel2.png',
+      title: "C'est moi, c'est vous !",
+      subtitle: 'Votre style, notre passion',
       buttonText: 'Nous contacter',
       buttonLink: '/contact'
     }
@@ -45,31 +47,53 @@ const HeroSlider = () => {
   };
 
   return (
-    <div className="relative h-[80vh] overflow-hidden">
+    <div className="relative h-[80vh] md:h-[85vh] lg:h-[80vh] overflow-hidden bg-kc-black">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.7 }}
+          initial={{ opacity: 0, scale: 1.03 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.97 }}
+          transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1.0] }}
           className="absolute inset-0"
         >
           <div 
-            className="absolute inset-0"
-            style={{ backgroundColor: slides[currentSlide].backgroundColor }}
+            className="absolute inset-0 overflow-hidden"
           >
+            <div
+              className="absolute inset-0 w-full h-full transform scale-105"
+              style={{ 
+                backgroundColor: slides[currentSlide].backgroundColor,
+                backgroundImage: slides[currentSlide].backgroundImage ? `url(${slides[currentSlide].backgroundImage})` : 'none',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center top', /* Ajustement pour voir davantage la tête des modèles */
+                backgroundRepeat: 'no-repeat',
+                animation: 'subtle-zoom 10s infinite alternate ease-in-out',
+                transition: 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+              }}
+            ></div>
+            {/* Overlay amélioré avec un dégradé complexe adapté à la position du texte */}
+            <div className={`absolute inset-0 ${currentSlide === 0 
+              ? 'bg-gradient-to-br from-black/80 via-black/60 to-black/30' 
+              : 'bg-gradient-to-bl from-black/80 via-black/60 to-black/30'}`}>
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
           </div>
           
           <div className="relative h-full flex items-center">
-            <div className="container">
+            <div className="container flex">
+              {/* Suppression de justify-end pour permettre au texte du premier slide d'être vraiment à gauche */}
               <motion.div
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
-                className="max-w-xl text-white"
+                className={`max-w-xl text-white ${
+                  currentSlide === 0 
+                    ? 'pl-4 md:pl-8 text-left' 
+                    : 'pr-4 md:pr-8 text-right ml-auto'
+                }`}
               >
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-4">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-4 text-shadow-lg">
                   {slides[currentSlide].title}
                 </h2>
                 <p className="text-xl md:text-2xl mb-8 text-white/90">
@@ -87,26 +111,7 @@ const HeroSlider = () => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Navigation Arrows */}
-      <button 
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-kc-gold transition-colors z-10"
-        aria-label="Slide précédent"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      
-      <button 
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-kc-gold transition-colors z-10"
-        aria-label="Slide suivant"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
+      {/* Les flèches de navigation ont été supprimées */}
 
       {/* Dots Indicator */}
       <div className="absolute bottom-6 left-0 right-0 flex justify-center space-x-2 z-10">

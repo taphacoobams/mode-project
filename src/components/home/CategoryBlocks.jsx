@@ -7,15 +7,15 @@ const CategoryBlocks = () => {
   const categories = [
     {
       id: 1,
-      title: 'Hommes',
-      image: 'https://i.pinimg.com/originals/d4/4f/d2/d44fd2c3f8e3a967506bd8f8b5ba4a93.jpg',
-      link: '/nos-creations/productcategory/homme',
+      title: 'Homme',
+      image: '/images/homme.png',
+      link: '/creations/productcategory/homme',
     },
     {
       id: 2,
-      title: 'Femmes',
-      image: 'https://i.pinimg.com/originals/7e/62/f0/7e62f0b4f6821fa37b1e4b5a2e4e7a72.jpg',
-      link: '/nos-creations/productcategory/femme',
+      title: 'Femme',
+      image: '/images/femme.png',
+      link: '/creations/productcategory/femme',
     },
   ];
 
@@ -30,7 +30,7 @@ const CategoryBlocks = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="relative overflow-hidden group h-[700px]"
+              className="relative overflow-hidden group h-[900px]"
             >
               <LazyLoadImage
                 src={category.image}

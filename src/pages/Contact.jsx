@@ -32,13 +32,7 @@ const Contact = () => {
         <meta property="og:url" content="https://khalilcollection.com/contact" />
       </Helmet>
 
-      <PageHeader 
-        title="Contact"
-        breadcrumbs={[
-          { label: 'Accueil', url: '/' },
-          { label: 'Contact' }
-        ]}
-      />
+      {/* PageHeader supprimé */}
       
       <div className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 max-w-6xl">
