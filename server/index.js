@@ -288,67 +288,12 @@ app.post('/api/send-mensuration', async (req, res) => {
   }
 });
 
-// Route pour envoyer un email de confirmation de commande
-app.post('/api/send-order-confirmation', async (req, res) => {
-  try {
-    const {
-      customerName,
-      customerEmail,
-      orderNumber,
-      orderDate,
-      trackingNumber,
-      deliveryAddress,
-      city,
-      postalCode,
-      country,
-      products,
-      totalAmount,
-      trackingUrl
-    } = req.body;
-
-    // Validation des données
-    if (!customerName || !customerEmail || !orderNumber) {
-      return res.status(400).json({ success: false, message: 'Veuillez fournir toutes les informations nécessaires' });
-    }
-
-    // Options de l'email
-    const mailOptions = {
-      from: `"Khalil Collection" <${process.env.EMAIL_USER}>`,
-      to: customerEmail,
-      replyTo: process.env.EMAIL_USER,
-      subject: `Confirmation de votre commande #${orderNumber} - Khalil Collection`,
-      html: `
-        <h2>Confirmation de commande</h2>
-        <p>Cher(e) ${customerName},</p>
-        <p>Nous vous remercions pour votre commande #${orderNumber}.</p>
-        <p>Vous recevrez prochainement un email avec les détails de livraison.</p>
-        <p>Cordialement,</p>
-        <p>L'équipe de Khalil Collection</p>
-        <div style="text-align: center; margin-top: 15px;">
-          <p style="margin-bottom: 5px;">khalilcollections<!-- -->@<!-- -->gmail.com</p>
-          <p style="margin-bottom: 5px;">+221 78 463 10 10</p>
-          <p>Fann Hock Rue 55X70, Dakar, Sénégal</p>
-        </div>
-      `
-    };
-
-    // Envoi de l'email
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Email de confirmation de commande envoyé avec succès:', info.response);
-
-    res.status(200).json({ success: true, message: 'Email de confirmation envoyé avec succès' });
-  } catch (error) {
-    console.error('Erreur lors de l\'envoi de l\'email de confirmation de commande:', error);
-    
-    res.status(500).json({ 
-      success: false, 
-      message: 'Une erreur est survenue lors de l\'envoi de l\'email de confirmation',
-      error: error.message
-    });
-  }
-});
+// La route send-order-confirmation a été supprimée
 
 // Démarrage du serveur
-app.listen(PORT, () => {
-  // Serveur démarré
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Serveur démarré sur le port ${PORT}`);
+  console.log(`Variables d'environnement chargées: PORT=${PORT}, EMAIL_SERVICE=${process.env.EMAIL_SERVICE || 'non défini'}`);
+  console.log(`EMAIL_USER est ${process.env.EMAIL_USER ? 'défini' : 'non défini'}`);
+  console.log(`EMAIL_PASS est ${process.env.EMAIL_PASS ? 'défini' : 'non défini'}`);
 });

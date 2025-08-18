@@ -145,7 +145,7 @@ const Mensurations = () => {
           gender: activeTab
         };
 
-        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+        const apiUrl = process.env.REACT_APP_API_URL || 'https://khalil-collection-api.onrender.com';
         const response = await axios.post(`${apiUrl}/api/send-mensuration`, dataToSend);
 
         if (response.data.success) {

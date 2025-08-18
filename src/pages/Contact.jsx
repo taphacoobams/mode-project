@@ -42,7 +42,7 @@ const Contact = () => {
     setError(null);
     
     try {
-      const response = await axios.post('http://localhost:5000/api/send-email', {
+      const response = await axios.post('https://khalil-collection-api.onrender.com/api/send-email', {
         name: formData.name,
         email: formData.email,
         subject: formData.subject,
