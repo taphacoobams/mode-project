@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import axios from 'axios';
+import ManifestoBanner from '../components/home/ManifestoBanner';
 
 // Style CSS intégré directement dans le composant
 const mensurationsStyles = `
@@ -107,6 +107,12 @@ const Mensurations = () => {
       newErrors.telephone = 'Le numéro de téléphone est requis';
     } else if (!/^[0-9+\s()-]{8,15}$/i.test(formData.telephone)) {
       newErrors.telephone = 'Numéro de téléphone invalide';
+    }
+    
+    if (!formData.email?.trim()) {
+      newErrors.email = 'L\'email est requis';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
+      newErrors.email = 'Adresse email invalide';
     }
     
     // Validation des champs de mensurations en fonction de l'onglet actif
@@ -289,6 +295,26 @@ const Mensurations = () => {
                 {errors.telephone && (
                   <p id="telephone-error" className="mt-1 text-red-500 text-sm">
                     {errors.telephone}
+                  </p>
+                )}
+              </div>
+              <div className="mb-4">
+                <label htmlFor="email" className="block text-gray-700 mb-2">
+                  Email <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  onChange={handleChange}
+                  className={`w-full border ${
+                    errors.email ? 'border-red-500' : 'border-gray-300'
+                  } rounded-sm px-4 py-2 focus:outline-none focus:border-kc-gold`}
+                  aria-invalid={errors.email ? 'true' : 'false'}
+                  aria-describedby={errors.email ? 'email-error' : undefined}
+                />
+                {errors.email && (
+                  <p id="email-error" className="mt-1 text-red-500 text-sm">
+                    {errors.email}
                   </p>
                 )}
               </div>
@@ -928,61 +954,9 @@ const Mensurations = () => {
         </div>
       </div>
 
-      {/* Section pied de page */}
-      <div className="bg-gray-900 text-white py-12 mt-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="mb-8 text-center">
-              <h2 className="text-2xl font-bold mb-2">MENSURATIONS EN LIGNE</h2>
-              <p className="text-gray-400 text-sm">Saisir sans déplacement toutes vos mesures directement</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-              <div>
-                <h3 className="text-lg font-medium mb-4 uppercase">À PROPOS</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  Khalil Collection se centre sur la passion du designer qui vous aide à créer des pièces uniques parfaitement ajustées à votre silhouette.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-medium mb-4 uppercase">NOS CONTACTS</h3>
-                <ul className="text-gray-400 text-sm space-y-2">
-                  <li className="flex items-center">
-                    <span className="mr-2">📍</span> Point E, Dakar 12 Rue Kaolack Taf
-                  </li>
-                  <li className="flex items-center">
-                    <span className="mr-2">📞</span> +221 77 659 97 96
-                  </li>
-                  <li className="flex items-center">
-                    <span className="mr-2">✉️</span> contact@btoure.com
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-medium mb-4 uppercase">SUIVEZ-NOUS</h3>
-                <div className="flex space-x-4">
-                  <a href="https://facebook.com" className="text-white hover:text-kc-gold transition-colors">
-                    <FaFacebookF size={20} />
-                  </a>
-                  <a href="https://instagram.com" className="text-white hover:text-kc-gold transition-colors">
-                    <FaInstagram size={20} />
-                  </a>
-                </div>
-                <div className="mt-6">
-                  <button className="border border-white text-white px-4 py-2 text-sm hover:bg-white hover:text-gray-900 transition-colors">
-                    JE PRENDS MES MESURES
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center text-gray-500 text-xs">
-              © BTouré. Tous droits réservés
-            </div>
-          </div>
-        </div>
+      {/* Ajout de ManifestoBanner avant la fin de la page */}
+      <div className="mt-16">
+        <ManifestoBanner />
       </div>
     </>
   );
