@@ -127,7 +127,7 @@ const productsData = [
   {
     id: 2,
     name: "Chemise Traditionnelle Wax Royal",
-    price: "79,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise en tissu wax authentique avec motifs royaux, conçue pour un confort optimal.",
@@ -143,7 +143,7 @@ const productsData = [
   {
     id: 3,
     name: "Chemise Élégante Motif Kente",
-    price: "94,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise inspirée des motifs Kente, symbole de prestige et d'élégance africaine.",
@@ -159,7 +159,7 @@ const productsData = [
   {
     id: 4,
     name: "Chemise Moderne Broderie Contemporaine",
-    price: "84,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Fusion parfaite entre tradition et modernité avec des broderies contemporaines.",
@@ -175,7 +175,7 @@ const productsData = [
   {
     id: 5,
     name: "Chemise Luxe Bogolan Authentique",
-    price: "99,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise premium avec motifs Bogolan authentiques, fabriquée selon les techniques traditionnelles.",
@@ -191,7 +191,7 @@ const productsData = [
   {
     id: 6,
     name: "Chemise Festival Broderie Or",
-    price: "109,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise festive avec broderies en fil d'or, idéale pour les célébrations et événements spéciaux.",
@@ -207,7 +207,7 @@ const productsData = [
   {
     id: 7,
     name: "Chemise Dashiki Moderne",
-    price: "74,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Réinterprétation moderne du dashiki traditionnel, alliant confort et style africain contemporain.",
@@ -223,7 +223,7 @@ const productsData = [
   {
     id: 8,
     name: "Chemise Africaine Broderie Luxe",
-    price: "119,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise haut de gamme avec broderies artisanales complexes, symbole d'élégance et de raffinement.",
@@ -239,7 +239,7 @@ const productsData = [
   {
     id: 9,
     name: "Chemise Traditionnelle Motifs Ancestraux",
-    price: "89,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise inspirée des motifs ancestraux africains, alliance parfaite entre tradition et modernité.",
@@ -255,7 +255,7 @@ const productsData = [
   {
     id: 10,
     name: "Chemise Royale Broderie Dorée",
-    price: "129,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise d'exception avec broderies en fil d'or, pour les occasions les plus prestigieuses.",
@@ -271,7 +271,7 @@ const productsData = [
   {
     id: 11,
     name: "Chemise Wax Contemporaine",
-    price: "79,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise moderne en tissu wax aux couleurs vives, parfaite pour un style affirmé et contemporain.",
@@ -287,7 +287,7 @@ const productsData = [
   {
     id: 12,
     name: "Chemise Cérémonie Broderie Fine",
-    price: "99,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise de cérémonie avec broderies fines et détaillées, idéale pour les mariages et événements formels.",
@@ -303,7 +303,7 @@ const productsData = [
   {
     id: 13,
     name: "Chemise Prestige Motifs Africains",
-    price: "104,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise prestige avec motifs africains traditionnels revisités, symbole d'élégance et d'authenticité.",
@@ -319,7 +319,7 @@ const productsData = [
   {
     id: 14,
     name: "Chemise Tendance Motifs Géométriques",
-    price: "84,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise tendance avec motifs géométriques inspirés de l'art africain contemporain.",
@@ -335,7 +335,7 @@ const productsData = [
   {
     id: 15,
     name: "Chemise Artisanale Broderie Traditionnelle",
-    price: "94,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise artisanale avec broderies traditionnelles réalisées à la main par des artisans experts.",
@@ -351,7 +351,7 @@ const productsData = [
   {
     id: 16,
     name: "Chemise Premium Motifs Ethniques",
-    price: "89,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise premium avec motifs ethniques subtils, alliance parfaite entre élégance et tradition.",
@@ -367,7 +367,7 @@ const productsData = [
   {
     id: 17,
     name: "Chemise Exclusive Collection Khalil",
-    price: "119,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Pièce exclusive de la collection Khalil, chemise haut de gamme avec finitions luxueuses et design unique.",
@@ -383,7 +383,7 @@ const productsData = [
   {
     id: 18,
     name: "Chemise Signature Khalil Collection",
-    price: "129,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "La chemise signature de Khalil Collection, symbole d'élégance et de raffinement intemporel.",
@@ -399,7 +399,7 @@ const productsData = [
   {
     id: 19,
     name: "Chemise Festive Broderie Dorée",
-    price: "114,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise festive avec broderies dorées luxueuses, idéale pour les célébrations et occasions spéciales.",
@@ -415,7 +415,7 @@ const productsData = [
   {
     id: 20,
     name: "Chemise Traditionnelle Khalil",
-    price: "99,99 €",
+    price: "15000 FCFA",
     category: "homme",
     subcategory: "chemises",
     description: "Chemise traditionnelle de la collection Khalil, alliance parfaite entre héritage culturel et confort moderne.",
