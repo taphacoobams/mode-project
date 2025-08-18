@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 import { FiPhone, FiMapPin, FiMail } from 'react-icons/fi';
-import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube, FaSnapchatGhost } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaSnapchatGhost } from 'react-icons/fa';
 import GoogleMap from '../components/contact/GoogleMap';
 import ManifestoBanner from '../components/home/ManifestoBanner';
 
@@ -276,22 +276,7 @@ const Contact = () => {
               >
                 <FaSnapchatGhost size={28} className="text-kc-gold hover:text-yellow-600 transition-colors" />
               </a>
-              <a 
-                href="https://tiktok.com/@khalilcollections" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block p-3 bg-white rounded-full shadow-md hover:shadow-lg transition-all"
-              >
-                <FaTiktok size={28} className="text-kc-gold hover:text-yellow-600 transition-colors" />
-              </a>
-              <a 
-                href="https://youtube.com/khalilcollections" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block p-3 bg-white rounded-full shadow-md hover:shadow-lg transition-all"
-              >
-                <FaYoutube size={28} className="text-kc-gold hover:text-yellow-600 transition-colors" />
-              </a>
+              {/* TikTok et YouTube supprimés */}
             </div>
           </div>
         </div>

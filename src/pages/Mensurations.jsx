@@ -192,23 +192,13 @@ const Mensurations = () => {
 
       <div className="py-8">
         <div className="container mx-auto px-4">
-          {/* Fil d'Ariane */}
-          <div className="flex items-center text-sm text-gray-500 mb-8">
-            <a href="/" className="hover:text-kc-gold">Home</a>
-            <span className="mx-2">/</span>
-            <span className="text-kc-gold">Vos mensurations</span>
-          </div>
-
           {/* Titre de la page */}
-          <h1 className="text-3xl font-bold text-center mb-8">Vos mensurations</h1>
-
-          {/* Image de bannière */}
-          <div className="mb-10">
-            <img
-              src="/images/mensuration-banner.jpg"
-              alt="Prise de mensurations"
-              className="w-full h-64 object-cover rounded-md"
-            />
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-heading font-bold text-kc-black mb-6">Mensurations</h2>
+            <div className="w-16 h-1 bg-kc-gold mx-auto mb-6"></div>
+            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+              Prenez vos mensurations en ligne pour des vêtements Khalil Collection parfaitement ajustés à votre morphologie.
+            </p>
           </div>
 
           {/* Messages d'état */}

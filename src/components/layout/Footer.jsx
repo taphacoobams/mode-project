@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaFacebookF, FaInstagram, FaSnapchatGhost, FaTiktok, FaYoutube, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaSnapchatGhost, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -76,24 +76,7 @@ const Footer = () => {
               >
                 <FaSnapchatGhost className="text-white" />
               </a>
-              <a 
-                href="https://tiktok.com/@khalilcollections" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                aria-label="TikTok"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-kc-gold transition-colors"
-              >
-                <FaTiktok className="text-white" />
-              </a>
-              <a 
-                href="https://youtube.com/khalilcollections" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-kc-gold transition-colors"
-              >
-                <FaYoutube className="text-white" />
-              </a>
+              {/* TikTok et YouTube supprimés */}
             </div>
             {/* Bouton WhatsApp supprimé */}
           </div>

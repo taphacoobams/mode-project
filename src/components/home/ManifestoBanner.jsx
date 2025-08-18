@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaFacebookF, FaInstagram, FaSnapchatGhost, FaTiktok, FaYoutube, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaSnapchatGhost, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 
 const ManifestoBanner = () => {
   return (
@@ -10,7 +10,7 @@ const ManifestoBanner = () => {
           <div className="w-full md:w-1/4 flex flex-col items-center">
             <div className="bg-white p-2 rounded-md mb-4">
               <img 
-                src="/qrcode.jpg" 
+                src={require("../../assets/images/qrcode.jpg")} 
                 alt="QR Code Khalil Collection" 
                 className="w-32 h-32"
               />
@@ -25,12 +25,6 @@ const ManifestoBanner = () => {
               </a>
               <a href="https://snapchat.com/add/khalilcollections" className="bg-kc-gold w-8 h-8 rounded-md flex items-center justify-center hover:opacity-90">
                 <FaSnapchatGhost className="text-kc-black" />
-              </a>
-              <a href="https://tiktok.com/@khalilcollections" className="bg-kc-gold w-8 h-8 rounded-md flex items-center justify-center hover:opacity-90">
-                <FaTiktok className="text-kc-black" />
-              </a>
-              <a href="https://youtube.com/khalilcollections" className="bg-kc-gold w-8 h-8 rounded-md flex items-center justify-center hover:opacity-90">
-                <FaYoutube className="text-kc-black" />
               </a>
             </div>
             <p className="text-kc-gold font-medium">Made in Sénégal</p>
