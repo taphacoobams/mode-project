@@ -1292,9 +1292,12 @@ const allProducts = (() => {
     const subcatPrefix = subcategory.split('-').map(part => part.charAt(0).toUpperCase()).join('');
     const reference = `${prefix}-${catPrefix}-${subcatPrefix}-${categoryCounter.toString().padStart(3, '0')}`;
     
-    // Déterminer le prix en fonction du dossier d'images
+    // Utiliser le prix défini dans les données du produit s'il existe déjà au format FCFA
+    // sinon déterminer le prix en fonction du dossier d'images
     let price;
-    if (product.image && product.image.includes('../assets/images/haut/')) {
+    if (product.price && product.price.includes('FCFA')) {
+      price = product.price; // Conserver le prix existant s'il est déjà en FCFA
+    } else if (product.image && product.image.includes('../assets/images/haut/')) {
       price = "15000 FCFA";
     } else {
       price = "Prix sur demande";
