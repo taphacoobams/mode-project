@@ -42,7 +42,8 @@ const Contact = () => {
     setError(null);
     
     try {
-      const response = await axios.post('https://khalil-collection-api.onrender.com/api/send-email', {
+      const apiUrl = process.env.REACT_APP_API_URL || 'https://khalil-collection-api.onrender.com';
+      const response = await axios.post(`${apiUrl}/api/send-email`, {
         name: formData.name,
         email: formData.email,
         subject: formData.subject,
