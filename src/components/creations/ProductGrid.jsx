@@ -46,9 +46,6 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
   };
 
   useEffect(() => {
-    console.log('ProductGrid - Catégorie:', category);
-    console.log('ProductGrid - Sous-catégorie:', subcategory);
-    console.log('ProductGrid - Filtre de prix:', priceFilter);
     
     // Utiliser les fonctions utilitaires pour filtrer les produits
     let filtered = getFilteredProducts(category, subcategory, sortBy);
@@ -60,7 +57,6 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
         filtered = filtered.filter(product => {
           return product.price === "Prix sur demande";
         });
-        console.log('ProductGrid - Après filtre Prix sur demande:', filtered.length);
       }
       // Filtre par plage de prix
       else if (priceFilter.min || priceFilter.max) {
@@ -79,11 +75,9 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
           
           return price >= minPrice && price <= maxPrice;
         });
-        console.log('ProductGrid - Après filtre de prix:', filtered.length);
       }
     }
     
-    console.log('ProductGrid - Produits filtrés:', filtered.length);
     setFilteredProducts(filtered);
     
     // Calculer le nombre total de pages
@@ -113,8 +107,8 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
     <div>
       {filteredProducts.length === 0 ? (
         <div className="text-center py-12">
-          <h3 className="text-xl font-heading font-medium text-kc-black mb-4">Aucun produit trouvé</h3>
-          <p className="text-gray-600">
+          <h3 className="text-xl font-heading font-medium text-kc-black dark:text-kc-white mb-4">Aucun produit trouvé</h3>
+          <p className="text-gray-600 dark:text-gray-400">
             Essayez de modifier vos filtres ou consultez nos autres catégories.
           </p>
         </div>
@@ -133,13 +127,13 @@ const ProductGrid = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
                 className="bg-white shadow-md overflow-hidden group"
                 whileHover={{ y: -5, transition: { duration: 0.3 } }}
               >
-                <div className="relative overflow-hidden aspect-square">
+                <div className="relative overflow-hidden aspect-square bg-gray-50">
                   <Link to={`/product/${product.reference.toLowerCase()}`}>
                     <LazyLoadImage
                       src={product.image}
                       alt={product.name}
                       effect="blur"
-                      className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-full object-cover md:object-contain transition-transform duration-700 group-hover:scale-105"
                       wrapperClassName="w-full h-full"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>

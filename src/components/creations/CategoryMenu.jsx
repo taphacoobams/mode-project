@@ -57,7 +57,6 @@ const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
 
   const handleCategoryClick = (categoryId) => {
     // Naviguer vers la catégorie et réinitialiser la sous-catégorie
-    console.log('Navigation vers la catégorie:', categoryId);
     navigate(`/creations/productcategory/${categoryId}`);
   };
 
@@ -67,7 +66,6 @@ const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
       ...expandedCategories,
       [categoryId]: true
     });
-    console.log('Navigation vers la sous-catégorie:', subcategoryId, 'de la catégorie:', categoryId);
     navigate(`/creations/productcategory/${categoryId}/${subcategoryId}`);
   };
 

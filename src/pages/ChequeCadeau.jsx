@@ -1,6 +1,5 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import PageHeader from '../components/ui/PageHeader';
 import { FiGift, FiDownload, FiInfo } from 'react-icons/fi';
 import ManifestoBanner from '../components/home/ManifestoBanner';
 
@@ -63,13 +62,13 @@ const ChequeCadeau = () => {
               
               <div className="flex flex-col items-center justify-center bg-gray-50 p-6 rounded-lg">
                 <img 
-                  src="/cheque.jpg" 
+                  src={require("../assets/images/cheque.jpg")} 
                   alt="Aperçu du chèque cadeau" 
                   className="w-full max-w-xs mb-6 shadow-md rounded-md" 
                 />
                 
                 <a 
-                  href="/cheque.pdf" 
+                  href={require("../assets/cheque.pdf")} 
                   download
                   className="flex items-center justify-center bg-kc-gold hover:bg-kc-gold/90 text-white font-medium py-3 px-6 rounded-md transition-colors w-full max-w-xs"
                 >

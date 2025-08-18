@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FiFilter, FiChevronDown, FiGrid, FiList } from 'react-icons/fi';
 
 const FilterSort = ({ sortBy, onSortChange, viewMode, onViewModeChange, onPriceFilterChange }) => {

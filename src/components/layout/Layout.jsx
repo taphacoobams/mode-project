@@ -9,18 +9,20 @@ const Layout = ({ children }) => {
   const location = useLocation();
   
   // Vérifier si nous sommes sur une page produit (URL contient /creations/ ou /product/)
-  const isProductPage = /\/creations\/[^\/]+\/[^\/]+/.test(location.pathname) || /\/product\/[^\/]+/.test(location.pathname);
+  const isProductPage = /\/creations\/[^/]+\/[^/]+/.test(location.pathname) || /\/product\/[^/]+/.test(location.pathname);
   
   return (
     <>
       <Header />
-      <main className="pt-20">
-        {children}
-        <MeasurementBlock />
-      </main>
-      <Footer />
-      {/* N'afficher le bouton WhatsApp global que si nous ne sommes pas sur une page produit */}
-      {!isProductPage && <WhatsAppButton />}
+      <div className="flex flex-col min-h-screen bg-white">
+        <main className="pt-20">
+          {children}
+          <MeasurementBlock />
+        </main>
+        <Footer />
+        {/* N'afficher le bouton WhatsApp global que si nous ne sommes pas sur une page produit */}
+        {!isProductPage && <WhatsAppButton />}
+      </div>
     </>
   );
 };

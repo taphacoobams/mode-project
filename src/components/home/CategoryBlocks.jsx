@@ -8,13 +8,13 @@ const CategoryBlocks = () => {
     {
       id: 1,
       title: 'Homme',
-      image: '/images/homme.png',
+      image: require('../../assets/images/homme.png'),
       link: '/creations/productcategory/homme',
     },
     {
       id: 2,
       title: 'Femme',
-      image: '/images/femme.png',
+      image: require('../../assets/images/femme.png'),
       link: '/creations/productcategory/femme',
     },
   ];
@@ -30,13 +30,14 @@ const CategoryBlocks = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="relative overflow-hidden group h-[900px]"
+              className="relative overflow-hidden group h-[500px] sm:h-[600px] md:h-[700px] lg:h-[900px]"
             >
               <LazyLoadImage
                 src={category.image}
                 alt={category.title}
                 effect="blur"
                 className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
+                style={{ objectPosition: 'center 20%' }}
                 wrapperClassName="absolute inset-0"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />

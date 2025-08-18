@@ -5,7 +5,6 @@ import CategoryMenu from '../components/creations/CategoryMenu';
 import ProductGrid from '../components/creations/ProductGrid';
 import ProductList from '../components/creations/ProductList';
 import FilterSort from '../components/creations/FilterSort';
-import PageHeader from '../components/ui/PageHeader';
 import ManifestoBanner from '../components/home/ManifestoBanner';
 
 const Creations = () => {
@@ -23,15 +22,12 @@ const Creations = () => {
     const path = location.pathname;
     const pathParts = path.split('/');
     
-    console.log('Path parts:', pathParts);
     
     // Format attendu: /creations/productcategory/[category]/[subcategory]
     if (pathParts.length >= 4 && pathParts[1] === 'creations' && pathParts[2] === 'productcategory') {
       const categoryParam = pathParts[3];
       const subcategoryParam = pathParts.length >= 5 ? pathParts[4] : '';
       
-      console.log('Catégorie détectée:', categoryParam);
-      console.log('Sous-catégorie détectée:', subcategoryParam);
       
       if (categoryParam) {
         setCategory(categoryParam);

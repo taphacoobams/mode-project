@@ -10,20 +10,21 @@ import Spinner from './components/ui/Spinner';
 
 // Lazy-loaded Pages
 const Home = lazy(() => import('./pages/Home'));
-const Brand = lazy(() => import('./pages/NotreBrand'));
+const Brand = lazy(() => import('./pages/Brand'));
 const Creations = lazy(() => import('./pages/Creations'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Mensurations = lazy(() => import('./pages/Mensurations'));
 const ProductDetail = lazy(() => import('./pages/ProductDetail'));
 const Designer = lazy(() => import('./pages/Designer'));
 const ChequeCadeau = lazy(() => import('./pages/ChequeCadeau'));
+const SearchResults = lazy(() => import('./pages/SearchResults'));
 
 function App() {
   return (
     <HelmetProvider>
-      <Router>
-        <ScrollToTop />
-        <div className="flex flex-col min-h-screen bg-white">
+        <Router>
+          <ScrollToTop />
+          <div className="flex flex-col min-h-screen bg-white">
           <Suspense fallback={
             <div className="flex justify-center items-center h-screen">
               <Spinner size="lg" color="gold" />
@@ -42,11 +43,12 @@ function App() {
                 <Route path="/cheque-cadeau" element={<ChequeCadeau />} />
                 <Route path="/product/:reference" element={<ProductDetail />} />
                 <Route path="/creations/:category/:reference" element={<ProductDetail />} />
+                <Route path="/search-results" element={<SearchResults />} />
               </Routes>
             </Layout>
           </Suspense>
         </div>
-      </Router>
+        </Router>
     </HelmetProvider>
   );
 }

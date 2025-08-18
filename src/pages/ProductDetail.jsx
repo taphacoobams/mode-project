@@ -58,9 +58,9 @@ const ProductDetail = () => {
   // Sinon, on complète avec des produits de la même catégorie
   let similarProducts = [];
   
-  if (sameSubcategoryProducts.length >= 4) {
+  if (sameSubcategoryProducts.length >= 10) {
     // Suffisamment de produits dans la même sous-catégorie
-    similarProducts = sameSubcategoryProducts.slice(0, 6);
+    similarProducts = sameSubcategoryProducts.slice(0, 10);
   } else {
     // Pas assez de produits dans la même sous-catégorie, on ajoute des produits de la même catégorie
     const sameCategoryProducts = allProducts
@@ -71,8 +71,8 @@ const ProductDetail = () => {
                (!p.subcategory || !product.subcategory || p.subcategory !== product.subcategory);
       });
     
-    // Combiner les deux listes et limiter à 6 produits
-    similarProducts = [...sameSubcategoryProducts, ...sameCategoryProducts].slice(0, 6);
+    // Combiner les deux listes et limiter à 10 produits
+    similarProducts = [...sameSubcategoryProducts, ...sameCategoryProducts].slice(0, 10);
   }
   
   // Hook déjà appelé en haut du composant
@@ -134,7 +134,7 @@ const ProductDetail = () => {
                     effect="blur"
                     className="w-full h-full object-contain object-center"
                     wrapperClassName="w-full h-full"
-                    placeholderSrc="/images/placeholder.png"
+                    placeholderSrc={require("../assets/images/placeholder.png")}
                   />
                   <button 
                     onClick={() => setShowFullscreenImage(true)} 
@@ -333,9 +333,9 @@ const ProductDetail = () => {
             )}
             
             {/* Flèche droite */}
-            {currentIndex < similarProducts.length - 4 && (
+            {currentIndex < similarProducts.length - 6 && (
               <button 
-                onClick={() => setCurrentIndex(Math.min(similarProducts.length - 4, currentIndex + 1))}
+                onClick={() => setCurrentIndex(Math.min(similarProducts.length - 6, currentIndex + 1))}
                 className="absolute right-0 top-1/2 -translate-y-1/2 -mr-5 z-10 w-10 h-10 rounded-full bg-kc-gold text-kc-black hover:bg-kc-gold/80 flex items-center justify-center shadow-md"
                 aria-label="Produit suivant"
               >
@@ -343,9 +343,9 @@ const ProductDetail = () => {
               </button>
             )}
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 px-2 sm:px-4">
-              {similarProducts.slice(currentIndex, currentIndex + 4).map(product => (
-                <div key={product.id} className="group">
+            <div className="flex overflow-x-auto gap-4 px-2 sm:px-4 pb-4 hide-scrollbar">
+              {similarProducts.slice(currentIndex, currentIndex + 6).map(product => (
+                <div key={product.id} className="group flex-shrink-0 w-[160px] sm:w-[200px] md:w-[220px]">
                   <Link to={`/product/${product.reference.toLowerCase()}`} className="block">
                     <div className="relative overflow-hidden aspect-square bg-gray-100 mb-3 rounded-lg shadow-md border border-gray-200 group">
                       <LazyLoadImage
@@ -354,7 +354,7 @@ const ProductDetail = () => {
                         effect="blur"
                         className="w-full h-full object-contain object-center"
                         wrapperClassName="w-full h-full"
-                        placeholderSrc="/images/placeholder.png"
+                        placeholderSrc={require("../assets/images/placeholder.png")}
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
                       

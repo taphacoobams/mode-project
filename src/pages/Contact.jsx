@@ -1,24 +1,73 @@
 import { useState } from 'react';
+import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
-import { FiPhone, FiMapPin, FiMail, FiClock } from 'react-icons/fi';
+import { FiPhone, FiMapPin, FiMail } from 'react-icons/fi';
 import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube, FaSnapchatGhost } from 'react-icons/fa';
 import GoogleMap from '../components/contact/GoogleMap';
-import PageHeader from '../components/ui/PageHeader';
 import ManifestoBanner from '../components/home/ManifestoBanner';
+
+// Liste des thèmes pour le sujet
+const subjectThemes = [
+  { value: '', label: 'Sélectionnez un sujet' },
+  { value: 'information', label: 'Demande d\'information' },
+  { value: 'commande', label: 'Question sur une commande' },
+  { value: 'personnalisation', label: 'Demande de personnalisation' },
+  { value: 'collaboration', label: 'Proposition de collaboration' },
+  { value: 'reclamation', label: 'Réclamation' },
+  { value: 'autre', label: 'Autre sujet' }
+];
 
 const Contact = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
 
-  const handleFormSubmit = (e) => {
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    // In a real application, this would send the form data to a server
-    console.log('Form submitted');
-    setFormSubmitted(true);
+    setLoading(true);
+    setError(null);
     
-    // Reset form submission status after 5 seconds
-    setTimeout(() => {
-      setFormSubmitted(false);
-    }, 5000);
+    try {
+      const response = await axios.post('http://localhost:5000/api/send-email', {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message
+      });
+      
+      console.log('Email sent successfully:', response.data);
+      setFormSubmitted(true);
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+      
+      // Reset form submission status after 5 seconds
+      setTimeout(() => {
+        setFormSubmitted(false);
+      }, 5000);
+    } catch (err) {
+      console.error('Error sending email:', err);
+      setError('Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -53,6 +102,12 @@ const Contact = () => {
                 </div>
               ) : null}
               
+              {error && (
+                <div className="p-4 bg-red-100 text-red-700 rounded-md mb-4">
+                  {error}
+                </div>
+              )}
+              
               <form onSubmit={handleFormSubmit}>
                 <div className="mb-4">
                   <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Nom</label>
@@ -61,6 +116,8 @@ const Contact = () => {
                     id="name" 
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
                     placeholder="Votre nom"
+                    value={formData.name}
+                    onChange={handleChange}
                     required
                   />
                 </div>
@@ -72,19 +129,27 @@ const Contact = () => {
                     id="email" 
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
                     placeholder="Votre email"
+                    value={formData.email}
+                    onChange={handleChange}
                     required
                   />
                 </div>
                 
                 <div className="mb-4">
                   <label htmlFor="subject" className="block text-gray-700 font-medium mb-2">Sujet</label>
-                  <input 
-                    type="text" 
-                    id="subject" 
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                    placeholder="Sujet"
+                  <select
+                    id="subject"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={formData.subject}
+                    onChange={handleChange}
                     required
-                  />
+                  >
+                    {subjectThemes.map((theme) => (
+                      <option key={theme.value} value={theme.value}>
+                        {theme.label}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 
                 <div className="mb-6">
@@ -94,15 +159,28 @@ const Contact = () => {
                     rows="5" 
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
                     placeholder="Votre message"
+                    value={formData.message}
+                    onChange={handleChange}
                     required
                   ></textarea>
                 </div>
                 
                 <button 
                   type="submit" 
-                  className="w-full bg-kc-gold hover:bg-yellow-600 text-white font-medium py-3 px-4 rounded-md transition duration-300"
+                  className="w-full bg-kc-gold hover:bg-yellow-600 text-white font-medium py-3 px-4 rounded-md transition duration-300 flex items-center justify-center"
+                  disabled={loading}
                 >
-                  Envoyer Un Message
+                  {loading ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Envoi en cours...
+                    </>
+                  ) : (
+                    'Envoyer Un Message'
+                  )}
                 </button>
               </form>
             </div>

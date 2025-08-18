@@ -1,0 +1,293 @@
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const nodemailer = require('nodemailer');
+const path = require('path');
+const fs = require('fs');
+
+// Chemin absolu vers le fichier .env
+const envPath = path.join(__dirname, '.env');
+
+
+// Charger les variables d'environnement depuis le bon fichier .env
+require('dotenv').config({ path: envPath });
+
+// Charger manuellement les variables si elles ne sont pas définies
+if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+  try {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    const envLines = envContent.split('\n');
+    
+    envLines.forEach(line => {
+      const parts = line.split('=');
+      if (parts.length === 2) {
+        const key = parts[0].trim();
+        const value = parts[1].trim();
+        if (!process.env[key]) {
+          process.env[key] = value;
+        }
+      }
+    });
+  } catch (err) {
+    console.error(`Erreur lors du chargement manuel du fichier .env: ${err.message}`);
+  }
+}
+
+// Vérifier que les variables d'environnement sont bien chargées
+['EMAIL_USER','EMAIL_PASS','EMAIL_SERVICE','PORT'].forEach(k => {
+  if (!process.env[k] && k !== 'EMAIL_SERVICE') {
+    console.error(`[ERREUR] Variable d'environnement manquante: ${k}`);
+  }
+});
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Configuration du transporteur Nodemailer avec les paramètres optimaux pour Gmail
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,            // 465 = SSL
+  secure: true,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS  // Mot de passe d'application
+  },
+});
+
+// Vérifier la connexion au serveur SMTP
+transporter.verify(function(error, success) {
+  if (error) {
+    console.error('Erreur de connexion au serveur SMTP:', error);
+  }
+});
+
+// Route pour tester le serveur
+app.get('/', (req, res) => {
+  res.send('Le serveur d\'emails fonctionne correctement');
+});
+
+// Route pour envoyer un email
+app.post('/api/send-email', async (req, res) => {
+  try {
+    const { name, email, phone, subject, message } = req.body;
+
+    // Validation des données
+    if (!name || !email || !message) {
+      return res.status(400).json({ success: false, message: 'Veuillez remplir tous les champs obligatoires' });
+    }
+
+    const toAddress = process.env.EMAIL_USER;
+    console.log('Tentative d\'envoi d\'email à:', toAddress);
+    
+    // Fonction pour capitaliser la première lettre
+    const capitalize = (str) => {
+      if (!str) return '';
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    };
+    
+    // Obtenir le label correspondant à la valeur du sujet
+    let subjectLabel = 'Contact depuis le site';
+    
+    // Liste des thèmes pour le sujet (doit correspondre à celle dans Contact.jsx)
+    const subjectThemes = [
+      { value: '', label: 'Sélectionnez un sujet' },
+      { value: 'information', label: 'Demande d\'information' },
+      { value: 'commande', label: 'Question sur une commande' },
+      { value: 'personnalisation', label: 'Demande de personnalisation' },
+      { value: 'collaboration', label: 'Proposition de collaboration' },
+      { value: 'reclamation', label: 'Réclamation' },
+      { value: 'autre', label: 'Autre sujet' }
+    ];
+    
+    // Trouver le label correspondant à la valeur du sujet
+    if (subject) {
+      const themeFound = subjectThemes.find(theme => theme.value === subject);
+      if (themeFound) {
+        subjectLabel = themeFound.label;
+      }
+    }
+    
+    // Options de l'email
+    const mailOptions = {
+      from: `"${name || 'Formulaire site'}" <${process.env.EMAIL_USER}>`,
+      replyTo: email,                 // pour répondre au client
+      to: toAddress,
+      subject: `Nouveau message à partir du site Khalil Collection: ${subjectLabel}`,
+      html: `
+        <h2>Nouveau message de contact</h2>
+        <p><strong>Nom:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        ${phone ? `<p><strong>Téléphone:</strong> ${phone}</p>` : ''}
+        <p><strong>Message:</strong></p>
+        <p>${message.replace(/\n/g, '<br>')}</p>
+        <hr>
+        <p>Ce message a été envoyé depuis le formulaire de contact de Khalil Collection.</p>
+      `
+    };
+
+    // Envoi de l'email
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email envoyé avec succès:', info.response);
+
+    // Email de confirmation à l'expéditeur
+    const confirmationMailOptions = {
+      from: `"Khalil Collection" <${process.env.EMAIL_USER}>`,
+      to: email,
+      replyTo: process.env.EMAIL_USER, // Pour que le client puisse répondre à l'adresse professionnelle
+      subject: 'Confirmation de votre message - Khalil Collection',
+      html: `
+        <h2>Merci pour votre message</h2>
+        <p>Cher(e) ${name},</p>
+        <p>Nous avons bien reçu votre message et nous vous remercions de nous avoir contactés.</p>
+        <p>Notre équipe vous répondra dans les plus brefs délais.</p>
+        <p>Cordialement,</p>
+        <p>L'équipe de Khalil Collection</p>
+        <div style="text-align: center; margin-top: 15px;">
+          <p style="margin-bottom: 5px;">khalilcollections<!-- -->@<!-- -->gmail.com</p>
+          <p style="margin-bottom: 5px;">+221 78 463 10 10</p>
+          <p>Fann Hock Rue 55X70, Dakar, Sénégal</p>
+        </div>
+      `
+    };
+
+    // Envoi de l'email de confirmation
+    console.log('Envoi de l\'email de confirmation...');
+    const confirmInfo = await transporter.sendMail(confirmationMailOptions);
+    console.log('Email de confirmation envoyé avec succès:', confirmInfo.response);
+
+    res.status(200).json({ success: true, message: 'Votre message a été envoyé avec succès' });
+  } catch (error) {
+    console.error('Erreur détaillée lors de l\'envoi de l\'email:', error);
+    
+    // Informations de débogage supplémentaires
+    console.error('Informations d\'authentification utilisées:');
+    console.error('- EMAIL_USER:', process.env.EMAIL_USER);
+    console.error('- EMAIL_PASS:', process.env.EMAIL_PASS ? '******' : 'Non défini');
+    
+    res.status(500).json({ 
+      success: false, 
+      message: 'Une erreur est survenue lors de l\'envoi de votre message',
+      error: error.message
+    });
+  }
+});
+
+// Route pour envoyer les mensurations par email
+app.post('/api/send-mensuration', async (req, res) => {
+  try {
+    // Extraire les champs principaux
+    const { nom_complet: fullName, telephone: phone, email, gender, commentaires, ...mensurations } = req.body;
+
+    // Validation des données
+    if (!fullName || !email || !phone) {
+      return res.status(400).json({ success: false, message: 'Veuillez remplir tous les champs obligatoires' });
+    }
+
+    const toAddress = process.env.EMAIL_USER;
+    console.log('Tentative d\'envoi d\'email à:', toAddress);
+    
+    // Fonction pour formater les mensurations
+    const formatMensurations = (data) => {
+      if (!data) return '';
+      
+      let html = '<table style="border-collapse: collapse; width: 100%; margin-top: 15px;">';
+      html += '<tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Mesure</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Valeur (cm)</th></tr>';
+      
+      // Exclure ces champs qui ne sont pas des mensurations
+      const excludeFields = ['fullName', 'email', 'phone', 'gender', 'commentaires'];
+      
+      // Ajouter chaque mensuration au tableau
+      Object.entries(data).forEach(([key, value]) => {
+        if (!excludeFields.includes(key) && value) {
+          // Formater la clé pour l'affichage (remplacer les underscores par des espaces et capitaliser)
+          const formattedKey = key
+            .split('_')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+          
+          html += `<tr><td style="border: 1px solid #ddd; padding: 8px;">${formattedKey}</td><td style="border: 1px solid #ddd; padding: 8px;">${value}</td></tr>`;
+        }
+      });
+      
+      html += '</table>';
+      return html;
+    };
+    
+    // Options de l'email
+    const mailOptions = {
+      from: `"${fullName || 'Formulaire mensurations'}" <${process.env.EMAIL_USER}>`,
+      replyTo: email,                 // pour répondre au client
+      to: toAddress,
+      subject: `Nouvelles mensurations - ${gender === 'homme' ? 'Homme' : 'Femme'} - ${fullName}`,
+      html: `
+        <h2>Nouvelles mensurations client</h2>
+        <p><strong>Nom complet:</strong> ${fullName}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Téléphone:</strong> ${phone}</p>
+        <p><strong>Genre:</strong> ${gender === 'homme' ? 'Homme' : 'Femme'}</p>
+        
+        <h3>Mensurations détaillées</h3>
+        ${formatMensurations(mensurations)}
+        
+        ${commentaires ? `<p><strong>Commentaires:</strong></p><p>${commentaires.replace(/\n/g, '<br>')}</p>` : ''}
+        <hr>
+        <p>Ces mensurations ont été envoyées depuis le formulaire en ligne de Khalil Collection.</p>
+      `
+    };
+
+    // Envoi de l'email
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email envoyé avec succès:', info.response);
+
+    // Email de confirmation au client
+    const confirmationMailOptions = {
+      from: `"Khalil Collection" <${process.env.EMAIL_USER}>`,
+      to: email,
+      replyTo: process.env.EMAIL_USER,
+      subject: 'Confirmation de vos mensurations - Khalil Collection',
+      html: `
+        <h2>Merci pour l'envoi de vos mensurations</h2>
+        <p>Cher(e) ${fullName},</p>
+        <p>Nous avons bien reçu vos mensurations et nous vous remercions de votre confiance.</p>
+        <p>Notre équipe va étudier vos mesures et vous contactera prochainement pour la suite de votre commande.</p>
+        <p>Cordialement,</p>
+        <p>L'équipe de Khalil Collection</p>
+        <div style="text-align: center; margin-top: 15px;">
+          <p style="margin-bottom: 5px;">khalilcollections<!-- -->@<!-- -->gmail.com</p>
+          <p style="margin-bottom: 5px;">+221 78 463 10 10</p>
+          <p>Fann Hock Rue 55X70, Dakar, Sénégal</p>
+        </div>
+      `
+    };
+
+    // Envoi de l'email de confirmation
+    console.log('Envoi de l\'email de confirmation...');
+    const confirmInfo = await transporter.sendMail(confirmationMailOptions);
+    console.log('Email de confirmation envoyé avec succès:', confirmInfo.response);
+
+    res.status(200).json({ success: true, message: 'Vos mensurations ont été envoyées avec succès' });
+  } catch (error) {
+    console.error('Erreur détaillée lors de l\'envoi de l\'email:', error);
+    
+    // Informations de débogage supplémentaires
+    console.error('Informations d\'authentification utilisées:');
+    console.error('- EMAIL_USER:', process.env.EMAIL_USER);
+    console.error('- EMAIL_PASS:', process.env.EMAIL_PASS ? '******' : 'Non défini');
+    
+    res.status(500).json({ 
+      success: false, 
+      message: 'Une erreur est survenue lors de l\'envoi de vos mensurations',
+      error: error.message
+    });
+  }
+});
+
+// Démarrage du serveur
+app.listen(PORT, () => {
+  // Serveur démarré
+});

@@ -33,7 +33,7 @@ const PartnershipsSection = () => {
             <div className="md:w-1/2">
               <div className="relative w-full h-full min-h-[300px]">
                 <img 
-                  src="/images/partenariats/baobab.jpg" 
+                  src={require("../../assets/images/partenariats/baobab.jpg")} 
                   alt="Orchestra Baobab habillé par Khalil Collection" 
                   className="w-full h-full object-cover"
                 />

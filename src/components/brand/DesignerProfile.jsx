@@ -15,7 +15,7 @@ const DesignerProfile = () => {
           <div className="relative">
             <div className="absolute -top-4 -left-4 w-24 h-24 border-2 border-kc-gold z-0"></div>
             <LazyLoadImage
-              src="/designer.jpg"
+              src={require("../../assets/images/designer.jpg")}
               alt="Khalil Collection Designer"
               effect="blur"
               className="w-full h-auto relative z-10"

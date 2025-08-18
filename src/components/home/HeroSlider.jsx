@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -9,7 +9,7 @@ const HeroSlider = () => {
     {
       id: 1,
       backgroundColor: '#1a1a1a',
-      backgroundImage: '/images/carrousel1.png',
+      backgroundImage: require('../../assets/images/carrousel1.png'),
       title: "Bienvenue chez Khalil Collection",
       subtitle: 'L’élégance dans chaque couture',
       buttonText: 'Qui sommes-nous',
@@ -18,7 +18,7 @@ const HeroSlider = () => {
     {
       id: 2,
       backgroundColor: '#2a2a2a',
-      backgroundImage: '/images/carrousel2.png',
+      backgroundImage: require('../../assets/images/carrousel2.png'),
       title: "C'est moi, c'est vous !",
       subtitle: 'Votre style, notre passion',
       buttonText: 'Nous contacter',
@@ -26,28 +26,23 @@ const HeroSlider = () => {
     }
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    }, 5000);
-    
-    return () => clearInterval(interval);
+  // Fonction pour passer au slide suivant, utilisée par l'intervalle automatique
+  const goToNextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   }, [slides.length]);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  };
+  useEffect(() => {
+    const interval = setInterval(goToNextSlide, 5000);
+    
+    return () => clearInterval(interval);
+  }, [goToNextSlide]);
 
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
 
   return (
-    <div className="relative h-[80vh] md:h-[85vh] lg:h-[80vh] overflow-hidden bg-kc-black">
+    <div className="relative h-[100vh] md:h-[100vh] lg:h-[100vh] overflow-hidden bg-kc-black">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}

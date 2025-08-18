@@ -1,6 +1,5 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import PageHeader from '../components/ui/PageHeader';
 import DesignerProfile from '../components/brand/DesignerProfile';
 import DesignerMessage from '../components/brand/DesignerMessage';
 import PartnershipsSection from '../components/brand/PartnershipsSection';

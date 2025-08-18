@@ -37,4 +37,13 @@ body {
   .section-title {
     @apply mb-8 text-3xl font-bold font-serif text-kc-black md:text-4xl;
   }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
 }

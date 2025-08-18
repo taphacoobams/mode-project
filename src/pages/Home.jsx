@@ -15,7 +15,7 @@ const Home = () => {
         <meta property="og:description" content="Découvrez Khalil Collection, une marque de mode africaine premium qui réinvente l'habillement traditionnel avec une touche contemporaine." />
       </Helmet>
 
-      <div className="pt-16">
+      <div className="pt-0">
         <HeroSlider />
         <CategoryBlocks />
         <LatestCreations />

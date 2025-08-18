@@ -2,11 +2,23 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiSend, FiCheck } from 'react-icons/fi';
 
+// Liste des thèmes pour le sujet
+const subjectThemes = [
+  { value: '', label: 'Sélectionnez un sujet' },
+  { value: 'information', label: 'Demande d\'information' },
+  { value: 'commande', label: 'Question sur une commande' },
+  { value: 'personnalisation', label: 'Demande de personnalisation' },
+  { value: 'collaboration', label: 'Proposition de collaboration' },
+  { value: 'reclamation', label: 'Réclamation' },
+  { value: 'autre', label: 'Autre sujet' }
+];
+
 const ContactForm = ({ onSubmit, formSubmitted }) => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     phone: '',
+    subject: '',
     message: '',
   });
   
@@ -47,6 +59,10 @@ const ContactForm = ({ onSubmit, formSubmitted }) => {
       newErrors.phone = 'Numéro de téléphone invalide';
     }
     
+    if (!formData.subject) {
+      newErrors.subject = 'Veuillez sélectionner un sujet';
+    }
+    
     if (!formData.message.trim()) {
       newErrors.message = 'Le message est requis';
     }
@@ -66,6 +82,7 @@ const ContactForm = ({ onSubmit, formSubmitted }) => {
         fullName: '',
         email: '',
         phone: '',
+        subject: '',
         message: '',
       });
     }
@@ -152,6 +169,34 @@ const ContactForm = ({ onSubmit, formSubmitted }) => {
         {errors.phone && (
           <p id="phone-error" className="mt-1 text-red-500 text-sm">
             {errors.phone}
+          </p>
+        )}
+      </div>
+      
+      <div className="mb-4">
+        <label htmlFor="subject" className="block text-gray-700 mb-2">
+          Sujet <span className="text-red-500">*</span>
+        </label>
+        <select
+          id="subject"
+          name="subject"
+          value={formData.subject}
+          onChange={handleChange}
+          className={`w-full border ${
+            errors.subject ? 'border-red-500' : 'border-gray-300'
+          } rounded-sm px-4 py-2 focus:outline-none focus:border-kc-gold`}
+          aria-invalid={errors.subject ? 'true' : 'false'}
+          aria-describedby={errors.subject ? 'subject-error' : undefined}
+        >
+          {subjectThemes.map((theme) => (
+            <option key={theme.value} value={theme.value}>
+              {theme.label}
+            </option>
+          ))}
+        </select>
+        {errors.subject && (
+          <p id="subject-error" className="mt-1 text-red-500 text-sm">
+            {errors.subject}
           </p>
         )}
       </div>

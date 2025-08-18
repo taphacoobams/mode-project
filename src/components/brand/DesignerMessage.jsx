@@ -46,7 +46,7 @@ const DesignerMessage = () => {
                 <p className="text-kc-gold text-sm">Designer & Fondateur</p>
               </div>
               <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-kc-gold">
-                <img src="/designer.jpg" alt="Khalil - Designer & Fondateur" className="w-full h-full object-cover" />
+                <img src={require("../../assets/images/designer.jpg")} alt="Khalil - Designer & Fondateur" className="w-full h-full object-cover" />
               </div>
             </div>
           </div>
