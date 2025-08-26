@@ -45,6 +45,23 @@ const ProductList = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
       });
     }
     
+    // Ajouter un prix original et une réduction uniquement pour les chemises
+    filtered = filtered.map(product => {
+      if (product.subcategory === 'chemises') {
+        return {
+          ...product,
+          hasDiscount: true,
+          originalPrice: '25 000 FCFA',
+          discountedPrice: '15 000 FCFA',
+          discountPercentage: 40 // (25000 - 15000) / 25000 * 100 = 40%
+        };
+      }
+      return {
+        ...product,
+        hasDiscount: false
+      };
+    });
+    
     setFilteredProducts(filtered);
     
     // Calculer le nombre total de pages
@@ -112,7 +129,17 @@ const ProductList = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
                     <Link to={`/product/${product.reference.toLowerCase()}`}>
                       <h3 className="text-lg font-medium text-kc-black mb-2 hover:text-kc-gold transition-colors">{product.name}</h3>
                     </Link>
-                    <p className="text-kc-gold font-semibold mb-2">{product.price}</p>
+                    <div className="flex items-center gap-2 mb-2">
+                      {product.hasDiscount ? (
+                        <>
+                          <p className="text-kc-gold font-semibold">{product.discountedPrice}</p>
+                          <p className="text-gray-500 text-sm line-through">{product.originalPrice}</p>
+                          <span className="bg-red-500 text-white text-xs px-2 py-0.5 rounded-md">-{product.discountPercentage}%</span>
+                        </>
+                      ) : (
+                        <p className="text-kc-gold font-semibold">{product.price}</p>
+                      )}
+                    </div>
                     <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                       {product.description || `${product.name} - Collection Khalil Collection. Disponible en plusieurs tailles.`}
                     </p>
@@ -166,34 +193,21 @@ const ProductList = ({ category, subcategory, sortBy, currentPage = 1, onPageCha
                 
                 {[...Array(totalPages)].map((_, index) => {
                   const pageNumber = index + 1;
-                  // Afficher les 3 premiers, les 3 derniers, et 2 autour de la page courante
-                  if (
-                    pageNumber <= 3 ||
-                    pageNumber > totalPages - 3 ||
-                    (pageNumber >= currentPage - 1 && pageNumber <= currentPage + 1)
-                  ) {
-                    return (
-                      <button
-                        key={pageNumber}
-                        onClick={() => handlePageChange(pageNumber)}
-                        className={`px-3 py-1 rounded-md ${pageNumber === currentPage
-                          ? 'bg-kc-gold text-white'
-                          : 'text-gray-700 hover:bg-gray-100'
-                        }`}
-                        aria-label={`Page ${pageNumber}`}
-                        aria-current={pageNumber === currentPage ? 'page' : undefined}
-                      >
-                        {pageNumber}
-                      </button>
-                    );
-                  } else if (
-                    (pageNumber === 4 && currentPage > 5) ||
-                    (pageNumber === totalPages - 3 && currentPage < totalPages - 4)
-                  ) {
-                    // Afficher des points de suspension pour indiquer des pages omises
-                    return <span key={pageNumber} className="px-2">...</span>;
-                  }
-                  return null;
+                  // Afficher tous les numéros de pages en même temps
+                  return (
+                    <button
+                      key={pageNumber}
+                      onClick={() => handlePageChange(pageNumber)}
+                      className={`px-3 py-1 rounded-md ${pageNumber === currentPage
+                        ? 'bg-kc-gold text-white'
+                        : 'text-gray-700 hover:bg-gray-100'
+                      }`}
+                      aria-label={`Page ${pageNumber}`}
+                      aria-current={pageNumber === currentPage ? 'page' : undefined}
+                    >
+                      {pageNumber}
+                    </button>
+                  );
                 })}
                 
                 <button

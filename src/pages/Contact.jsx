@@ -94,8 +94,9 @@ const Contact = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Formulaire de contact */}
-            <div className="bg-white p-8 rounded-lg shadow-md">
+            <div>
               <h2 className="text-2xl font-bold mb-6 text-kc-black">Nous écrire</h2>
+              <div className="bg-white p-8 pb-16 rounded-lg shadow-md">
               
               {formSubmitted ? (
                 <div className="p-4 bg-green-100 text-green-700 rounded-md mb-4">
@@ -111,12 +112,12 @@ const Contact = () => {
               
               <form onSubmit={handleFormSubmit}>
                 <div className="mb-4">
-                  <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Nom</label>
+                  <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Nom complet</label>
                   <input 
                     type="text" 
                     id="name" 
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                    placeholder="Votre nom"
+                    placeholder="Votre nom complet"
                     value={formData.name}
                     onChange={handleChange}
                     required
@@ -184,6 +185,7 @@ const Contact = () => {
                   )}
                 </button>
               </form>
+              </div>
             </div>
             
             {/* Informations de contact */}
@@ -196,7 +198,7 @@ const Contact = () => {
                     <FiPhone size={20} />
                   </div>
                   <div>
-                    <p className="text-gray-700">+221 78 463 10 10</p>
+                    <a href="tel:+221784631010" className="text-gray-700 hover:text-kc-gold transition-colors">+221 78 463 10 10</a>
                   </div>
                 </div>
               </div>
@@ -207,7 +209,7 @@ const Contact = () => {
                     <FiMail size={20} />
                   </div>
                   <div>
-                    <p className="text-gray-700">khalilcollections@gmail.com</p>
+                    <a href="mailto:khalilcollections@gmail.com" className="text-gray-700 hover:text-kc-gold transition-colors">khalilcollections@gmail.com</a>
                   </div>
                 </div>
               </div>
@@ -218,7 +220,7 @@ const Contact = () => {
                     <FiMapPin size={20} />
                   </div>
                   <div>
-                    <p className="text-gray-700">Fann Hock Rue 55X70, Dakar, Sénégal</p>
+                    <a href="https://maps.app.goo.gl/guYD6B4CvAEKRsq68" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-kc-gold transition-colors">Fann Hock Rue 55X70, Dakar, Sénégal</a>
                   </div>
                 </div>
               </div>
@@ -226,11 +228,7 @@ const Contact = () => {
               <h2 className="text-2xl font-bold mb-4 mt-8 text-kc-black">Horaires d'ouverture</h2>
               
               <div className="mb-2">
-                <p className="text-gray-700">Lundi - Vendredi : 09h00 à 17h00</p>
-              </div>
-              
-              <div className="mb-2">
-                <p className="text-gray-700">Samedi : 09h00 à 13h00</p>
+                <p className="text-gray-700">Lundi - Samedi : 11h00 à 21h00</p>
               </div>
               
               <div className="mb-8">
@@ -275,8 +273,7 @@ const Contact = () => {
                 className="block p-3 bg-white rounded-full shadow-md hover:shadow-lg transition-all"
               >
                 <FaSnapchatGhost size={28} className="text-kc-gold hover:text-yellow-600 transition-colors" />
-              </a>
-              {/* TikTok et YouTube supprimés */}
+              </a>  
             </div>
           </div>
         </div>

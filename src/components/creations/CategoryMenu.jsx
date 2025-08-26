@@ -1,14 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { FiChevronDown, FiChevronUp, FiMenu, FiX } from 'react-icons/fi';
 
 const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
   const navigate = useNavigate();
+  const [menuVisible, setMenuVisible] = useState(false);
   const [expandedCategories, setExpandedCategories] = useState({
     homme: activeCategory === 'homme',
     femme: activeCategory === 'femme',
     accessoires: activeCategory === 'accessoires',
   });
+  
+  // Détecter si l'écran est en mode mobile
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      if (!mobile) {
+        setMenuVisible(true); // Toujours visible sur desktop
+      }
+    };
+    
+    // Initialiser
+    handleResize();
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const categories = [
     {
@@ -69,11 +89,37 @@ const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
     navigate(`/creations/productcategory/${categoryId}/${subcategoryId}`);
   };
 
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
+  };
+
   return (
     <div className="bg-white shadow-md p-6">
-      <h2 className="text-xl font-heading font-bold text-kc-black mb-6">Catégories</h2>
+      {/* Bouton pour ouvrir/fermer le menu sur mobile */}
+      {isMobile && (
+        <div className="flex items-center justify-between mb-4 border-b border-gray-200 pb-4">
+          <h2 className="text-xl font-heading font-bold text-kc-black">Catégories</h2>
+          <button 
+            onClick={toggleMenu}
+            className="p-2 text-kc-black hover:text-kc-gold transition-colors focus:outline-none bg-gray-100 hover:bg-gray-200 rounded-full w-10 h-10 flex items-center justify-center"
+            aria-label={menuVisible ? 'Fermer le menu des catégories' : 'Ouvrir le menu des catégories'}
+          >
+            {menuVisible ? <FiX size={20} /> : <FiMenu size={20} />}
+          </button>
+        </div>
+      )}
       
-      <ul className="space-y-4">
+      {/* Titre sur desktop */}
+      {!isMobile && (
+        <h2 className="text-xl font-heading font-bold text-kc-black mb-6">Catégories</h2>
+      )}
+      
+      {/* Menu des catégories */}
+      <div 
+        className={`transition-all duration-300 ease-in-out overflow-hidden ${isMobile ? (menuVisible ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0') : 'block'}`}
+        style={{ transitionProperty: 'max-height, opacity' }}
+      >
+        <ul className="space-y-4">
         {categories.map((category) => (
           <li key={category.id} className="border-b border-gray-100 pb-2">
             <div className="flex items-center justify-between">
@@ -123,6 +169,7 @@ const CategoryMenu = ({ activeCategory, activeSubcategory }) => {
         >
           Voir toutes les créations
         </Link>
+      </div>
       </div>
     </div>
   );

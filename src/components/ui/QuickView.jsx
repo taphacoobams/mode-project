@@ -29,7 +29,17 @@ const QuickView = ({ product, isOpen, onClose }) => {
             <p className="text-sm text-gray-500">Stock: <span className="text-green-600">En stock</span></p>
           </div>
           
-          <p className="text-2xl font-semibold text-kc-gold mb-6">{product.price}</p>
+          <div className="mb-6">
+            {product.subcategory === 'chemises' || product.hasDiscount ? (
+              <div className="flex items-center gap-3">
+                <p className="text-2xl font-semibold text-kc-gold">{product.discountedPrice || '15 000 FCFA'}</p>
+                <p className="text-lg text-gray-500 line-through">{product.originalPrice || '25 000 FCFA'}</p>
+                <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-md">-40%</span>
+              </div>
+            ) : (
+              <p className="text-2xl font-semibold text-kc-gold">{product.price}</p>
+            )}
+          </div>
           
           {product.description && (
             <p className="text-gray-700 leading-relaxed mb-6 text-sm">

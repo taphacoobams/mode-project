@@ -30,7 +30,23 @@ const ProductDetail = () => {
   // Les sélecteurs de taille et quantité ont été supprimés selon la demande du client
   
   // Trouver le produit correspondant à la référence
-  const product = allProducts.find(p => p.reference.toLowerCase() === reference);
+  let product = allProducts.find(p => p.reference.toLowerCase() === reference);
+  
+  // Appliquer les prix barrés uniquement à la catégorie chemises
+  if (product && product.subcategory === 'chemises') {
+    product = {
+      ...product,
+      hasDiscount: true,
+      originalPrice: '25 000 FCFA',
+      discountedPrice: '15 000 FCFA',
+      discountPercentage: 40 // (25000 - 15000) / 25000 * 100 = 40%
+    };
+  } else if (product) {
+    product = {
+      ...product,
+      hasDiscount: false
+    };
+  }
   
   // Si le produit n'existe pas, afficher un message simple
   if (!product) {
@@ -161,12 +177,14 @@ const ProductDetail = () => {
           <div className="space-y-4 sm:space-y-6">
             <h1 className="text-2xl sm:text-3xl font-heading font-bold text-kc-black">{product.name}</h1>
             <div className="flex items-center space-x-3">
-              <span className="text-xl sm:text-2xl font-semibold text-kc-gold">{product.price}</span>
-              {product.originalPrice && (
-                <span className="text-sm sm:text-base text-gray-500 line-through">{product.originalPrice}</span>
-              )}
-              {product.discount && (
-                <span className="text-sm sm:text-base text-red-600 font-medium">{product.discount}</span>
+              {product.hasDiscount ? (
+                <>
+                  <span className="text-xl sm:text-2xl font-semibold text-kc-gold">{product.discountedPrice}</span>
+                  <span className="text-sm sm:text-base text-gray-500 line-through">{product.originalPrice}</span>
+                  <span className="text-sm sm:text-base bg-red-500 text-white px-2 py-0.5 rounded-md">-{product.discountPercentage}%</span>
+                </>
+              ) : (
+                <span className="text-xl sm:text-2xl font-semibold text-kc-gold">{product.price}</span>
               )}
             </div>
             
@@ -390,7 +408,16 @@ const ProductDetail = () => {
                       </Link>
                     </div>
                     <h3 className="text-xs sm:text-sm md:text-lg font-medium text-kc-black mb-1 sm:mb-2 hover:text-kc-gold transition-colors line-clamp-2">{product.name}</h3>
-                    <p className="text-kc-gold font-semibold text-xs sm:text-sm md:text-base">{product.price}</p>
+                    <div className="flex items-center gap-2">
+                      {product.category === 'chemises' ? (
+                        <>
+                          <p className="text-kc-gold font-semibold text-xs sm:text-sm md:text-base">15 000 FCFA</p>
+                          <p className="text-gray-500 text-xs line-through">25 000 FCFA</p>
+                        </>
+                      ) : (
+                        <p className="text-kc-gold font-semibold text-xs sm:text-sm md:text-base">{product.price}</p>
+                      )}
+                    </div>
                   </Link>
                 </div>
               ))}

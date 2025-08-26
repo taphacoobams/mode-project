@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -10,12 +10,87 @@ import QuickView from '../ui/QuickView';
 const SearchProductGrid = ({ searchResults }) => {
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
+  const [processedResults, setProcessedResults] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isHovering, setIsHovering] = useState({});
   
-  // Pas besoin de détecter la taille de l'écran car nous n'utilisons plus cette information
+  // Détecter si l'appareil est mobile
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
   
-  const handleQuickView = (product) => {
+  // Traiter les résultats de recherche pour ajouter les prix barrés aux chemises
+  useEffect(() => {
+    const processed = searchResults.map(product => {
+      if (product.subcategory === 'chemises') {
+        return {
+          ...product,
+          hasDiscount: true,
+          originalPrice: '25 000 FCFA',
+          discountedPrice: '15 000 FCFA',
+          discountPercentage: 40 // (25000 - 15000) / 25000 * 100 = 40%
+        };
+      }
+      return {
+        ...product,
+        hasDiscount: false
+      };
+    });
+    
+    setProcessedResults(processed);
+    
+    // Initialiser l'état de survol pour chaque produit
+    const hoverState = {};
+    processed.forEach(product => {
+      hoverState[product.id] = false;
+    });
+    setIsHovering(hoverState);
+  }, [searchResults]);
+  
+  const handleQuickView = (product, e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setQuickViewProduct(product);
     setIsQuickViewOpen(true);
+  };
+  
+  // Gérer le survol ou le clic selon le type d'appareil
+  const handleMouseEnter = (productId) => {
+    if (!isMobile) {
+      setIsHovering(prev => ({ ...prev, [productId]: true }));
+    }
+  };
+  
+  const handleMouseLeave = (productId) => {
+    if (!isMobile) {
+      setIsHovering(prev => ({ ...prev, [productId]: false }));
+    }
+  };
+  
+  const handleProductClick = (productId) => {
+    if (isMobile) {
+      setIsHovering(prev => {
+        const newState = { ...prev };
+        // Réinitialiser tous les autres produits
+        Object.keys(newState).forEach(key => {
+          newState[key] = false;
+        });
+        // Activer uniquement le produit cliqué
+        newState[productId] = !prev[productId];
+        return newState;
+      });
+    }
   };
 
   const container = {
@@ -50,15 +125,28 @@ const SearchProductGrid = ({ searchResults }) => {
             animate="show"
             className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6"
           >
-            {searchResults.map((product) => (
+            {processedResults.map((product) => (
               <motion.div 
                 key={product.id} 
                 variants={item}
                 className="bg-white shadow-md overflow-hidden group"
                 whileHover={{ y: -5, transition: { duration: 0.3 } }}
+                onClick={() => handleProductClick(product.id)}
+                onMouseEnter={() => handleMouseEnter(product.id)}
+                onMouseLeave={() => handleMouseLeave(product.id)}
               >
                 <div className="relative overflow-hidden aspect-square bg-gray-50">
-                  <Link to={`/product/${product.reference?.toLowerCase() || product.id}`}>
+                  {/* Badge de réduction - uniquement pour les produits avec réduction */}
+                  {product.hasDiscount && (
+                    <div className="absolute top-2 left-2 z-10 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
+                      -{product.discountPercentage}%
+                    </div>
+                  )}
+                  
+                  <Link 
+                    to={`/product/${product.reference?.toLowerCase() || product.id}`}
+                    onClick={(e) => isMobile && isHovering[product.id] ? e.preventDefault() : null}
+                  >
                     <LazyLoadImage
                       src={product.image}
                       alt={product.name}
@@ -69,39 +157,53 @@ const SearchProductGrid = ({ searchResults }) => {
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
                   </Link>
                   
-                  {/* Boutons d'action */}
-                  <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button
-                      onClick={() => handleQuickView(product)}
-                      className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-kc-gold hover:text-kc-black transition-colors"
-                      aria-label={`Aperçu rapide de ${product.name}`}
-                    >
-                      <FiEye size={18} />
-                    </button>
-                    <a
-                      href={`https://wa.me/221784631010?text=${encodeURIComponent(`Bonjour, je vous contacte depuis votre site Khalil Collection\n\nJe suis intéressé(e) par ce produit: ${product.reference?.toUpperCase() || product.id} sur https://khalil-collection.vercel.app/product/${product.reference?.toLowerCase() || product.id}`)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-green-500 shadow-md flex items-center justify-center hover:bg-green-600 text-white transition-colors"
-                      aria-label={`Commander ${product.name} via WhatsApp`}
-                    >
-                      <FaWhatsapp size={18} />
-                    </a>
-                  </div>
+                  {/* Boutons d'action - visibles au survol sur desktop ou après clic sur mobile */}
+                  {((!isMobile && isHovering[product.id]) || (isMobile && isHovering[product.id])) && (
+                    <div className="absolute top-4 right-4 flex flex-col gap-2 transition-opacity duration-300">
+                      <button
+                        onClick={(e) => handleQuickView(product, e)}
+                        className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-kc-gold hover:text-kc-black transition-colors"
+                        aria-label={`Aperçu rapide de ${product.name}`}
+                      >
+                        <FiEye size={18} />
+                      </button>
+                      <a
+                        href={`https://wa.me/221784631010?text=${encodeURIComponent(`Bonjour, je vous contacte depuis votre site Khalil Collection\n\nJe suis intéressé(e) par ce produit: ${product.reference?.toUpperCase() || product.id} sur https://khalil-collection.vercel.app/product/${product.reference?.toLowerCase() || product.id}`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-full bg-green-500 shadow-md flex items-center justify-center hover:bg-green-600 text-white transition-colors"
+                        aria-label={`Commander ${product.name} via WhatsApp`}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <FaWhatsapp size={18} />
+                      </a>
+                    </div>
+                  )}
                   
-                  <Link 
-                    to={`/product/${product.reference?.toLowerCase() || product.id}`}
-                    className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-kc-gold text-kc-black w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-kc-gold/80"
-                    aria-label={`Voir ${product.name}`}
-                  >
-                    <FiArrowRight size={16} />
-                  </Link>
+                  {((!isMobile && isHovering[product.id]) || (isMobile && isHovering[product.id])) && (
+                    <Link 
+                      to={`/product/${product.reference?.toLowerCase() || product.id}`}
+                      className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-kc-gold text-kc-black w-10 h-10 rounded-full flex items-center justify-center transition-opacity duration-300 hover:bg-kc-gold/80"
+                      aria-label={`Voir ${product.name}`}
+                    >
+                      <FiArrowRight size={16} />
+                    </Link>
+                  )}
                 </div>
                 <div className="p-2 sm:p-4">
                   <Link to={`/product/${product.reference?.toLowerCase() || product.id}`}>
                     <h3 className="text-xs sm:text-sm md:text-lg font-medium text-kc-black mb-1 sm:mb-2 hover:text-kc-gold transition-colors line-clamp-2">{product.name}</h3>
                   </Link>
-                  <p className="text-kc-gold font-semibold text-xs sm:text-sm md:text-base">{product.price}</p>
+                  <div className="flex items-center gap-2">
+                    {product.hasDiscount ? (
+                      <>
+                        <p className="text-kc-gold font-semibold text-xs sm:text-sm md:text-base">{product.discountedPrice}</p>
+                        <p className="text-gray-500 text-xs line-through">{product.originalPrice}</p>
+                      </>
+                    ) : (
+                      <p className="text-kc-gold font-semibold text-xs sm:text-sm md:text-base">{product.price}</p>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             ))}

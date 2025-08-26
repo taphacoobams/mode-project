@@ -39,7 +39,9 @@ const Footer = () => {
               <li className="flex items-start">
                 <FaMapMarkerAlt className="text-kc-gold mr-3 text-lg mt-1" />
                 <address className="not-italic">
-                  Fann Hock Rue 55X70, Dakar, Sénégal
+                  <a href="https://maps.app.goo.gl/guYD6B4CvAEKRsq68" target="_blank" rel="noopener noreferrer" className="hover:text-kc-gold transition-colors">
+                    Fann Hock Rue 55X70, Dakar, Sénégal
+                  </a>
                 </address>
               </li>
             </ul>

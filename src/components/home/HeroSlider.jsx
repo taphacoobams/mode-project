@@ -8,7 +8,7 @@ const HeroSlider = () => {
   const slides = [
     {
       id: 1,
-      backgroundColor: '#1a1a1a',
+      backgroundColor: '#333333',
       backgroundImage: require('../../assets/images/carrousel1.png'),
       title: "Bienvenue chez Khalil Collection",
       subtitle: 'L’élégance dans chaque couture',
@@ -17,7 +17,7 @@ const HeroSlider = () => {
     },
     {
       id: 2,
-      backgroundColor: '#2a2a2a',
+      backgroundColor: '#333333',
       backgroundImage: require('../../assets/images/carrousel2.png'),
       title: "C'est moi, c'est vous !",
       subtitle: 'Votre style, notre passion',
@@ -69,10 +69,10 @@ const HeroSlider = () => {
             ></div>
             {/* Overlay amélioré avec un dégradé complexe adapté à la position du texte */}
             <div className={`absolute inset-0 ${currentSlide === 0 
-              ? 'bg-gradient-to-br from-black/80 via-black/60 to-black/30' 
-              : 'bg-gradient-to-bl from-black/80 via-black/60 to-black/30'}`}>
+              ? 'bg-gradient-to-br from-black/50 via-black/30 to-black/10' 
+              : 'bg-gradient-to-bl from-black/50 via-black/30 to-black/10'}`}>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
           </div>
           
           <div className="relative h-full flex items-center">
